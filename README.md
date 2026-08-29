@@ -1,68 +1,86 @@
-# Nombre del Proyecto
+# Pagina web para: carnes y parrillas "La Vaca Roja"
 
-Proyecto realizado para el curso de Taller de programación web. La web está basada en ...
+Proyecto realizado para el curso de Taller de programación web. La web está basada en html y css.
 
-## 📋 Tabla de Contenidos
-- [Descripción](#descripción)
-- [Demo](#demo)
-- [Tecnologías](#tecnologías)
-- [Instalación](#instalación)
-- [Estructura del proyecto](#estructura-del-proyecto)
-- [Uso](#uso)
+## Tabla de Contenidos
+
 - [Equipo](#equipo)
-- [Contribuir](#contribuir)
+- [Descripción](#descripción)
+- [Tecnologías](#tecnologías)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Reglas básicas y flujo para el equipo](#Reglas básicas y flujo para el equipo)
+
+## Equipo
+
+- Luque Serna, Bryan Alexander - [GitHub] (https://github.com/BryanLS736)
+- Guizado Sosa, Jheremy Carlos - [GitHub] (https://github.com/JGuizado1)
+- Moquillaza Gonzales, David Akira - [GitHub](https://github.com/davicitox)
+- Ayay Palomino, Diego Alvaro - [GitHub](https://github.com/diegoayay)
+- Huaman Angeles, Harold Raul - [GitHub] (https://github.com/User-locototex)
+- Segura Pizarro, Isabella Valentina - [GitHub] (https://github.com/isazuaaan)
 
 ## Descripción
-Explicación más detallada: qué problema resuelve, para quién es, contexto del proyecto (si es una tarea de universidad/bootcamp, mencionarlo).
 
-## Demo
-Link a versión desplegada (GitHub Pages, Netlify, Vercel) si aplica, o capturas de pantalla.
+Página web para el restaurante “La vaca roja”, como una propuesta tecnológica que contribuya a mejorar su presencia digital y la forma en que se presenta ante sus clientes.
 
 ## Tecnologías
+
 - HTML5
 - CSS3
-- JavaScript (Vanilla)
 
-## Instalación
-
-\`\`\`bash
 # Clonar el repositorio
-git clone https://github.com/usuario/repo.git
+
+git clone https://github.com/Proyecto-taller-de-programacion-web/Proyecto-web.git
 
 # Entrar a la carpeta
 cd repo
 
 # Abrir index.html en el navegador
 # o usar Live Server en VSCode
-\`\`\`
 
 ## Estructura del proyecto
 
-\`\`\`
-proyecto/
+```bash
+ProyectoParrillas/
+├── paginas
+│   ├── 0. login
+│   │   └── index.html
+│   ├── 0. registrar
+│   │   └── index.html
+│   ├── 1. carnes
+│   │   └── index.html
+│   ├── 2. cava-bar
+│   │   └── index.html
+│   ├── 3. nosotros
+│   │   └── index.html
+│   ├── 4. sedes
+│   │   └── index.html
+│   └── 5. reservar
+│   │   └── index.html
 ├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── main.js
-├── img/
-├── .gitignore
-└── README.md
-\`\`\`
+└── estilos.css
+```
 
-## Uso
-Instrucciones de cómo interactuar con el proyecto una vez corriendo.
+## Reglas básicas y flujo para el equipo
 
-## Equipo
-- Luque Serna, Bryan Alexander - [GitHub] (https://github.com/BryanLS736)
-- Nombre 2 - [GitHub](link)
-- Nombre 3 - [GitHub](link)
+```git
+-- Colocarse en la rama principal
+git checkout develop
 
-## Contribuir
-Reglas básicas para el equipo: cómo hacer branches, formato de commits, etc.
+-- Traer los cambios
+git pull
 
-\`\`\`bash
-git checkout -b feature/nombre-de-la-funcionalidad
-git commit -m "tipo: descripción breve"
-git push origin feature/nombre-de-la-funcionalidad
-\`\`\`
+-- Crear nueva rama para los nuevos cambios
+git checkout -b feature/nombre-funcionalidad
+
+-- Añadir los cambios
+git add . 
+
+-- Realizar el commit de los cambios
+git commit -am "Mensaje del cambio"
+
+-- Enviar los cambios al repositorio
+git push
+
+-- Luego hacer el Pull Request en el git hub del proyecto
+```
