@@ -1,0 +1,240 @@
+:root {
+  --black: #0a0908;
+  --black-2: #141210;
+  --red: #c41f24;
+  --red-dim: #7a1216;
+  --white: #f5f2ee;
+  --grey: #b9b2a8;
+  --line: rgba(245, 242, 238, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--black);
+  font-family: 'Jost', sans-serif;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ============ MAIN HERO ============ */
+.login-seccion {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+  flex-wrap: wrap;
+  padding: 64px 24px 80px;
+}
+
+.cabecera-login {
+  max-width: 480px;
+  text-align: left;
+}
+
+.hero-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 18px;
+}
+
+.login-seccion h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 68px);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--white);
+}
+
+.cabecera-login p.texto {
+  margin-top: 16px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 1.15rem;
+  color: var(--grey);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.divider-flame {
+  width: 100px;
+  height: 2px;
+  background: var(--red);
+  margin: 30px 0 0;
+}
+
+/* ============ FORM CONTAINER ============ */
+.form-container {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(20, 18, 16, 0.66);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--red);
+  padding: 40px 38px 34px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-box label {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 8px;
+}
+
+.input-box input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.input-box input::placeholder {
+  color: rgba(185, 178, 168, 0.5);
+}
+
+.input-box input:focus {
+  border-color: var(--red);
+  background: rgba(196, 31, 36, 0.06);
+}
+
+.remember-password {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--grey);
+}
+
+.checkbox-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-line input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.checkbox-line input:checked {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.checkbox-line input:checked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(45deg, transparent 40%, var(--black) 40%, var(--black) 45%, transparent 45%),
+    linear-gradient(-45deg, transparent 40%, var(--black) 40%, var(--black) 45%, transparent 45%);
+}
+
+.link-red {
+  color: var(--white);
+  text-decoration: none;
+  border-bottom: 1px solid var(--red);
+  padding-bottom: 1px;
+  transition: color 0.2s ease;
+}
+
+.link-red:hover {
+  color: var(--red);
+}
+
+.btn-principal {
+  margin-top: 6px;
+  padding: 14px 0;
+  background: transparent;
+  border: 1px solid var(--white);
+  color: var(--white);
+  font-family: 'Oswald', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-principal:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+}
+
+.texto-cambio {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--grey);
+  margin-top: 26px;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 1px solid var(--red);
+  outline-offset: 3px;
+}
+
+/* En pantallas angostas, apilar y centrar como antes */
+@media (max-width:860px) {
+  .login-seccion {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cabecera-login {
+    text-align: center;
+  }
+
+  .divider-flame {
+    margin: 30px auto 0;
+  }
+}

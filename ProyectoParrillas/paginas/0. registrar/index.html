@@ -1,16 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="descripcion" content="Regístrate en La Vaca Roja y disfruta de una experiencia más personalizada al realizar tus reservas.">  
-
-    <title>Registrar</title>
-    <link rel="stylesheet" href="../../estilos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Vaca Roja — Registrarse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/estilos/estilos_registrar.css">
 </head>
-
-
 <body>
-    
+  <main class="registro-seccion">
+    <p class="hero-eyebrow">Nuevos clientes</p>
+    <h1>Únete a<br>la mesa</h1>
+    <p class="eslogan">El lugar perfecto para los amantes de la carne</p>
+    <div class="divider-flame"></div>
+
+    <div class="card">
+      <form id="register-form">
+        <div class="input-box">
+          <label for="reg-name">Nombre completo</label>
+          <input type="text" id="reg-name" placeholder="Tu nombre" required>
+        </div>
+
+        <div class="row-two">
+          <div class="input-box">
+            <label for="reg-email">Correo</label>
+            <input type="email" id="reg-email" placeholder="correo@ejemplo.com" required>
+          </div>
+          <div class="input-box">
+            <label for="reg-phone">Teléfono</label>
+            <input type="tel" id="reg-phone" placeholder="+51 999 999 999" maxlength="9" required pattern="[0-9]+">
+          </div>
+        </div>
+
+        <div class="row-two">
+          <div class="input-box">
+            <label for="reg-pass">Contraseña</label>
+            <input type="password" id="reg-pass" placeholder="••••••••" required>
+          </div>
+          <div class="input-box">
+            <label for="reg-pass2">Confirmar</label>
+            <input type="password" id="reg-pass2" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <div class="fine-print">
+          <label class="checkbox-line">
+            <input type="checkbox" required>
+            <span>Acepto los términos del restaurante y la política de reservas.</span>
+          </label>
+        </div>
+        <button type="submit" class="btn-principal">Crear cuenta</button>
+
+        <p class="switch-line">¿Ya tienes cuenta? <a class="link-red" href="../0. login/index.html">Inicia sesión</a></p>
+      </form>
+    </div>
+  </main>
 </body>
+
 </html>
