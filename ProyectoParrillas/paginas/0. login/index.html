@@ -1,17 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="descripcion" content="Inicia sesión en La Vaca Roja para acceder a tu cuenta y gestionar tus reservas.">  
+<html lang="es">
 
-    <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="../../estilos.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Vaca Roja — Iniciar sesión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/estilos/estilos_login.css">
 </head>
 
-
 <body>
-    
+  <main class="login-seccion">
+    <div class="cabecera-login">
+      <p class="hero-eyebrow">Acceso de clientes</p>
+      <h1>Bienvenido<br>de nuevo</h1>
+      <p class="texto">
+        Tu lugar en la mesa te espera. Inicia sesión para reservar, guardar tus platillos favoritos y disfrutar de
+        beneficios exclusivos para quienes aman el fuego tanto como nosotros.
+      </p>
+      <div class="divider-flame"></div>
+    </div>
+
+    <div class="form-container">
+      <form id="login-form">
+        <div class="input-box">
+          <label for="login-email">Correo electrónico</label>
+          <input type="email" id="login-email" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+        <div class="input-box">
+          <label for="login-pass">Contraseña</label>
+          <input type="password" id="login-pass" placeholder="Contraseña" required>
+        </div>
+
+        <div class="remember-password">
+          <label class="checkbox-line">
+            <input type="checkbox">Recordarme
+          </label>
+          <a class="link-red" href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+        <button type="submit" class="btn-principal">Iniciar sesión</button>
+        <p class="texto-cambio">¿Aún no tienes cuenta? <a class="link-red" href="../0. registrar/index.html">Regístrate
+            aquí</a></p>
+      </form>
+    </div>
+  </main>
 </body>
 
 </html>
