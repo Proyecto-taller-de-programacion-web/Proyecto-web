@@ -1,0 +1,85 @@
+body{
+    margin:0;
+}
+
+/* ----------BARRA DE NAVEGACIÓN------------*/
+nav{
+    background-color: black;
+    height: 80px;
+    padding: 0px 20px 0px 35px;
+    font-family:  Google Sans Flex;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+/* Logo de la empresa*/
+.logo-principal{
+    width: 90px;
+}
+
+
+
+/* Caja de botones de navegación*/
+nav ul li{
+    display: inline;
+    padding: 0px 45px;
+}
+.boton-login{
+    display: inline;
+    background-color: rgb(227, 21, 38);
+    border-radius: 7px;
+    padding: 8px 15px;
+}
+
+
+/* Letras de botones de navegación*/
+nav ul li a{
+    color:white;
+    text-decoration: none;
+}
+.boton-login a{
+    color: white;
+    padding: 6px 15px;
+}
+
+
+/* Focus en los botones de navegación*/
+nav ul li a:hover{
+    color: rgb(227, 21, 38);
+}
+
+.boton-login a:hover{
+    color: white;
+}
+
+
+
+
+/* ---------------PIE DE PÁGINA------------------*/
+footer{
+    text-align: center;
+    background-color: rgb(250, 227, 207);
+    font-family: Google Sans Flex;
+    color: rgb(147, 30, 55);
+    padding: 60px 0px 40px 0px;
+}
+
+.logo-footer{
+    width: 240px;
+}
+
+.titulo-logo{
+    font-family: "Fjalla One"
+}
+
+.caja-footer{
+    margin:40px;
+}
+
+.informacion-footer{
+    font-family: Google Sans Flex;
+}

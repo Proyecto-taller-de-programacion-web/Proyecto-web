@@ -10,8 +10,8 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body { font-family: 'Poppins', sans-serif; color: var(--gris-oscuro); line-height: 1.6; background: var(--blanco); }
-h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-img { max-width: 100%; display: block; }
+h1, h2, h3, h4 { font-family: 'Playfair Display'; }
+img { max-width: 100%;}
 a { text-decoration: none; color: inherit; }
 
 .contenedor { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
@@ -77,3 +77,4 @@ a { text-decoration: none; color: inherit; }
 .opinion-item__fecha { font-size: .75rem; color: #888; }
 .opinion-item__estrellas { color: #FBBC04; font-size: 1rem; letter-spacing: 2px; margin-bottom: 10px; }
 .opinion-item p { font-size: .85rem; }
+
