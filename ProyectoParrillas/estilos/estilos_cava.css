@@ -1,0 +1,133 @@
+/* ============ HERO (Cava y Bar) ============ */
+.hero-cava {
+    position: relative;
+}
+
+.hero-cava img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-cava h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: "Fjalla One";
+    font-weight: normal;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* ============ INTRO (copa + texto) ============ */
+.intro-cava {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background-color: black;
+    padding: 60px 40px;
+}
+
+.intro-cava figure {
+    margin: 0;
+    margin-left: -20px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.intro-cava figure img {
+    width: 250%;
+    display: block;
+}
+
+.texto-intro {
+    max-width: 480px;
+    margin-left: 20px;
+    color: rgb(200, 220, 235);
+    font-family: Google Sans Flex;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.texto-intro p {
+    margin-bottom: 20px;
+}
+
+/* ============ SECCIÓN VINOS (3 vinos) ============ */
+.cuerpo-pagina {
+    background-color: rgb(250, 227, 207);
+    padding: 40px 60px;
+}
+
+.cuerpo-pagina>div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cuerpo-pagina figure {
+    margin: 0;
+    width: 250px;
+    text-align: center;
+}
+
+.cuerpo-pagina figure img {
+    width: 100%;
+}
+
+.cuerpo-pagina p2 {
+    display: block;
+    margin-top: 10px;
+    color: rgb(227, 21, 38);
+    font-weight: bold;
+    font-family: Google Sans Flex;
+}
+
+/* ============ GALERÍA (paisaje + almacén) ============ */
+.galeria-cava {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background-color: rgb(250, 227, 207);
+    padding: 50px 60px;
+}
+
+.galeria-cava figure {
+    margin: 0;
+    width: 40%;
+    max-width: 600px;
+}
+
+.galeria-cava img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.boton-carta {
+    text-align: center;
+    background-color: rgb(250, 227, 207);
+    padding: 25px;
+}
+
+.boton-carta a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: rgb(227, 21, 38);
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.boton-carta a:hover {
+    color: rgb(227, 21, 38);
+    background-color: black;
+}
