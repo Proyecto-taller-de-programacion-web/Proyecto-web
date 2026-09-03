@@ -49,7 +49,7 @@
 
 
   <main class="registro-seccion">
-    <p class="hero-eyebrow">Nuevos clientes</p>
+    <p class="referencia">Nuevos clientes</p>
     <h1>Únete a<br>la mesa</h1>
     <p class="eslogan">El lugar perfecto para los amantes de la carne</p>
     <div class="divider-flame"></div>
@@ -57,29 +57,28 @@
     <div class="card">
       <form id="register-form">
         <div class="input-box">
-          <label for="reg-name">Nombre completo</label>
-          <input type="text" id="reg-name" placeholder="Tu nombre" required>
+          <label for="nombre-completo">Nombre completo</label>
+          <input type="text" name="nombre-completo" id="nombre-completo" placeholder="Tu nombre" required>
+        </div>
+        <div class="row-two">
+          <div class="input-box">
+            <label for="correo">Correo</label>
+            <input type="email" name="correo" id="correo" placeholder="correo@ejemplo.com" required>
+          </div>
+          <div class="input-box">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" name="telefono" id="telefono" placeholder="+51 999 999 999" maxlength="9" required pattern="[0-9]+">
+          </div>
         </div>
 
         <div class="row-two">
           <div class="input-box">
-            <label for="reg-email">Correo</label>
-            <input type="email" id="reg-email" placeholder="correo@ejemplo.com" required>
+            <label for="pass">Contraseña</label>
+            <input type="password" name="pass" id="pass" placeholder="••••••••" required>
           </div>
           <div class="input-box">
-            <label for="reg-phone">Teléfono</label>
-            <input type="tel" id="reg-phone" placeholder="+51 999 999 999" maxlength="9" required pattern="[0-9]+">
-          </div>
-        </div>
-
-        <div class="row-two">
-          <div class="input-box">
-            <label for="reg-pass">Contraseña</label>
-            <input type="password" id="reg-pass" placeholder="••••••••" required>
-          </div>
-          <div class="input-box">
-            <label for="reg-pass2">Confirmar</label>
-            <input type="password" id="reg-pass2" placeholder="••••••••" required>
+            <label for="pass2">Confirmar</label>
+            <input type="password" name="pass2" id="pass2" placeholder="••••••••" required>
           </div>
         </div>
 

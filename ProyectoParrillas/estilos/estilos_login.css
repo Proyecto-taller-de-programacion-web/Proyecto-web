@@ -14,10 +14,6 @@
   padding: 0;
 }
 
-html,
-body {
-  height: 100%;
-}
 
 body {
   min-height: 100vh;
@@ -30,7 +26,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ============ MAIN HERO ============ */
+/* ============ MAIN ============ */
 .login-seccion {
   position: relative;
   z-index: 2;
@@ -48,7 +44,7 @@ body {
   text-align: left;
 }
 
-.hero-eyebrow {
+.referencia {
   font-family: 'Oswald', sans-serif;
   font-size: 20px;
   letter-spacing: 0.35em;
@@ -123,17 +119,13 @@ form {
   font-size: 14px;
   padding: 12px 14px;
   outline: none;
-  transition: border-color 0.25s ease, background 0.25s ease;
+  border-radius: 3px;
 }
 
 .input-box input::placeholder {
   color: rgba(185, 178, 168, 0.5);
 }
 
-.input-box input:focus {
-  border-color: var(--red);
-  background: rgba(196, 31, 36, 0.06);
-}
 
 .remember-password {
   display: flex;
@@ -167,21 +159,12 @@ form {
   border-color: var(--red);
 }
 
-.checkbox-line input:checked::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(45deg, transparent 40%, var(--black) 40%, var(--black) 45%, transparent 45%),
-    linear-gradient(-45deg, transparent 40%, var(--black) 40%, var(--black) 45%, transparent 45%);
-}
 
 .link-red {
   color: var(--white);
   text-decoration: none;
   border-bottom: 1px solid var(--red);
   padding-bottom: 1px;
-  transition: color 0.2s ease;
 }
 
 .link-red:hover {
@@ -200,7 +183,6 @@ form {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .btn-principal:hover {
@@ -216,25 +198,3 @@ form {
   margin-top: 26px;
 }
 
-button:focus-visible,
-input:focus-visible,
-a:focus-visible {
-  outline: 1px solid var(--red);
-  outline-offset: 3px;
-}
-
-/* En pantallas angostas, apilar y centrar como antes */
-@media (max-width:860px) {
-  .login-seccion {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .cabecera-login {
-    text-align: center;
-  }
-
-  .divider-flame {
-    margin: 30px auto 0;
-  }
-}
