@@ -78,3 +78,33 @@ a { text-decoration: none; color: inherit; }
 .opinion-item__estrellas { color: #FBBC04; font-size: 1rem; letter-spacing: 2px; margin-bottom: 10px; }
 .opinion-item p { font-size: .85rem; }
 
+
+
+section{
+  float:left;
+  width:87%;
+}
+
+aside{
+  background-color: rgb(219, 201, 184);
+  float:right;
+  width: 15%;
+  padding-left: 25px;
+  height: 1920px;
+
+
+  top: 620px;
+  right: 20px;
+  width: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -65,6 +65,8 @@ footer{
     font-family: Google Sans Flex;
     color: rgb(147, 30, 55);
     padding: 60px 0px 40px 0px;
+    
+    clear:both;
 }
 
 .logo-footer{
