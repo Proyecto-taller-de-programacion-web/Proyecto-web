@@ -1,5 +1,156 @@
 
 
-.logo-nosotros{
+
+
+
+/*------Logo de Nosotros-----*/
+figure{
+    margin: 0;
+}
+.img-nosotros{
     width: 100% ;
+}
+
+figure h1{
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 70px;    
+    color: #fffcfc;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+}
+
+/*-----------CONTENIDO PRINCIPAL------------*/
+
+/*---Para todas las secciones---*/
+section{
+    margin: 0;
+    padding: 120px;
+}
+
+/*---Sección 1--*/
+.caja-seccion1{
+    text-align: left;
+    background-color: #93111B;
+    color:white;
+    
+}
+
+.titulo-seccion1{
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 50px;    
+    color: #ffffff;
+}
+
+.parrafo-seccion1{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;    
+    color: #ffffff;
+    text-align: left;
+    margin: 0 0px;
+}
+
+
+.contenedor-tabla{
+    
+}
+
+table{
+    font-family: 'Inter', sans-serif;
+    width: 60%;
+    border-radius: 40px;
+    border-collapse: collapse;
+    font-size: 17px;
+
+    display:inline-block;
+    margin:20px 100px 20px 0px;
+}
+
+th,td{
+    padding:15px;
+    text-align: center;
+    border: 3px solid #000000;
+}
+.img-horarios{
+    display:inline-block;
+    width: 20%;
+    text-align: right;
+}
+
+
+
+
+
+
+
+/*---Sección 2--*/
+.caja-seccion2{
+    background-color: #FFE8D3;
+    color:white;
+}
+
+.titulo-seccion2{
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 50px;    
+    color: #000000;
+}
+
+.caja-parrafo2{
+    background-color: #e69f9f;
+    padding:50px;
+}
+
+.parrafo-seccion2{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;    
+    color: #000000;
+    text-align: left;
+    margin: 0 200px;
+}
+
+.caja-imagenes{
+    display:inline-block;
+    margin:auto;
+}
+
+
+
+.img-historia{
+    width: 380px;
+    margin: 25px 25px;
+}
+/*-----SECCIÓN: Horarios y servicios-----*/
+
+
+
+
+
+/*-----SECCIÓN: Nuestra historia-----*/
+
+
+
+
+
+
+/*-----SECCIÓN: Misión y Visión-----*/
+
+
+.caja-valores{
+    background-color: #0B0A0E;
+    color: #fffcfc;
+    text-align: center;
+    padding:50px;
+    margin:15px
+}
+
+.titulo-valores{
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+}
+
+.texto-valores{
+    font-family: 'Helvetica', sans-serif;
+    font-size: 15px;
 }
