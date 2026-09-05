@@ -15,6 +15,7 @@
     <title>Reservar</title>
 
     <link rel="stylesheet" href="../../estilos/estilos_global.css">
+    <link rel="stylesheet" href="../../estilos/estilos_reserva.css">
 
 </head>
 
@@ -38,20 +39,149 @@
         <li><a href="index.html">RESERVAR</a></li>
         <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
     </ul>
-
 </nav> 
 
+<div class="container">
+    <div class="title">
+      <p class="referencia">NUEVAS RESERVAS</p>
+      <h1>RESERVA</h1>
+      <h3>No se quede sin un lugar, realice su reserva ahora</h3>
+    </div>
 
+    <div>
+      <form class="formReserva" name="formReserva" method="get" action="confirmacion.html">
+        <fieldset class="fieldDatosReserva">
+          <legend>DATOS DE LA RESERVA</legend>
+          <div class="form-group">
+            <p>1 SELECCIONE SU SEDE</p>
 
+            <input type="radio" name="sede" id="sede-san-isidro" value="san-isidro" required/>
+            <label for="sede-san-isidro">San Isidro</label>
 
+            <input type="radio" name="sede" id="sede-miraflores" value="miraflores"/>
+            <label for="sede-miraflores">Miraflores</label>
+          </div>
+          <div class="form-group">
+            <p>2 SELECCIONE SU CONSUMO</p>
 
+            <input type="radio" name="tipo-consumo" id="consumo-almuerzo" value="almuerzo" required/>
+            <label for="consumo-almuerzo">Almuerzo</label>
 
+            <input type="radio" name="tipo-consumo" id="consumo-cena" value="cena"/>
+            <label for="consumo-cena">Cena</label>
 
+            <input type="radio" name="tipo-consumo" id="consumo-brunch" value="brunch"/>
+            <label for="consumo-brunch">Brunch</label>
 
+            <input type="radio" name="tipo-consumo" id="consumo-evento-especial" value="evento-especial"/>
+            <label for="consumo-evento-especial">Evento Especial</label>
+          </div>
+          <div class="form-group">
+            <p>3 SELECCIONE UNA ZONA</p>
 
+            <input type="radio" name="zona" id="zona-salon-principal" value="salon-principal" required/>
+            <label for="zona-salon-principal">Salón Principal</label>
 
+            <input type="radio" name="zona" id="zona-lounge" value="lounge"/>
+            <label for="zona-lounge">Lounge</label>
 
+            <input type="radio" name="zona" id="zona-terraza-alta" value="terraza-alta"/>
+            <label for="zona-terraza-alta">Terraza Alta</label>
+          </div>
+          <div class="form-group">
+            <label for="numero-personas">4 SELECCIONE EL NÚMERO DE PERSONAS</label>
+            <select id="numero-personas" name="total-personas" required>
+              <option value="" disabled selected hidden>Seleccione</option>
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+              <option value="7">7 personas</option>
+              <option value="8">8 personas</option>
+              <option value="9">9 personas</option>
+              <option value="10">10 personas</option>
+              <option value="11">11 personas</option>
+              <option value="12">12 personas</option>
+              <option value="13">13 personas</option>
+              <option value="14">14 personas</option>
+              <option value="15">15 personas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fecha-reserva">5 SELECCIONE LA FECHA</label>
+            <input type="date" name="fechas" id="fecha-reserva" value="" min="2026-09-08" required/>
+          </div>
+          <div class="form-group">
+            <label for="hora-reserva">6 SELECCIONE LA HORA</label>
+            <select id="hora-reserva" name="hora" required>
+              <option value="" disabled selected hidden>Seleccione</option>
+              <option value="12:00pm">12:00 PM</option>
+              <option value="1:00pm">1:00 PM</option>
+              <option value="2:00pm">2:00 PM</option>
+              <option value="3:00pm">3:00 PM</option>
+              <option value="4:00pm">4:00 PM</option>
+              <option value="5:00pm">5:00 PM</option>
+              <option value="6:00pm">6:00 PM</option>
+              <option value="7:00pm">7:00 PM</option>
+              <option value="9:00pm">9:00 PM</option>
+              <option value="10:00pm">10:00 PM</option>
+              <option value="11:00pm">11:00 PM</option>
+              <option value="12:00am">12:00 AM</option>
+            </select>
+          </div>
+        </fieldset>
 
+        <fieldset>
+          <legend>INFORMACIÓN EXTRA (NO OBLIGATORIO)</legend>
+          <div class="form-group">
+            <label for="requerimiento">¿Tienes algún requerimiento especial?</label>
+            <textarea name="comentario-req" id="requerimiento" placeholder="Ejm: Mesa junto a la ventana..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="necesidad">¿Alguna necesidad a tomar en cuenta?</label>
+            <textarea name="comentario-nec" id="necesidad" placeholder="Ejm: Acceso para silla de ruedas..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="alegias">¿Alguna alergia, intolerancia o restricción alimentaria?</label>
+            <textarea name="comentario-ale" id="alegias" placeholder="Ejm: Alergia a mariscos..."></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldDatos">
+          <legend>DATOS DE LA PERSONA</legend>
+          <div class="form-group">
+            <label for="nombre">NOMBRE</label>
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" required minlength="2"/>
+          </div>
+          <div class="form-group">
+            <label for="apellido">APELLIDO</label>
+            <input type="text" name="apellido" id="apellido" placeholder="Apellido" required minlength="2"/>
+          </div>
+          <div class="form-group">
+            <label for="correo">CORREO ELECTRÓNICO</label>
+            <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required/>
+          </div>
+          <div class="form-group">
+            <label for="telefono">TELÉFONO</label>
+            <input type="tel" name="telefono" id="telefono" placeholder="999999999" required pattern="[0-9]{9}"/>
+          </div>
+        </fieldset>
+
+        <div class="checkbox-line">
+          <input type="checkbox" name="terminos" id="terminos" required/>
+          <label for="terminos">Acepto los <a href="#">términos y condiciones</a></label>
+        </div>
+
+        <div class="form-action">
+          <button type="submit" class="btn-submit">RESERVAR</button>
+          <input type="reset" class="btn-reset" value="LIMPIAR FORMULARIO"/>
+        </div>
+      </form>
+    </div>
+  </div>
+  
     <!---------PIE DE PÁGINA---------->
 <footer>
 
