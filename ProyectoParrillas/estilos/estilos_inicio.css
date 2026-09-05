@@ -80,24 +80,6 @@ a { text-decoration: none; color: inherit; }
 
 
 
-section{
-  float:left;
-  width:87%;
-}
-
-aside{
-  background-color: rgb(219, 201, 184);
-  float:right;
-  width: 15%;
-  padding-left: 25px;
-  height: 1920px;
-
-
-  top: 620px;
-  right: 20px;
-  width: 200px;
-}
-
 
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fjalla+One&display=swap" rel="stylesheet">
 
+    <!--pOR Mientras-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
 
     <!--Título y la conexión a css-->
     <title>Nosotros</title>
@@ -19,7 +25,7 @@
 
 <body>
 
-    <!---------BARRA DE NAVEGACIÓN---------->
+    <!--------------BARRA DE NAVEGACIÓN------------------>
 <nav>
 
     <figure>
@@ -40,10 +46,196 @@
 </nav>   
 
 
+    <!-----Imagen principal--->
+<div>
     <figure>
-        <img class="logo-nosotros" src="../../img/nosotros.jpg" alt="Logo de Nosotros">
+        <img class="img-nosotros" src="../../img/nosotros2.jpg" alt="Logo de Nosotros">
+        <h1>NOSOTROS</h1>
+    </figure>
+</div>
+
+
+
+    <!--------------------------CONTENIDO PRINCIPAL---------------------------->
+
+    <!---------SECCIÓN: Nuestros horarios-------->
+<section class="caja-seccion1">
+
+            <h2 class="titulo-seccion1">NUESTROS HORARIOS:</h2>
+            <p class= "parrafo-seccion1">Disfruta de nuestras carnes y parrilladas en diferentes 
+                momentos de la semana.</p>
+
+    <div class="contenedor-tabla">
+
+            <table>
+                <!-- Agrupamos las columnas -->
+                <colgroup>
+                    <col class="col-dia">
+                    <col class="col-horario">
+                    <col class="col-servicio">
+                    <col class="col-detalle">
+                </colgroup>
+
+                <thead>
+                    <!-- colspan: el título ocupa las 4 columnas -->
+                    <tr>
+                        <th colspan="4">HORARIOS Y EXPERIENCIAS</th>
+                    </tr>
+
+                    <tr>
+                        <th>Día</th>
+                        <th>Horario</th>
+                        <th>Servicio</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <!-- MARTES A SÁBADO -->
+                    <tr>
+                        <!-- rowspan: ocupa 3 filas -->
+                        <td rowspan="3">
+                            Martes a Sábado
+                        </td>
+
+                        <td>12:00 p. m. - 3:00 p. m.</td>
+                        <td>Almuerzo Parrillero</td>
+                        <td>
+                            Menú ejecutivo, carnes y acompañamientos.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3:00 p. m. - 6:00 p. m.</td>
+                        <td>Hora Parrillera</td>
+                        <td>
+                            Cortes de carne y parrilladas especiales.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>6:00 p. m. - 10:00 p. m.</td>
+                        <td>Cena Parrillera</td>
+                        <td>
+                            Carta completa y cortes premium.
+                        </td>
+                    </tr>
+
+
+                    <!-- DOMINGO -->
+                    <tr>
+                        <!-- rowspan: ocupa 2 filas -->
+                        <td rowspan="2">
+                            Domingo
+                        </td>
+
+                        <td>12:00 p. m. - 4:00 p. m.</td>
+                        <td>Buffet Familiar</td>
+                        <td>
+                            Variedad de carnes, ensaladas y acompañamientos.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>4:00 p. m. - 7:00 p. m.</td>
+                        <td>Parrilla Familiar</td>
+                        <td>
+                            Parrilladas y platos especiales para compartir.
+                        </td>
+                    </tr>
+
+
+                    <!-- LUNES -->
+                    <tr>
+                        <td>Lunes</td>
+                        <td colspan="3">
+                            Día de descanso
+                        </td>
+                    </tr>
+
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <!-- colspan: agrupamos 3 columnas -->
+                        <td colspan="3">Horario general de atención</td>
+                        <td>
+                            Martes a Sábado: 12:00 p. m. - 10:00 p. m.
+                            <br>
+                            Domingo: 12:00 p. m. - 7:00 p. m.
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+
+            <div class="img-horarios">
+                <figure>
+                    <img src="../../img/imagenHorario.png" alt="Imagen de horarios">  
+                </figure>
+    </div>
+    </div>
+
+     
+   
+</section>
+
+
+    <!-------SECCIÓN: Nuestra historia------>
+
+<section class="caja-seccion2">   
+    
+    <h2 class="titulo-seccion2">NUESTRA HISTORIA</h2>
+    
+    <div class="caja-parrafo2">
+
+        <p class="parrafo-seccion2">La Vaca Roja nace en el año 2010 con la idea de ofrecer a nuestros clientes una experiencia gastronómica única, brindando carnes de la más alta calidad, preparadas con maestría y servidas en un ambiente acogedor y familiar.</p>
+
+        <p class="parrafo-seccion2">Desde entonces, nos hemos convertido en un referente en el mundo de las carnes y parrillas, destacando por nuestra excelencia culinaria, innovación constante y compromiso con la satisfacción del cliente.</p>
+
+        <p class="parrafo-seccion2">En La Vaca Roja, nos apasiona lo que hacemos y nos esforzamos por ofrecer siempre lo mejor a nuestros clientes. ¡Ven y descubre por qué somos la elección preferida para los amantes de la carne!</p>
+    </div>
+
+    <div>
+    <figure class="caja-imagenes">
+        <img class="img-historia" src="../../img/nuestrahistoria1.png" alt="Imagen de la historia">
     </figure>
 
+    <figure class="caja-imagenes">
+        <img class="img-historia" src="../../img/nuestrahistoria2.png" alt="Imagen de la historia">
+    </figure>
+
+    <figure class="caja-imagenes">
+        <img class="img-historia" src="../../img/nuestrahistoria3.png" alt="Imagen de la historia">
+    </figure>
+
+    </div>
+
+</section>
+
+
+    <!--------SECCIÓN: Mision y visión-------->
+<section class="caja-seccion1"> 
+
+    <h2 class="titulo-seccion1">VALORES</h2>
+
+    <article class="caja-valores">
+
+        <h4 class="titulo-valores">MISIÓN</h4>
+        <p class="texto-valores">Ofrecer a nuestros clientes una experiencia gastronómica única, brindando carnes de la más alta calidad, preparadas con maestría y servidas en un ambiente acogedor y familiar.</p>
+    
+    </article>
+
+    <article class="caja-valores">
+
+        <h4 class="titulo-valores">VISIÓN</h4>
+        <p class="texto-valores">Ser reconocidos como el referente principal en carnes y parrillas, destacando por nuestra excelencia culinaria, innovación constante y compromiso con la satisfacción del cliente.</p>
+    
+    </article>
+
+    
+</section>
 
 
 
@@ -51,7 +243,7 @@
 
 
 
-    <!---------PIE DE PÁGINA---------->
+    <!----------------------------PIE DE PÁGINA---------------------->
 <footer>
 
         <figure>
