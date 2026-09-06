@@ -5,8 +5,8 @@ figure{
 }
 .img-nosotros{
     display: block;
-    height: 710px;
-    max-width: 100%;
+    
+    width: 100%;
 }
 figure h1{
     /* Posicionamiento */
