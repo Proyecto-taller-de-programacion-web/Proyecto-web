@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="descripcion" content="Conoce la historia, tradición y propuesta gastronómica de Carnes y Parrillas La Vaca Roja.">  
+    <meta name="descripcion" content="Conoce la historia, tradición y propuesta gastronómica de Carnes y Parrillas La Vaca Roja.">
 
     <!--Importación desde GoogleFont para las fuentes-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fjalla+One&display=swap" rel="stylesheet">
-
-    <!--pOR Mientras-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-
 
     <!--Título y la conexión a css-->
     <title>Nosotros</title>
@@ -25,48 +21,45 @@
 
 <body>
 
-    <!--------------BARRA DE NAVEGACIÓN------------------>
-<nav>
+    <!---------BARRA DE NAVEGACIÓN---------->
+    <nav>
 
-    <div class="logo-container">
+        <div class="logo-container">
+            <figure>
+                <img class="logo-principal" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+            </figure>
+        </div>
+
+        <ul>
+            <li><a href="../../index.html">INICIO</a></li>
+            <li><a href="../../paginas/1. carnes/index.html">CARNES</a></li>
+            <li><a href="../../paginas/2. cava-bar/index.html">CAVA/BAR</a></li>
+            <li><a href="index.html">NOSOTROS</a></li>
+            <li><a href="../../paginas/4. sedes/index.html">SEDES</a></li>
+            <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
+            <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
+        </ul>
+
+    </nav>
+
+    <!---------IMAGEN PRINCIPAL---------->
+    <div>
         <figure>
-            <img class="logo-principal" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+            <img class="img-nosotros" src="../../img/nosotros2.jpg" alt="Logo de Nosotros">
+            <h1>NOSOTROS</h1>
         </figure>
     </div>
-    
-    <ul>
-        <li><a href="../../index.html">INICIO</a></li>
-        <li><a href="../../paginas/1. carnes/index.html">CARNES</a></li>
-        <li><a href="../../paginas/2. cava-bar/index.html">CAVA/BAR</a></li>
-        <li><a href="index.html">NOSOTROS</a></li>
-        <li><a href="../../paginas/4. sedes/index.html">SEDES</a></li>
-        <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
-        <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
-    </ul>
 
-</nav>   
+    <!---------------------------CONTENIDO PRINCIPAL---------------------------->
 
+    <!---------SECCIÓN: Nuestros horarios---------->
+    <section class="seccion-horarios">
 
-    <!-----Imagen principal----->
-<div>
-    <figure>
-        <img class="img-nosotros" src="../../img/nosotros2.jpg" alt="Logo de Nosotros">
-        <h1>NOSOTROS</h1>
-    </figure>
-</div>
+        <h2 class="titulo-horarios">NUESTROS HORARIOS:</h2>
+        <p class="parrafo-horarios">Disfruta de nuestras carnes y parrilladas en diferentes
+            momentos de la semana.</p>
 
-
-
-    <!--------------------------CONTENIDO PRINCIPAL---------------------------->
-
-    <!---------SECCIÓN: Nuestros horarios-------->
-<section class="seccion-horarios">
-
-            <h2 class="titulo-horarios">NUESTROS HORARIOS:</h2>
-            <p class= "parrafo-horarios">Disfruta de nuestras carnes y parrilladas en diferentes 
-                momentos de la semana.</p>
-
-    <div class="contenedor-tabla">
+        <div class="contenedor-tabla">
 
             <table>
                 <!-- Agrupamos las columnas -->
@@ -89,199 +82,146 @@
                     <!-- MARTES A SÁBADO -->
                     <tr>
                         <!-- rowspan: ocupa 3 filas -->
-                        <td rowspan="3">
-                            Martes a Sábado
-                        </td>
-
+                        <td rowspan="3">Martes a Sábado</td>
                         <td class="celdas-internas1">12:00 p. m. - 3:00 p. m.</td>
                         <td class="celdas-internas1">Almuerzo Parrillero</td>
                         <td class="celdas-internas1">Menú ejecutivo, carnes y acompañamientos.</td>
                     </tr>
-
                     <tr>
                         <td class="celdas-internas1">3:00 p. m. - 6:00 p. m.</td>
                         <td class="celdas-internas1">Hora Parrillera</td>
                         <td class="celdas-internas1">Cortes de carne y parrilladas especiales.</td>
                     </tr>
-
                     <tr>
                         <td class="celdas-internas1">6:00 p. m. - 10:00 p. m.</td>
                         <td class="celdas-internas1">Cena Parrillera</td>
                         <td class="celdas-internas1">Carta completa y cortes premium.</td>
                     </tr>
 
-
                     <!-- DOMINGO -->
                     <tr>
                         <!-- rowspan: ocupa 2 filas -->
-                        <td rowspan="2">
-                            Domingo
-                        </td>
-
+                        <td rowspan="2">Domingo</td>
                         <td class="celdas-internas2">12:00 p. m. - 4:00 p. m.</td>
                         <td class="celdas-internas2">Buffet Familiar</td>
                         <td class="celdas-internas2">Variedad de carnes, ensaladas y acompañamientos.</td>
                     </tr>
-
                     <tr>
                         <td class="celdas-internas2">4:00 p. m. - 7:00 p. m.</td>
                         <td class="celdas-internas2">Parrilla Familiar</td>
                         <td class="celdas-internas2">Parrilladas y platos especiales para compartir.</td>
                     </tr>
 
-
                     <!-- LUNES -->
                     <tr>
                         <td>Lunes</td>
-                        <td  class="celdas-internas1" colspan="3">
-                            Día de descanso
-                        </td>
+                        <td class="celdas-internas1" colspan="3">Día de descanso</td>
                     </tr>
-
                 </tbody>
 
                 <tfoot>
                     <tr>
                         <!-- colspan: agrupamos 3 columnas -->
                         <td colspan="3">Horario general de atención</td>
-                        <td>Martes a Sábado: 12:00 p. m. - 10:00 p. m.<br>
+                        <td>
+                            Martes a Sábado: 12:00 p. m. - 10:00 p. m.<br>
                             Domingo: 12:00 p. m. - 7:00 p. m.
                         </td>
                     </tr>
                 </tfoot>
             </table>
 
+            <figure>
+                <img class="img-horarios" src="../../img/img-horario2.jpg" alt="Imagen de horarios">
+            </figure>
 
-            <div>
-                <figure>
-                    <img class="img-horarios" src="../../img/img-horario2.jpg" alt="Imagen de horarios">  
-                </figure>
-            </div>
-    </div>
+        </div>
 
+    </section>
 
-    
-</section>
+    <!---------SECCIÓN: Nuestra historia---------->
+    <section class="seccion-historia">
 
-
-    <!-------SECCIÓN: Nuestra historia------>
-
-<section class="seccion-historia">   
-    
-    <h2 class="titulo-historia">NUESTRA HISTORIA</h2>
-
+        <h2 class="titulo-historia">NUESTRA HISTORIA</h2>
 
         <figure class="caja-img-historia">
             <img class="img-historia" src="../../img/img-historia2.jpg" alt="Imagen de la historia">
         </figure>
 
-
         <div class="caja-parrafo-historia">
-            <p class="parrafo-historia">La Vaca Roja nace en el año 2010 con la idea de ofrecer a nuestros clientes una experiencia gastronómica única, 
-                brindando carnes de la más alta calidad, preparadas con maestría y servidas en un ambiente acogedor y familiar. <br><br>
+            <p class="parrafo-historia">
+                La Vaca Roja nace en el año 2010 con la idea de ofrecer a nuestros clientes una experiencia gastronómica única,
+                brindando carnes de la más alta calidad, preparadas con maestría y servidas en un ambiente acogedor y familiar.
+                <br><br>
                 Desde entonces, nos hemos convertido en un referente en el mundo de las carnes y parrillas, destacando por nuestra excelencia culinaria,
-                innovación constante y compromiso con la satisfacción del cliente</p>
+                innovación constante y compromiso con la satisfacción del cliente
+            </p>
         </div>
 
-    </div>
-
-</section>
-
-
-
-
-    <!--------SECCIÓN: Servicios 1-------->
-<div class= "contenedor-secciones">
-
-    <section class="seccion-servicios1"> 
-
-    <h2 class="titulo-horarios">NUESTROS<br>SERVICIOS</h2>
-    <p class="parrafo-horarios">Conoce todo lo que tenemos <br>para ti y tus colaboradores</p>
-    
     </section>
 
+    <!---------SECCIÓN: Servicios 1 (banner)---------->
+    <div class="contenedor-secciones">
 
-    <figure>
+        <section class="seccion-servicios1">
+            <h2 class="titulo-horarios">NUESTROS<br>SERVICIOS</h2>
+            <p class="parrafo-horarios">Conoce todo lo que tenemos <br>para ti y tus colaboradores</p>
+        </section>
+
+        <figure>
             <img class="img-secundaria" src="../../img/img-secundaria.png" alt="Imagen secundaria">
-    </figure>
-    
-</div>    
-
-    <!--------SECCIÓN: Servicios 2-------->
-
-
-<section class="seccion-experiencias2"> 
-
-    <div class="contenedor-experiencias">
-
-
-        <article class="caja-experiencias">
-
-        <h4 class="titulo-experiencias">CENAS/<br>ALMUERZOS EJECUTIVOS</h4>
-        
-        <figure>
-            <img src="../../img/img-experiencias1.png" alt="Imagen de experiencias 1">
         </figure>
-        
-        </article>
-
-
-
-        <article class="caja-experiencias">
-
-        <h4 class="titulo-experiencias">CLASES DE COCINA <br>PARTICIPATIVA</h4>
-    
-        <figure>
-            <img src="../../img/img-experiencias2.png" alt="Imagen de experiencias 2">
-        </figure>
-
-        </article>
 
     </div>
 
+    <!---------SECCIÓN: Servicios 2 (tarjetas de experiencias)---------->
+    <section class="seccion-experiencias2">
 
+        <div class="contenedor-experiencias">
 
-    <div class="contenedor-experiencias">
+            <article class="caja-experiencias">
+                <h4 class="titulo-experiencias">CENAS/<br>ALMUERZOS EJECUTIVOS</h4>
+                <figure>
+                    <img src="../../img/img-experiencias1.png" alt="Imagen de experiencias 1">
+                </figure>
+            </article>
 
+            <article class="caja-experiencias">
+                <h4 class="titulo-experiencias">CLASES DE COCINA <br>PARTICIPATIVA</h4>
+                <figure>
+                    <img src="../../img/img-experiencias2.png" alt="Imagen de experiencias 2">
+                </figure>
+            </article>
 
-        <article class="caja-experiencias">
+        </div>
 
-            <h4 class="titulo-experiencias">MASTER CLASS COCTELERÍA</h4>
-            
-            <figure>
-                <img src="../../img/img-experiencias3.png" alt="Imagen de experiencias 3">
-            </figure>
-        
-        </article>
+        <div class="contenedor-experiencias">
 
+            <article class="caja-experiencias">
+                <h4 class="titulo-experiencias">MASTER CLASS COCTELERÍA</h4>
+                <figure>
+                    <img src="../../img/img-experiencias3.png" alt="Imagen de experiencias 3">
+                </figure>
+            </article>
 
+            <article class="caja-experiencias">
+                <h4 class="titulo-experiencias">DESAYUNOS EJECUTIVOS</h4>
+                <figure>
+                    <img src="../../img/img-experiencias4.png" alt="Imagen de experiencias">
+                </figure>
+            </article>
 
-        <article class="caja-experiencias">
+        </div>
 
-            <h4 class="titulo-experiencias">DESAYUNOS EJECUTIVOS</h4>
-        
-            <figure>
-                <img src="../../img/img-experiencias4.png" alt="Imagen de experiencias ">
-            </figure>
+    </section>
 
-        </article>
-
-    </div>
-
-
-</section>
-
-
-
-
-    <!----------------------------PIE DE PÁGINA---------------------->
-<footer>
+    <!---------PIE DE PÁGINA---------->
+    <footer>
 
         <figure>
             <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
             <h2 class="titulo-logo">LA VACA ROJA</h2>
         </figure>
-
 
         <div class="caja-footer">
             <h4 class="informacion-footer">SEDES</h4>
@@ -293,18 +233,17 @@
             <h4 class="informacion-footer">TELÉFONO</h4>
             <p>(01) 352 1472 / 982 140 582</p>
         </div>
-        
+
         <div class="caja-footer">
             <h4 class="informacion-footer">EMAIL</h4>
             <p>info@lavacaroja.pe</p>
         </div>
-        
+
         <div class="caja-footer">
             <h4 class="informacion-footer">HORARIO DE ATENCIÓN</h4>
             <p>Martes a Sábado: 12:00 pm - 10:00 pm</p>
             <p>Domingos: 12:00 pm - 7:00 pm</p>
         </div>
-
 
         <div>
             <img src="../../img/logoFacebook.png" alt="Logo de Facebook">
@@ -312,9 +251,7 @@
             <img src="../../img/logoTiktok.png" alt="Logo de Tiktok">
         </div>
 
-
-</footer>
-
+    </footer>
 
 </body>
 </html>
