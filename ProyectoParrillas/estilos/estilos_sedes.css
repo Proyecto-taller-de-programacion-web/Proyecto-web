@@ -3,7 +3,8 @@
 .container{
     /* Espaciado */
     padding: 50px 80px 100px;
-}
+    background-color: #7d0610;
+}   
 .title{
     /* Espaciado */
     margin-bottom: 60px;
@@ -13,13 +14,13 @@
 .title h1{
     font-family: 'Fjalla One', sans-serif;
     font-size: 60px;
-    color: #B3171E;
+    color: #ffffff;
 }
 .title h3{
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: normal;
-    color: #000000;
+    color: #ffffff;
 }
 
 /* ====================================================== */
@@ -29,7 +30,9 @@
     /* Espaciado */
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 50px
+    
+    ;
 }
 
 /* Tarjeta individual de una sede (imagen + info en fila) */
