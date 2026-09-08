@@ -5,46 +5,47 @@ figure{
 }
 .img-nosotros{
     display: block;
-    
     width: 100%;
 }
 figure h1{
+    color: #fffcfc;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 80px;
+
     /* Posicionamiento */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -100%);
-    /* Tipografía */
-    font-family: 'Fjalla One', sans-serif;
-    font-size: 80px;
-    color: #fffcfc;
+    
 }
-/*----------------CONTENIDO PRINCIPAL----------------*/
-/*------------SECCIÓN: Horarios y servicios----------*/
+/*-----------------------CONTENIDO PRINCIPAL-----------------------*/
+
+
+/*---------------SECCIÓN: Horarios y servicios-------*/
 .seccion-horarios{
-    /* Espaciado */
-    padding: 50px 80px 100px 80px;
-    /* Tipografía */
-    text-align: left;
-    color: white;
-    /* Fondo */
     background-color: #B3171E;
+    color: white;
+
+    padding: 50px 80px 100px 80px;
+    text-align: left;
+    
 }
 .titulo-horarios{
+    color: #ffffff;
     font-family: 'Fjalla One', sans-serif;
     font-size: 50px;
-    color: #ffffff;
 }
 .parrafo-horarios{
-    /* Espaciado */
-    margin: 0px;
-    /* Tipografía */
+    color: #ffffff;
     font-family: 'Inter', sans-serif;
     font-size: 20px;
-    color: #ffffff;
+
+    margin: 0px;
+
 }
 /*-----------TABLAS-----------*/
-.contenedor-tabla{
+.contenedor-horarios{
     display: flex;
     margin-top: 60px;
 }
@@ -52,24 +53,21 @@ figure h1{
     background-color: rgb(10, 22, 27);
 }
 table{
-    /* Espaciado */
-    width: 75%;
+    width: 50%;
     border-collapse: collapse;
     margin-right: 80px;
-    /* Tipografía */
+
     font-family: Inter, Helvetica, sans-serif;
     font-size: 14px;
     text-align: center;
 }
 caption{
-    /* Espaciado */
-    padding: 25px;
-    /* Tipografía */
+    background-color: rgb(78, 14, 14);
+    color: #ffffff;
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
-    /* Fondo */
-    background-color: rgb(78, 14, 14);
+
+    padding: 25px;
 }
 /*----Celdas-----*/
 th,td{
@@ -78,102 +76,101 @@ th,td{
 }
 /*Color del encabezado de la tabla*/
 thead{
-    color: white;
     background-color: rgb(21, 46, 56);
+    color: white;
 }
 /*--Tbody--*/
-.celdas-internas1{
+.celdas-tipo1{
     background-color: rgb(37, 73, 87);
 }
-.celdas-internas2{
+.celdas-tipo2{
     background-color: rgb(80, 140, 163);
 }
-/*--Mouse encima del tbody--*/
+/*--Focus encima del tbody--*/
 tbody td:hover{
     background-color: rgb(64, 87, 95);
 }
 /*Fondo al pie de la tabla*/
 tfoot{
-    color: #000000;
     background-color: silver;
+    color: #000000;
 }
-/*---------Imagen de horarios-------*/
+/*-----Imagen de horarios----*/
 .img-horarios{
     width: 610px;
+
 }
-/*------------SECCIÓN: Nuestra historia-------------------------*/
+/*-------------------SECCIÓN: Nuestra historia------------------*/
 .seccion-historia{
-    /* Espaciado */
-    padding: 20px 80px 100px 80px;
-    /* Tipografía */
-    text-align: center;
-    /* Fondo */
     background-color: #FFE8D3;
+
+    padding: 20px 110px 100px 110px;
+    text-align: center;
 }
 .titulo-historia{
+    color: black;
     font-family: 'Fjalla One', sans-serif;
     font-size: 50px;
-    color: black;
 }
-/*--Imagenes de historia--*/
+
+/*--Imagen de historia--*/
 .img-historia{
     width: 700px;
     margin: 25px;
 }
+
 /*Caja de texto*/
 .caja-parrafo-historia{
-    margin-left: 50px;
-    padding: 10px;
+    padding: 45px;
+    background-color: rgb(255, 179, 179);
+    text-align: left;
+
 }
+
 .parrafo-historia{
-    /* Espaciado */
-    padding: 15px;
-    /* Tipografía */
+    color: black;
     font-family: 'Inter', sans-serif;
     font-size: 22px;
-    text-align: left;
-    color: #000000;
+
 }
-/*------------SECCIÓN: Servicios1-----------------------------*/
-.contenedor-secciones{
+/*------------SECCIÓN: Servicios 1 (banner)-------------------*/
+.contenedor-banner{
     display: flex;
 }
 /*-----------*/
 .seccion-servicios1{
-    /* Espaciado */
-    width: 45%;
-    padding: 65px 0px 65px 200px;
-    /* Fondo */
     background-color: #B3171E;
+
+    width: 45%;
+    padding: 65px 0px 65px 150px;
 }
 .img-secundaria{
     width: 850px;
 }
-/*------------SECCIÓN: Servicios2----------*/
-.seccion-experiencias2{
+/*-----------------SECCIÓN: Servicios2---------------------------*/
+.seccion-servicios2{
+    background-color: white;
+
     padding: 65px;
-    background-color: #ffffff;
 }
 /*------*/
-.contenedor-experiencias{
+.contenedor-servicios{
     display: flex;
     padding: 0px 150px;
 }
 /*------*/
-.caja-experiencias{
-    /* Espaciado */
-    margin: 0px 10px 50px 10px;
-    /* Tipografía */
-    text-align: center;
-    /* Fondo */
+.caja-servicios{
     background-color: #c6c9c791;
+
+    margin: 0px 10px 50px 10px;
+    text-align: center;
 }
-.titulo-experiencias{
+.titulo-servicios{
+    color: #B3171E;
     font-family: "Fjalla One";
     font-size: 40px;
     font-weight: bold;
-    color: #B3171E;
 }
-.caja-experiencias img{
+.caja-servicios img{
     width: 100%;
 }
