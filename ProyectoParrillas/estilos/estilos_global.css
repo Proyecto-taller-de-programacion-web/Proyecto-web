@@ -48,7 +48,7 @@ nav ul li a{
 
 /* Focus en los botones de navegación*/
 nav ul li a:hover{
-    color: rgb(227, 21, 38);
+    color: #A90816;
 }
 
 .boton-login a:hover{
