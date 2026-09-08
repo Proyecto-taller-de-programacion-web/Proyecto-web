@@ -117,7 +117,10 @@
     text-align: center;
     background-color: rgb(250, 227, 207);
     padding: 25px;
+    font-family: "Fjalla One";
+    font-size: 20px;
 }
+
 
 .boton-carta a {
     display: inline-block;
