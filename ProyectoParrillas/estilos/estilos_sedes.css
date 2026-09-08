@@ -1,14 +1,11 @@
-/* SECCIÓN: Encabezado "Sedes"                              */
-/* ====================================================== */
+
+/* Título principal */
 .container{
-    /* Espaciado */
     padding: 50px 80px 100px;
     background-color: #7d0610;
 }   
 .title{
-    /* Espaciado */
     margin-bottom: 60px;
-    /* Tipografía */
     text-align: center;
 }
 .title h1{
@@ -23,9 +20,6 @@
     color: #ffffff;
 }
 
-/* ====================================================== */
-/* SECCIÓN: Listado de sedes                                */
-/* ====================================================== */
 .sedes{
     /* Espaciado */
     display: flex;
@@ -35,23 +29,17 @@
     ;
 }
 
-/* Tarjeta individual de una sede (imagen + info en fila) */
 .sede{
-    /* Espaciado */
     display: flex;
     align-items: center;
     gap: 40px;
     padding: 30px;
-    /* Fondo */
     background-color: #FFE8D3;
 }
 
-/* --- Bloque de texto de la sede --- */
 .sede-info{
-    /* Espaciado */
     flex: 1;
     padding: 20px;
-    /* Tipografía */
     text-align: left;
 }
 .sede-info h2{
@@ -62,40 +50,33 @@
 .sede-direccion,
 .sede-horario,
 .sede-telefono{
-    /* Espaciado */
     margin: 6px 0px;
-    /* Tipografía */
     font-family: 'Inter', sans-serif;
     font-size: 18px;
     color: #000000;
 }
 
-/* Botón "Ver en el mapa" */
 .sede-mapa{
-    /* Espaciado */
     display: inline-block;
     margin-top: 15px;
     padding: 10px 25px;
-    /* Tipografía */
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: bold;
     color: #ffffff;
     text-decoration: none;
-    /* Fondo */
     background-color: #B3171E;
 }
-/* Efecto hover del botón de mapa */
+
+
 .sede-mapa:hover{
     background-color: rgb(78, 14, 14);
 }
 
-/* --- Imagen de la sede --- */
 .sede-imagen{
     flex: 1;
 }
 .sede-imagen img{
-    /* Espaciado */
     width: 100%;
     height: 350px;
     display: block;
