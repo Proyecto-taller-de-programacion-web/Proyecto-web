@@ -1,5 +1,6 @@
 body{
     margin:0;
+    cursor: url("../img/cursor_carne.png"), auto;
 }
 
 /* ----------BARRA DE NAVEGACIÓN------------*/
