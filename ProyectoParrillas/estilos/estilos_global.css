@@ -4,15 +4,16 @@ body{
 }
 
 /* ----------BARRA DE NAVEGACIÓN------------*/
-nav{
+nav{    
+    
     background-color: black;
     height: 80px;
     padding: 0px 20px 0px 35px;
     font-family:  Google Sans Flex;
 
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; 
+    align-items: center;   
 }
 
 
@@ -56,6 +57,19 @@ nav ul li a:hover{
     color: white;
 }
 
+/*-----------------TITULO PRINCIPAL-----------------*/
+.titulo-principal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    margin-top: 40px;
+    color: #ffffff;
+    font: 700 6rem "Fjalla One", sans-serif;
+    letter-spacing: 3px;
+    z-index: 2;
+    
+}
 
 
 
