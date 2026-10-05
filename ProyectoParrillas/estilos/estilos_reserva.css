@@ -7,6 +7,9 @@
   --white: #f5f2ee;
   --grey: #b9b2a8;
   --line: rgba(245, 242, 238, 0.16);
+
+  ---texto: #c41f24;
+  --subtitulo: #f5f2ee;
 }
 
 * {

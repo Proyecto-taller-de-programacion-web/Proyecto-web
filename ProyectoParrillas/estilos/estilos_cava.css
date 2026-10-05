@@ -82,7 +82,7 @@
 .cuerpo-pagina figure img {
     width: 100%;
 }
-
+/*
 .cuerpo-pagina p2 {
     display: block;
     margin-top: 10px;
@@ -90,6 +90,9 @@
     font-weight: bold;
     font-family: Google Sans Flex;
 }
+    */
+
+
 
 /* ============ GALERÍA (paisaje + almacén) ============ */
 .galeria-cava {
