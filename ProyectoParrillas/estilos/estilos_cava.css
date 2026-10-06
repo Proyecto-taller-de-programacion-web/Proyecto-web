@@ -1,3 +1,10 @@
+/* ============================================================
+   ESTILOS_CAVA.CSS
+   Estilos específicos de la página "Cava/Bar"
+   Usa las variables definidas en estilos_global.css
+   ============================================================ */
+
+
 /* ============ ENCABEZADO (Cava y Bar) ============ */
 .encabezado-cava {
     position: relative;
@@ -7,20 +14,28 @@
 }
 
 .encabezado-cava img {
-     width: 100%;
+    width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
 .encabezado-overlay {
-   position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.55);
     z-index: 1;
+}
+
+/* El centrado del título va AQUÍ, no en el global */
+.encabezado-cava .titulo-hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    text-align: center;
 }
 
 
@@ -30,7 +45,7 @@
     align-items: center;
     justify-content: center;
     gap: 50px;
-    background-color: black;
+    background-color: var(--negro);
     padding: 60px 40px;
 }
 
@@ -50,7 +65,7 @@
     max-width: 480px;
     margin-left: 20px;
     color: rgb(200, 220, 235);
-    font-family: Google Sans Flex;
+    font-family: var(--fuente-texto);
     text-align: center;
     font-size: 0.95rem;
     line-height: 1.6;
@@ -60,13 +75,14 @@
     margin-bottom: 20px;
 }
 
+
 /* ============ SECCIÓN VINOS (3 vinos) ============ */
 .cuerpo-pagina {
     background-color: rgb(250, 227, 207);
     padding: 40px 60px;
 }
 
-.cuerpo-pagina>div {
+.cuerpo-pagina > div {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -82,16 +98,6 @@
 .cuerpo-pagina figure img {
     width: 100%;
 }
-/*
-.cuerpo-pagina p2 {
-    display: block;
-    margin-top: 10px;
-    color: rgb(227, 21, 38);
-    font-weight: bold;
-    font-family: Google Sans Flex;
-}
-    */
-
 
 
 /* ============ GALERÍA (paisaje + almacén) ============ */
@@ -99,7 +105,7 @@
     display: flex;
     justify-content: center;
     gap: 30px;
-    background-color:#7d0610;
+    background-color: #7d0610;
     padding: 50px 60px;
 }
 
@@ -116,26 +122,30 @@
     border-radius: 6px;
 }
 
+
 /* ============ BOTÓN CARTA (carta de vinos) ============ */
 .boton-carta {
     text-align: center;
     background-color: rgb(250, 227, 207);
     padding: 25px;
-    font-family: "Fjalla One";
-    font-size: 20px;
 }
 
+.boton-carta .titulo-card {
+    font-family: var(--fuente-titulos);
+    margin: 0 0 20px;
+}
 
 .boton-carta a {
     display: inline-block;
     padding: 10px 20px;
-    color: white;
+    color: var(--blanco);
     background-color: #7d0610;
     border-radius: 5px;
     text-decoration: none;
+    font-family: var(--fuente-texto);
 }
 
 .boton-carta a:hover {
     background-color: #4f0309;
-    color: white;
+    color: var(--blanco);
 }
