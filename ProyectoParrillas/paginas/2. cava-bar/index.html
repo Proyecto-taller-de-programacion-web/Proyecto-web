@@ -7,13 +7,11 @@
     <meta name="descripcion"
         content="Conoce la selección de bebidas y opciones de nuestra Cava Bar para acompañar tus carnes y parrillas.">
 
-    <!--Importación desde GoogleFont para las fuentes-->
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Fjalla+One&display=swap" rel="stylesheet">
 
-    <!--Título y la conexión a css-->
+    <!-- Título y CSS -->
     <title>CAVA/BAR</title>
 
     <link rel="stylesheet" href="../../estilos/estilos_global.css">
@@ -23,14 +21,11 @@
 
 <body>
 
-
     <!---------BARRA DE NAVEGACIÓN---------->
     <nav>
-
         <figure>
             <img class="logo-principal" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
         </figure>
-
 
         <ul>
             <li><a href="../../index.html">INICIO</a></li>
@@ -41,18 +36,16 @@
             <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
             <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
         </ul>
-
     </nav>
 
 
     <!---------CUERPO DE PÁGINA---------->
 
-
-    <!---Imagen Principal (encabezado)--->
+    <!--Imagen Principal (encabezado)--->
     <section class="encabezado-cava">
         <div class="encabezado-overlay"></div>
         <img src="../../img/bartender.jpeg" alt="Imagen de un barista">
-        <h1 class="titulo-hero">CAVA/BAR</h1>
+        <h1 class="titulo-hero texto-blanco">CAVA/BAR</h1>
     </section>
 
     <!---Introducción con copa--->
@@ -62,14 +55,14 @@
         </figure>
 
         <div class="texto-intro">
-            <p>Nuestra carta de bebidas está seleccionada con los mejores licores entre ron, whisky, vodka, tequila,
+            <p class="texto-mini texto-blanco">Nuestra carta de bebidas está seleccionada con los mejores licores entre ron, whisky, vodka, tequila,
                 gin, pisco, entre otros.</p>
 
-            <p>Los mejores vinos tintos Australianos, Estadounidenses, Franceses, Italianos, Españoles, Chilenos,
+            <p class="texto-mini texto-blanco">Los mejores vinos tintos Australianos, Estadounidenses, Franceses, Italianos, Españoles, Chilenos,
                 Argentinos, Uruguayos y Peruanos reposan en nuestra cava manteniéndolos a temperatura ideal para
                 cualquier ocasión.</p>
 
-            <p>Para los diferentes gustos también contamos con diferentes bebidas entre vino blanco, espumantes y
+            <p class="texto-mini texto-blanco">Para los diferentes gustos también contamos con diferentes bebidas entre vino blanco, espumantes y
                 champagnes.</p>
         </div>
     </section>
@@ -78,27 +71,29 @@
     <!---Imagen Secundaria: 3 vinos--->
     <section class="cuerpo-pagina">
         <div>
+            <div>
+                <h4 class="titulo-seccion texto-negro">NUESTRA CARTA DE VINOS</h4>
+            </div>
+
             <figure>
                 <img src="../../img/vino 1.jpeg" alt="Imagen de vino">
-                <h5 class="subtitulo negro">Selección Clásica</h5>
-                <p class="parrafo negro">Un vino elegante, de aroma intenso y sabor equilibrado. Ideal para una ocasión special.</p>
+                <h5 class="titulo-card texto-negro">Selección Clásica</h5>
+                <p class="parrafo-mini texto-negro">Un vino elegante, de aroma intenso y sabor equilibrado. Ideal para una ocasión especial.</p>
             </figure>
 
             <figure>
                 <img src="../../img/vino 2.jpeg" alt="Imagen de vino">
-                <h5 class="subtitulo negro">Selección Premium</h5>
-                <p class="parrafo negro">Un vino robusto y complejo, con aromas intensos y un cuerpo lleno. Perfecto para degustar en
+                <h5 class="titulo-card texto-negro">Selección Premium</h5>
+                <p class="parrafo-mini texto-negro">Un vino robusto y complejo, con aromas intensos y un cuerpo lleno. Perfecto para degustar en
                     compañía.</p>
             </figure>
 
             <figure>
                 <img src="../../img/vino 3.jpeg" alt="Imagen de vino">
-                <h5 class="subtitulo negro">Selección Especial</h5>
-                <p class="parrafo negro">Un vino excepcional, con una complejidad única y un final persistente. Ideal para momentos
+                <h5 class="titulo-card texto-negro">Selección Especial</h5>
+                <p class="parrafo-mini texto-negro">Un vino excepcional, con una complejidad única y un final persistente. Ideal para momentos
                     memorables.</p>
             </figure>
-                    
-            
         </div>
     </section>
 
@@ -113,13 +108,14 @@
         </figure>
     </section>
 
-
-    <!----link de la carta de la cava---->
-    <div class="boton-carta">
-        <h3>Conoce toda nuestra carta:</h3>
-        <a href="../../pdf_cartas/cartacava.pdf" target="_blank">Ver carta de vinos</a>
+    <!---------CONOCE TODA NUESTRA CARTA---------->
+    <div class="fondo-blanco">
+        <section class="boton-carta">
+            <h3 class="titulo-card texto-negro">Conoce toda nuestra carta:</h3>
+            <a href="../../pdf_cartas/cartacava.pdf" target="_blank">Ver carta de vinos</a>
+        </section>
     </div>
-
+        
 
     <!---------PIE DE PÁGINA---------->
     <footer>
@@ -128,7 +124,6 @@
             <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
             <h2 class="titulo-logo">LA VACA ROJA</h2>
         </figure>
-
 
         <div class="caja-footer">
             <h4 class="informacion-footer">SEDES</h4>
@@ -152,17 +147,13 @@
             <p>Domingos: 12:00 pm - 7:00 pm</p>
         </div>
 
-
         <div>
             <img src="../../img/logoFacebook.png" alt="Logo de Facebook">
             <img src="../../img/logoWhatsApp.png" alt="Logo de WhatsApp">
             <img src="../../img/logoTiktok.png" alt="Logo de Tiktok">
         </div>
 
-
     </footer>
-
-
 
 </body>
 
