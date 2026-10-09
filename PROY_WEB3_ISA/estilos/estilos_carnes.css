@@ -1,0 +1,304 @@
+/* ================================================================
+   1. MAQUETACIÓN PERSONAL
+   .container: grid que va a agrupar toda la página
+   ================================================================ */
+
+.container {
+    display: grid;
+    grid-template-columns: [col-header] 1fr [col-last];
+    grid-template-rows:
+        [row-header]   auto
+        [row-hero]     auto
+        [row-intro]    auto
+        [row-estrella] auto
+        [row-carta]    auto
+        [row-footer]   auto
+        [row-last];
+    min-height: 100vh;
+}
+
+/* Asignación de cada bloque a su fila nombrada */
+.header            { grid-column: col-header / col-last; grid-row: row-header; }
+.encabezado-carnes { grid-column: col-header / col-last; grid-row: row-hero; }
+.intro-carnes      { grid-column: col-header / col-last; grid-row: row-intro; }
+.seccion-estrella  { grid-column: col-header / col-last; grid-row: row-estrella; }
+.seccion-carta     { grid-column: col-header / col-last; grid-row: row-carta; }
+.footer            { grid-column: col-header / col-last; grid-row: row-footer; }
+
+
+/* ================================================================
+   2. PORTADA (TITULO con la imagen de fondo)
+   ================================================================ */
+
+.encabezado-carnes {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.encabezado-carnes img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Capa oscura sobre la imagen */
+.encabezado-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+/* Título sobre la imagen */
+.encabezado-carnes .titulo-hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+
+/* ================================================================
+   3. SECCIÓN INTRODUCTORIA (párrafo principal)
+   ================================================================ */
+
+.intro-carnes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: 3.75rem 2.5rem;
+    text-align: center;
+}
+
+.intro-carnes img {
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+    display: block;
+    margin-bottom: 1.875rem;
+}
+
+/* Ancho máximo solo para el párrafo del intro */
+.intro-carnes .parrafo {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+
+/* ================================================================
+   4. SECCIÓN PLATOS ESTRELLA (fondos alternados)
+   ================================================================ */
+
+.seccion-estrella {
+    background-color: var(--beige);
+    padding: 0 0 3.75rem;
+}
+
+.seccion-roja {
+    padding: 2.5rem 3.75rem;
+    background-color: var(--rojo-dim);
+    color: var(--blanco);
+}
+
+.seccion-blanco {
+    padding: 2.5rem 3.75rem;
+    background-color: var(--beige);
+    color: var(--negro);
+}
+
+.seccion-roja .titulo-seccion {
+    margin-bottom: 3.1rem;
+    text-align: center;
+}
+
+.articulo-plato {
+    display: flex;
+    align-items: center;
+    gap: 3.1rem;
+    max-width: 62.5rem;
+    margin: 0 auto;
+}
+
+.articulo-plato .invertido {
+    flex-direction: row;
+}
+
+.articulo-plato figure,
+.articulo-plato .texto-plato {
+    flex: 1;
+    margin: 0;
+}
+
+.articulo-plato img {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+.titulo-plato {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-card);
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+.texto-plato .parrafo-mini {
+    line-height: 1.6;
+}
+
+
+/* ================================================================
+   5. SECCIÓN DESCARGA DE CARTA
+   ================================================================ */
+
+.seccion-carta {
+    background-color: rgb(254, 254, 254);
+    color: var(--negro);
+    text-align: center;
+    padding: 1.56rem 1.56rem 2.5rem;
+}
+
+.titulo-carta {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-card);
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 1.25rem;
+}
+
+.seccion-carta a {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    background-color: var(--rojo-dim);
+    color: var(--blanco);
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.seccion-carta a:hover {
+    background-color: #4f0309;
+    transition: background-color 0.3s ease;
+}
+
+
+/* ================================================================
+   6. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
+   ================================================================ */
+
+/* CELULARES */
+@media (max-width: 480px) {
+    .encabezado-carnes {
+        height: 110vh;
+    }
+
+    .encabezado-carnes .titulo-hero {
+        font-size: 3rem;
+    }
+
+    .intro-carnes {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .seccion-roja,
+    .seccion-blanco {
+        padding: 1.875rem 1.25rem;
+    }
+
+    .seccion-roja .titulo-seccion {
+        font-size: 2.2rem;
+        margin-bottom: 1.875rem;
+    }
+
+    .articulo-plato,
+    .articulo-plato.invertido {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .articulo-plato img {
+        height: 14rem;
+    }
+
+    .titulo-plato,
+    .titulo-carta {
+        font-size: 1.4rem;
+    }
+}
+
+/* TABLETS */
+@media (min-width: 481px) and (max-width: 768px) {
+    .encabezado-carnes {
+        height: 100vh;
+    }
+
+    .encabezado-carnes .titulo-hero {
+        font-size: 3.5rem;
+    }
+
+    .intro-carnes {
+        padding: 3.1rem 1.875rem;
+    }
+
+    .seccion-roja,
+    .seccion-blanco {
+        padding: 2.5rem 1.875rem;
+    }
+
+    .seccion-roja .titulo-seccion {
+        font-size: 2.6rem;
+    }
+
+    .articulo-plato,
+    .articulo-plato.invertido {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .articulo-plato img {
+        height: 18rem;
+    }
+}
+
+/* LAPTOPS */
+@media (min-width: 769px) and (max-width: 1279px) {
+    .encabezado-carnes {
+        height: 100vh;
+    }
+
+    .encabezado-carnes .titulo-hero {
+        font-size: 4.5rem;
+    }
+
+    .seccion-roja,
+    .seccion-blanco {
+        padding: 2.5rem 2.5rem;
+    }
+
+    .articulo-plato {
+        gap: 2.5rem;
+    }
+
+    .articulo-plato img {
+        height: 17rem;
+    }
+}
+
+/* PC */
+@media (min-width: 1280px) {
+    .encabezado-carnes {
+        height: 100vh;
+    }
+}

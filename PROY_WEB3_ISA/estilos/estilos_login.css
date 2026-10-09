@@ -26,76 +26,78 @@ body {
   overflow-x: hidden;
 }
 
-/* ============ MAIN HERO ============ */
-.registro-seccion {
+/* ============ MAIN ============ */
+.login-seccion {
   position: relative;
   z-index: 2;
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 56px 24px 70px;
+  gap: 64px;
+  flex-wrap: wrap;
+  padding: 64px 24px 80px;
+}
+
+.cabecera-login {
+  max-width: 480px;
+  text-align: left;
 }
 
 .referencia {
   font-family: 'Oswald', sans-serif;
-  font-size: 11px;
+  font-size: 20px;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 18px;
 }
 
-.registro-seccion h1 {
+.login-seccion h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
-  font-size: clamp(36px, 6vw, 66px);
+  font-size: clamp(40px, 6vw, 68px);
   text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 1;
   color: var(--white);
 }
 
-.registro-seccion p.eslogan {
+.cabecera-login p.texto {
   margin-top: 16px;
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 1.15rem;
   color: var(--grey);
   letter-spacing: 0.02em;
+  line-height: 1.6;
+  text-align: justify;
 }
 
 .divider-flame {
-  width: 44px;
+  width: 100px;
   height: 2px;
   background: var(--red);
-  margin: 28px auto 32px;
+  margin: 30px 0 0;
 }
 
-/* ============ FORM CARD ============ */
-.card {
+/* ============ FORM CONTAINER ============ */
+.form-container {
   width: 100%;
-  max-width: 460px;
+  max-width: 420px;
   background: rgba(20, 18, 16, 0.66);
   backdrop-filter: blur(8px);
   border: 1px solid var(--line);
   border-top: 2px solid var(--red);
-  padding: 38px 38px 32px;
+  padding: 40px 38px 34px;
   text-align: left;
+  border-radius: 5px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-}
-
-.row-two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
 .input-box label {
@@ -117,6 +119,7 @@ form {
   font-size: 14px;
   padding: 12px 14px;
   outline: none;
+  border-radius: 3px;
 }
 
 .input-box input::placeholder {
@@ -124,9 +127,17 @@ form {
 }
 
 
+.remember-password {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--grey);
+}
+
 .checkbox-line {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   cursor: pointer;
   user-select: none;
@@ -141,7 +152,6 @@ form {
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
-  margin-top: 2px;
 }
 
 .checkbox-line input:checked {
@@ -150,18 +160,11 @@ form {
 }
 
 
-.fine-print {
-  font-size: 11.5px;
-  color: var(--grey);
-  line-height: 1.6;
-}
-
 .link-red {
   color: var(--white);
   text-decoration: none;
   border-bottom: 1px solid var(--red);
   padding-bottom: 1px;
-  transition: color 0.2s ease;
 }
 
 .link-red:hover {
@@ -188,10 +191,111 @@ form {
   color: var(--white);
 }
 
-.switch-line {
+.texto-cambio {
   text-align: center;
   font-size: 12.5px;
   color: var(--grey);
-  margin-top: 24px;
+  margin-top: 26px;
 }
 
+
+
+/* ================================================================
+   DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
+   ================================================================ */
+
+/* CELULARES */
+@media (max-width: 480px) {
+  .logo-principal {
+    max-width: 100%;
+  }
+
+  .login-seccion {
+    gap: 32px;
+    padding: 36px 16px 48px;
+  }
+
+  .cabecera-login {
+    text-align: center;
+  }
+
+  .referencia {
+    font-size: 14px;
+    letter-spacing: 0.25em;
+  }
+
+  .login-seccion h1 {
+    font-size: 2.4rem;
+  }
+
+  .cabecera-login p.texto {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .divider-flame {
+    width: 60px;
+    margin: 24px auto 0;
+  }
+
+  .form-container {
+    padding: 28px 20px 24px;
+  }
+
+  .remember-password {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* TABLETS */
+@media (min-width: 481px) and (max-width: 768px) {
+  .login-seccion {
+    gap: 40px;
+    padding: 48px 32px 64px;
+  }
+
+  .cabecera-login {
+    max-width: 560px;
+  }
+
+  .referencia {
+    font-size: 16px;
+  }
+
+  .login-seccion h1 {
+    font-size: 3.2rem;
+  }
+
+  .form-container {
+    max-width: 480px;
+  }
+}
+
+/* LAPTOPS */
+@media (min-width: 769px) and (max-width: 1279px) {
+  .login-seccion {
+    gap: 48px;
+    padding: 56px 32px 72px;
+  }
+
+  .cabecera-login {
+    max-width: 420px;
+  }
+
+  .referencia {
+    font-size: 18px;
+  }
+}
+
+/* PC */
+@media (min-width: 1280px) {
+  .login-seccion {
+    gap: 64px;
+  }
+
+  .form-container {
+    max-width: 440px;
+  }
+}

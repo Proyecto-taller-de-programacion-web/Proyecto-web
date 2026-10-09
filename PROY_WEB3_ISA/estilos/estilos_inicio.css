@@ -1,0 +1,545 @@
+/* ================================================================
+   1. MAQUETACIÓN PERSONAL
+   .container: grid que va a agrupar toda la página
+   ================================================================ */
+
+.container {
+    display: grid;
+    grid-template-columns: [col-header] 1fr [col-last];
+    grid-template-rows:
+        [row-header]         auto
+        [row-hero]           auto
+        [row-esencia]        auto
+        [row-reconocimientos] auto
+        [row-opiniones]      auto
+        [row-footer]         auto
+        [row-last];
+    min-height: 100vh;
+}
+
+/* Asignación de cada bloque a su fila nombrada */
+.header             { grid-column: col-header / col-last; grid-row: row-header; }
+.encabezado-inicio  { grid-column: col-header / col-last; grid-row: row-hero; }
+.nuestra-esencia    { grid-column: col-header / col-last; grid-row: row-esencia; }
+.reconocimientos    { grid-column: col-header / col-last; grid-row: row-reconocimientos; }
+.opiniones          { grid-column: col-header / col-last; grid-row: row-opiniones; }
+.footer             { grid-column: col-header / col-last; grid-row: row-footer; }
+
+
+/* ================================================================
+   1. CONTENEDOR DE CADA SECCION
+   ================================================================ */
+
+
+/* Ancho máximo para centrar el contenido dentro de cada sección */
+
+
+
+/* ================================================================
+   1. BOTONES
+   ================================================================ */
+
+.boton {
+    display: inline-block;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 4px;
+    font: 600 0.85rem 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: box-shadow .2s ease;
+}
+
+.boton:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .25);
+}
+
+.boton--encabezado {
+    background: #A90816;
+    color: #ffffff;
+}
+
+.boton--outline {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+
+/*------------------CONTENIDO DE LA PÁGINA---------------------------*/
+/* ================================================================
+   1. PORTADA (TITULO con la imagen de fondo)
+   ================================================================ */
+
+.encabezado-inicio {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.encabezado-inicio img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Capa oscura sobre la imagen */
+.encabezado-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+/* Bloque (título + frase + botón) centrado sobre la imagen */
+.encabezado-contenido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.encabezado-inicio .titulo-hero {
+    margin-bottom: 2px;
+}
+
+.encabezado-contenido .parrafo {
+    font-family: 'Fjalla One', sans-serif;
+    font-weight: 300;
+    font-size: 2rem;
+    color: #ffffff;
+    margin: 10px 0 20px;
+}
+
+
+/* ================================================================
+   2. SECCIÓN NUESTRA ESENCIA
+   ================================================================ */
+
+
+.nuestra-esencia {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding: 60px 0;
+    background: #A90816;
+}
+   
+.contenedor-seccion {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nuestra-esencia .titulo-seccion {
+    text-align: center;
+    color: #ffffff;
+}
+
+.subtitulo-seccion {
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: #FFE5CE;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.frase-destacada {
+    text-align: center;
+    max-width: 750px;
+    margin: 40px auto 0;
+    color: #FFE5CE;
+    font: italic 1.6rem 'Playfair Display', serif;
+}
+
+.esencia__columnas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 45px;
+    margin-top: 60px;
+}
+
+.esencia__item {
+    text-align: center;
+}
+
+.esencia__img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .25);
+}
+
+.esencia__titulo {
+    color: #ffffff;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.esencia__item .parrafo-mini {
+    color: #FFE5CE;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+
+/* ================================================================
+   6. SECCIÓN RECONOCIMIENTOS
+   ================================================================ */
+
+.reconocimientos {
+    display: flex;
+    align-items: center;
+    min-height: 75vh;
+    padding: 60px 0;
+    background: #FFE5CE;
+    color: #1a1a1a;
+}
+
+.reconocimientos .titulo-seccion {
+    text-align: left;
+    font-size: 3rem;
+    color: #1a1a1a;
+}
+
+.reconocimientos .parrafo {
+    text-align: left;
+    margin-top: 18px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #000000;
+}
+
+.reconocimientos__contenido {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.reconocimientos__imagenes {
+    display: flex;
+    gap: 12px;
+}
+
+.reconocimiento__img {
+    flex: 1;
+    width: 0;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .15);
+}
+
+
+/* ================================================================
+   7. SECCIÓN OPINIONES
+   ================================================================ */
+
+.opiniones {
+    display: flex;
+    align-items: center;
+    min-height: 75vh;
+    padding: 60px 0;
+    background: #7d0610;
+}
+
+.opiniones .titulo-seccion {
+    text-align: center;
+    color: #ffffff;
+}
+
+.opiniones__contenido {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-top: 35px;
+}
+
+.opiniones__img {
+    flex: 1;
+    min-width: 0;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .25);
+}
+
+.opiniones__texto {
+    flex: 1;
+    color: #ffffff;
+}
+
+.opiniones__titulo {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 14px;
+}
+
+.opiniones__texto .parrafo {
+    text-align: left;
+    margin-bottom: 22px;
+    color: #ffffff;
+}
+
+.opiniones__lista {
+    display: flex;
+    gap: 24px;
+    margin-top: 45px;
+}
+
+.opinion-item {
+    flex: 1;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    color: #3d3d3d;
+}
+
+.opinion-item__cabecera {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.opinion-item__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.opinion-item__datos h4 {
+    font-size: .95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.opinion-item__fecha {
+    font-size: .75rem;
+    color: #888;
+}
+
+.opinion-item__estrellas {
+    color: #FBBC04;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.opinion-item .parrafo-mini {
+    font-size: .85rem;
+}
+
+
+/* ================================================================
+   8. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
+   ================================================================ */
+
+/* CELULARES */
+@media (max-width: 480px) {
+    .encabezado-inicio {
+        height: 110vh;
+    }
+
+    .encabezado-inicio .titulo-hero {
+        font-size: 3rem;
+    }
+
+    .encabezado-contenido .parrafo {
+        font-size: 1.3rem;
+    }
+
+    .nuestra-esencia,
+    .reconocimientos,
+    .opiniones {
+        padding: 40px 0;
+        min-height: auto;
+    }
+
+    .nuestra-esencia .titulo-seccion,
+    .opiniones .titulo-seccion {
+        font-size: 2.2rem;
+    }
+
+    .reconocimientos .titulo-seccion {
+        font-size: 1.9rem;
+    }
+
+    .frase-destacada {
+        font-size: 1.2rem;
+        margin-top: 25px;
+    }
+
+    .esencia__columnas {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 35px;
+    }
+
+    .esencia__img {
+        height: 240px;
+    }
+
+    .reconocimientos__contenido {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .reconocimiento__img {
+        height: 220px;
+    }
+
+    .opiniones__contenido {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .opiniones__img {
+        width: 100%;
+        flex: none;
+        height: 220px;
+    }
+
+    .opiniones__lista {
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 30px;
+    }
+}
+
+/* TABLETS */
+@media (min-width: 481px) and (max-width: 768px) {
+    .encabezado-inicio {
+        height: 100vh;
+    }
+
+    .encabezado-inicio .titulo-hero {
+        font-size: 3.5rem;
+    }
+
+    .encabezado-contenido .parrafo {
+        font-size: 1.6rem;
+    }
+
+    .nuestra-esencia,
+    .reconocimientos,
+    .opiniones {
+        padding: 50px 0;
+        min-height: auto;
+    }
+
+    .nuestra-esencia .titulo-seccion,
+    .opiniones .titulo-seccion {
+        font-size: 2.6rem;
+    }
+
+    .reconocimientos .titulo-seccion {
+        font-size: 2.6rem;
+    }
+
+    .frase-destacada {
+        font-size: 1.4rem;
+    }
+
+    .esencia__columnas {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .esencia__img {
+        height: 200px;
+    }
+
+    .reconocimientos__contenido {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .reconocimiento__img {
+        height: 280px;
+    }
+
+    .opiniones__contenido {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .opiniones__img {
+        width: 100%;
+        flex: none;
+        height: 260px;
+    }
+
+    .opiniones__lista {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* LAPTOPS */
+@media (min-width: 769px) and (max-width: 1279px) {
+    .encabezado-inicio {
+        height: 100vh;
+    }
+
+    .encabezado-inicio .titulo-hero {
+        font-size: 4.5rem;
+    }
+
+    .esencia__columnas {
+        gap: 30px;
+    }
+
+    .esencia__img {
+        height: 260px;
+    }
+
+    .reconocimiento__img {
+        height: 340px;
+    }
+
+    .opiniones__lista {
+        gap: 18px;
+    }
+}
+
+/* PC */
+@media (min-width: 1280px) {
+    .encabezado-inicio {
+        height: 100vh;
+    }
+
+    .encabezado-inicio .titulo-hero {
+        font-size: 8rem;
+    }
+
+    .encabezado-contenido .parrafo {
+        font-size: 2rem;
+    }
+}

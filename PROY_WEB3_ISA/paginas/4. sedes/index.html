@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descripcion" content="Encuentra nuestras sedes y visita el restaurante más cercano.">  
+
+<!--Importación desde GoogleFont para las fuentes-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+
+
+    <!--Título y la conexión a css-->
+    <title>Sedes</title>
+
+    <link rel="stylesheet" href="../../estilos/estilos_sedes.css">
+    <link rel="stylesheet" href="../../estilos/estilos_global.css">
+</head>
+
+
+<body>
+
+    <!-- Contenedor principal: agrupa toda la página en un grid de filas -->
+    <div class="container">
+
+        <!---------BARRA DE NAVEGACIÓN (menú hamburguesa responsive)---------->
+        <header class="header">
+
+            <!-- Checkbox oculto — debe ir primero para que el selector ~ alcance al nav -->
+            <input type="checkbox" id="checkmenu">
+
+            <!-- Logo: siempre visible a la izquierda (order:1 en CSS) -->
+            <figure class="logo-container">
+                <img class="logo-principal" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+            </figure>
+
+            <!-- Ícono hamburguesa: visible solo en móvil/tablet, a la derecha (order:2) -->
+            <label for="checkmenu" class="lblmenu">&#9776;</label>
+
+            <!-- Nav: order:3, cae debajo en móvil al abrir el menú -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="../../index.html">INICIO</a></li>
+                    <li><a href="../../paginas/1. carnes/index.html">CARNES</a></li>
+                    <li><a href="../../paginas/2. cava-bar/index.html">CAVA/BAR</a></li>
+                    <li><a href="../../paginas/3. nosotros/index.html">NOSOTROS</a></li>
+                    <li><a href="#">SEDES</a></li>
+                    <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
+                    <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <!---------ENCABEZADO (título de la página)---------->
+        <section class="encabezado-sedes">
+            <h1 class="titulo-hero">SEDES</h1>
+            <p class="parrafo">CONOCE DONDE NOS UBICAMOS</p>
+        </section>
+
+
+        <!---------SECCIÓN: Listado de sedes---------->
+        <section class="seccion-sedes">
+
+
+            <div class="sede">
+                <div class="sede-info">
+                    <h2 class="titulo-seccion">San Isidro</h2>
+                    <p class="sede-direccion parrafo-mini">Dirección: Calle Pancho Fierro 15073 - San Isidro, Lima.</p>
+                    <p class="sede-horario parrafo-mini"><br>Horario:<br><br> M-S: 12:00 pm - 10:00 pm<br> D: 12:00 pm - 7:00pm </p>
+                    <p class="sede-telefono parrafo-mini"><br>Teléfono: 351 2604</p>
+                    <a href="https://www.google.com/maps/@-12.0969658,-77.0353565,110a,75y,104.94h,86.05t/data=!3m7!1e1!3m5!1sOwjMj5jtpbjAY-sFwT17dg!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D3.9547992472010236%26panoid%3DOwjMj5jtpbjAY-sFwT17dg%26yaw%3D104.93649129918454!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" class="sede-mapa parrafo-mini" target="_blank">Ver en el mapa</a>
+                </div>
+                <figure class="sede-imagen">
+                    <img src="../../img/sedeSanIsidro.png" alt="Local San Isidro">
+                </figure>
+            </div>
+
+            <div class="sede">
+                <figure class="sede-imagen">
+                    <img src="../../img/sedeMiraflores.jpeg" alt="Local Miraflores">
+                </figure>
+                <div class="sede-info">
+                    <h2 class="titulo-seccion">Miraflores</h2>
+                    <p class="sede-direccion parrafo-mini">Dirección: Av. Sta. Cruz 970- Miraflores, Lima.</p>
+                    <p class="sede-horario parrafo-mini"><br>Horario:<br><br>M-S: 12:00 pm - 10:00 pm<br> D: 12:00 pm - 7:00pm</p>
+                    <p class="sede-telefono parrafo-mini"><br>Teléfono: 352 4754</p>
+                    <a href="https://www.google.com/maps/@-12.1130914,-77.0390792,88a,75y,313.52h,86.18t/data=!3m7!1e1!3m5!1scXbO1d2PUYF0HaCCpLbdlA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D3.819999999999993%26panoid%3DcXbO1d2PUYF0HaCCpLbdlA%26yaw%3D313.52!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MDkwMi4wIKXMDSoASAFQAw%3D%3D" class="sede-mapa parrafo-mini" target="_blank">Ver en el mapa</a>
+                </div>
+            </div>
+
+        </section>
+
+        <!---------PIE DE PÁGINA---------->
+
+        <footer class="footer">
+
+            <figure>
+                <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+                <h2 class="titulo-logo">LA VACA ROJA</h2>
+                </figure>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">SEDES</h4>
+                <p>Av. Santa Cruz N° 940 - Miraflores, Lima.</p>
+                <p>Calle Pancho Fierro 15073 - San Isidro, Lima.</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">TELÉFONO</h4>
+                <p>(01) 352 1472</p>
+                <p>982 140 582</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">EMAIL</h4>
+                <p>info@lavacaroja.pe</p>
+                <p>Consultas y reservas</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">HORARIO DE ATENCIÓN</h4>
+                <p>Martes a Sábado: 12:00 pm - 10:00 pm</p>
+                <p>Domingos: 12:00 pm - 7:00 pm</p>
+                <p>Lunes: Cerrado</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">SERVICIOS</h4>
+                <p>Atención en salón</p>
+                <p>Reservas de mesa</p>
+                <p>Atención para familias</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">REDES SOCIALES</h4>
+                <br>
+                <img src="../../img/logoFacebook.png" alt="Logo de Facebook">
+                <img src="../../img/logoWhatsApp.png" alt="Logo de WhatsApp">
+                <img src="../../img/logoTiktok.png" alt="Logo de TikTok">
+            </div>
+
+        </footer>
+
+    </div>
+
+
+
+    
+</body>
+</html>
