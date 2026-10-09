@@ -26,78 +26,76 @@ body {
   overflow-x: hidden;
 }
 
-/* ============ MAIN ============ */
-.login-seccion {
+/* ============ MAIN HERO ============ */
+.registro-seccion {
   position: relative;
   z-index: 2;
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 64px;
-  flex-wrap: wrap;
-  padding: 64px 24px 80px;
-}
-
-.cabecera-login {
-  max-width: 480px;
-  text-align: left;
+  text-align: center;
+  padding: 56px 24px 70px;
 }
 
 .referencia {
   font-family: 'Oswald', sans-serif;
-  font-size: 20px;
+  font-size: 11px;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 18px;
 }
 
-.login-seccion h1 {
+.registro-seccion h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
-  font-size: clamp(40px, 6vw, 68px);
+  font-size: clamp(36px, 6vw, 66px);
   text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 1;
   color: var(--white);
 }
 
-.cabecera-login p.texto {
+.registro-seccion p.eslogan {
   margin-top: 16px;
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  font-size: 1.15rem;
+  font-size: 16px;
   color: var(--grey);
   letter-spacing: 0.02em;
-  line-height: 1.6;
-  text-align: justify;
 }
 
 .divider-flame {
-  width: 100px;
+  width: 44px;
   height: 2px;
   background: var(--red);
-  margin: 30px 0 0;
+  margin: 28px auto 32px;
 }
 
-/* ============ FORM CONTAINER ============ */
-.form-container {
+/* ============ FORM CARD ============ */
+.card {
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   background: rgba(20, 18, 16, 0.66);
   backdrop-filter: blur(8px);
   border: 1px solid var(--line);
   border-top: 2px solid var(--red);
-  padding: 40px 38px 34px;
+  padding: 38px 38px 32px;
   text-align: left;
-  border-radius: 5px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+}
+
+.row-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .input-box label {
@@ -119,7 +117,6 @@ form {
   font-size: 14px;
   padding: 12px 14px;
   outline: none;
-  border-radius: 3px;
 }
 
 .input-box input::placeholder {
@@ -127,17 +124,9 @@ form {
 }
 
 
-.remember-password {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12.5px;
-  color: var(--grey);
-}
-
 .checkbox-line {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   cursor: pointer;
   user-select: none;
@@ -152,6 +141,7 @@ form {
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .checkbox-line input:checked {
@@ -160,11 +150,18 @@ form {
 }
 
 
+.fine-print {
+  font-size: 11.5px;
+  color: var(--grey);
+  line-height: 1.6;
+}
+
 .link-red {
   color: var(--white);
   text-decoration: none;
   border-bottom: 1px solid var(--red);
   padding-bottom: 1px;
+  transition: color 0.2s ease;
 }
 
 .link-red:hover {
@@ -191,10 +188,80 @@ form {
   color: var(--white);
 }
 
-.texto-cambio {
+.switch-line {
   text-align: center;
   font-size: 12.5px;
   color: var(--grey);
-  margin-top: 26px;
+  margin-top: 24px;
 }
 
+
+
+/* ================================================================
+   DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
+   ================================================================ */
+
+/* CELULARES */
+@media (max-width: 480px) {
+  .logo-principal {
+    max-width: 100%;
+  }
+
+  .registro-seccion {
+    padding: 36px 16px 48px;
+  }
+
+  .registro-seccion h1 {
+    font-size: 2.4rem;
+  }
+
+  .registro-seccion p.eslogan {
+    font-size: 14px;
+  }
+
+  .divider-flame {
+    margin: 22px auto 26px;
+  }
+
+  .card {
+    padding: 26px 18px 24px;
+  }
+
+  .row-two {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+/* TABLETS */
+@media (min-width: 481px) and (max-width: 768px) {
+  .registro-seccion {
+    padding: 48px 32px 64px;
+  }
+
+  .registro-seccion h1 {
+    font-size: 3.2rem;
+  }
+
+  .card {
+    max-width: 520px;
+  }
+}
+
+/* LAPTOPS */
+@media (min-width: 769px) and (max-width: 1279px) {
+  .registro-seccion {
+    padding: 52px 32px 68px;
+  }
+
+  .registro-seccion h1 {
+    font-size: 3.8rem;
+  }
+}
+
+/* PC */
+@media (min-width: 1280px) {
+  .card {
+    max-width: 480px;
+  }
+}

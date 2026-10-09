@@ -25,14 +25,71 @@ body {
   color: var(--white);
 }
 
+/* ================================================================
+   1. MAQUETACIÓN PERSONAL
+   .container: grid que va a agrupar toda la página
+   ================================================================ */
+
 .container {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 56px 24px 70px;
+  display: grid;
+  grid-template-columns: [col-header] 1fr [col-last];
+  grid-template-rows:
+    [row-header]  auto
+    [row-titulo]  auto
+    [row-form]    auto
+    [row-footer]  auto
+    [row-last];
+  min-height: 100vh;
+}
+
+/* Asignación de cada bloque a su fila nombrada */
+.header             { grid-column: col-header / col-last; grid-row: row-header; }
+.encabezado-reserva { grid-column: col-header / col-last; grid-row: row-titulo; }
+.seccion-reserva    { grid-column: col-header / col-last; grid-row: row-form; }
+.footer             { grid-column: col-header / col-last; grid-row: row-footer; }
+
+
+/* ================================================================
+   2. ENCABEZADO (título de la página)
+   ================================================================ */
+
+.encabezado-reserva {
+  padding: 56px 24px 0;
+  text-align: center;
+}
+
+.encabezado-reserva .titulo-hero {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(36px, 6vw, 66px);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.encabezado-reserva .parrafo {
+  margin-top: 16px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--grey);
+  letter-spacing: 0.02em;
+}
+
+.encabezado-reserva::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 2px;
+  background: var(--red);
+  margin: 28px auto 0;
+}
+
+
+/* ================================================================
+   3. SECCIÓN FORMULARIO DE RESERVA
+   ================================================================ */
+
+.seccion-reserva {
+  padding: 32px 24px 70px;
 }
 
 .referencia {
@@ -43,38 +100,6 @@ body {
   color: var(--red);
   margin-bottom: 18px;
   text-align: center;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.title h1 {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  font-size: clamp(36px, 6vw, 66px);
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  line-height: 1;
-  color: var(--white);
-}
-
-.title h3 {
-  margin-top: 16px;
-  font-weight: 300;
-  font-size: 16px;
-  color: var(--grey);
-  letter-spacing: 0.02em;
-}
-
-.title::after {
-  content: "";
-  display: block;
-  width: 44px;
-  height: 2px;
-  background: var(--red);
-  margin: 28px auto 0;
 }
 
 .formReserva {
@@ -325,4 +350,80 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .btn-home:hover {
   background: var(--red);
   border-color: var(--red);
+}
+
+/* ================================================================
+   4. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
+   ================================================================ */
+
+/* CELULARES */
+@media (max-width: 480px) {
+  .encabezado-reserva {
+    padding: 40px 16px 0;
+  }
+
+  .encabezado-reserva .titulo-hero {
+    font-size: 2.6rem;
+  }
+
+  .seccion-reserva {
+    padding: 24px 12px 44px;
+  }
+
+  .formReserva {
+    width: 100%;
+    padding: 24px 16px;
+    gap: 22px;
+  }
+
+  .form-action {
+    flex-direction: column;
+  }
+
+  .exito-container {
+    margin: 40px 16px;
+    padding: 36px 20px;
+  }
+}
+
+/* TABLETS */
+@media (min-width: 481px) and (max-width: 768px) {
+  .encabezado-reserva .titulo-hero {
+    font-size: 3.5rem;
+  }
+
+  .seccion-reserva {
+    padding: 28px 20px 56px;
+  }
+
+  .formReserva {
+    width: 100%;
+    padding: 30px 24px;
+  }
+
+  .exito-container {
+    margin: 60px auto;
+  }
+}
+
+/* LAPTOPS */
+@media (min-width: 769px) and (max-width: 1279px) {
+  .encabezado-reserva .titulo-hero {
+    font-size: 4.5rem;
+  }
+
+  .formReserva {
+    width: 90%;
+  }
+}
+
+/* PC */
+@media (min-width: 1280px) {
+  .encabezado-reserva .titulo-hero {
+    font-size: 5rem;
+  }
+
+  .formReserva {
+    width: 92%;
+  }
 }

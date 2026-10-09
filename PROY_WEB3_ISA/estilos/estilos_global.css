@@ -1,0 +1,391 @@
+/*----------------------------CURSOR GLOBAL----------------------------*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    cursor: url("../img/cursor_carne.png"), auto;
+}
+
+
+
+/*----------------------------BARRA DE NAVEGACIÓN GLOBAL----------------------------*/
+
+/*------- MENÚ DE NAVEGACIÓN PENSADO EN GRANDE-------*/
+
+/* Contenedor que agrupa la imagen y la Barra de navegación*/
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background-color: rgb(0, 0, 0);
+    
+    height: 5rem;                   /* relativo: equivale a ~80px */
+    padding: 0rem 1.5rem;   /* relativo */
+    align-items: center;
+}
+
+.logo-container{
+    width: 5rem;
+}
+
+.logo-principal{
+    width: 100%;
+}
+
+/*Barra de navegación*/
+.nav ul {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none; /*quitar las viñetas*/
+
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Google Sans Flex', sans-serif;
+}
+
+.nav a:hover {
+    color: #A90816;
+}
+
+/* Botón "Iniciar Sesión" */
+.boton-login {
+    background-color: rgb(227, 21, 38);
+    border-radius: 0.4rem;
+    padding: 0.2rem 0.8rem;
+}
+
+
+/*----BOTON ESTILO HAMBURGUESA----*/
+
+/* Boton menú — oculto en escritorio, visible en móvil */
+.lblmenu {
+    font-size: 2rem;    /*tamaño de las 3 barritas*/
+    cursor: pointer;    /*cambia el cursor*/
+    display: none;       /* desactivada media query lo activa en móvil/tablet */
+    order: 3;            /* se ubica a la DERECHA del logo y el nav */
+    color:var(--blanco)
+}
+
+/* Checkbox SIEMPRE oculto, solo sirve cuando ponemos las 3 barras encima */
+#checkmenu {
+    display: none;
+}
+
+
+
+/*---------------------------FOOTER GLOBAL----------------------------*/
+
+.footer{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+
+    text-align: center;
+    background-color: rgb(250, 227, 207);
+    font-family: Google Sans Flex;
+    color: rgb(147, 30, 55);
+    padding: 60px 0px 40px 0px;
+    
+    clear:both;
+}
+
+.logo-footer{
+    width: 240px;
+}
+
+.titulo-logo{
+    font-family: "Fjalla One"
+}
+
+.caja-footer{
+    margin:20px;
+}
+
+.informacion-footer{
+    font-family: Google Sans Flex;
+}
+
+.footer figure {
+    grid-column: 1 / -1;
+}
+
+
+/*---------------------------DISEÑOS RESPONSIVOS GLOBALES----------------------------*/
+
+
+
+/* ================================================================
+   10. DISEÑO RESPONSIVE — 4 breakpoints
+   ================================================================ */
+
+/*---CELULARES---*/
+@media (max-width: 480px) {
+    .nav {
+        display: none;
+        flex-direction: column;
+        order: 3;
+        width: 100%;
+    }
+
+    #checkmenu:checked ~ .nav {
+        display: flex;
+    }
+
+    #checkmenu:checked ~ .nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        gap: 2rem;
+    }
+
+    #checkmenu:checked ~ .nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.6rem 1.25rem;
+    }
+
+    .logo-container { order: 1; }
+
+    .lblmenu {
+        display: block;
+        order: 2;
+    }
+
+    .footer {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/*---TABLET---*/
+@media (min-width: 481px) and (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.625rem 1.25rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-container { order: 1; }
+
+    .lblmenu {
+        display: block;
+        order: 2;
+    }
+
+    .nav {
+        display: none;
+        order: 3;
+        width: 100%;
+        background-color: black;
+    }
+
+    #checkmenu:checked ~ .nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #checkmenu:checked ~ .nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 0.625rem 0;
+        gap: 2rem;
+    }
+
+    #checkmenu:checked ~ .nav ul li {
+        width: 100%;
+        text-align: center;
+        padding: 0.625rem 0;
+    }
+
+    .footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/*----LAPTOPS---*/
+@media (min-width: 769px) and (max-width: 1279px) {
+    .lblmenu { display: none; }
+
+    .nav { display: flex !important; }
+
+    .nav ul {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .footer {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+}
+
+/*---PC---*/
+@media (min-width: 1280px) {
+    .lblmenu { display: none; }
+
+    .nav { display: flex !important; }
+
+    .nav ul {
+        display: flex;
+        gap: 3rem;
+    }
+
+    .footer {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
+
+
+
+
+/*-------------------------------CLASES REUTILIZABLES--------------------------------*/
+
+
+/* ============================================================
+   VARIABLES (TOKENS)
+   ============================================================ */
+:root {
+    /* --- Colores --- */
+    --negro: #0a0908;
+    --negro-2: #141210;
+    --rojo: #c41f24;
+    --rojo-dim: #7a1216;
+    --blanco: #f5f2ee;
+    --gris: #b9b2a8;
+    --linea: rgba(245, 242, 238, 0.16);
+    --beige: #FFE5CE;          /* NUEVO: fondo claro de algunas secciones */
+
+    /* --- Tipografías --- */
+    --fuente-titulos: "Fjalla One", sans-serif;     /* Hero, logo, nav */
+    --fuente-texto: "Inter", sans-serif;             /* Párrafos generales */
+    --fuente-display: "Playfair Display", serif;     /* NUEVO: títulos elegantes */
+    --fuente-suave: "Poppins", sans-serif;           /* NUEVO: textos descriptivos */
+
+    /* --- Tamaños de letra --- */
+    --fs-hero: 6rem;
+    --fs-titulo: 3.75rem;
+    --fs-seccion: 3.1rem;
+    --fs-subtitulo: 2.5rem;
+    --fs-card: 1.75rem;
+    --fs-parrafo: 1.25rem;
+    --fs-parrafo-mini: 1rem;
+
+    /* --- Espaciado --- */
+    --espacio-sm: 0.5rem;
+    --espacio-md: 1rem;
+    --espacio-lg: 2rem;
+    --espacio-xl: 4rem;
+
+    /* --- Bordes --- */
+    --radio: 8px;
+}
+/* ============================================================
+   TÍTULOS
+   ============================================================ */
+.titulo-hero {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-hero);
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--blanco);
+}
+
+.titulo-pagina {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-titulo);
+    color: var(--blanco);
+}
+
+/* NUEVO: título grande con tipografía serif elegante (Playfair Display) */
+.titulo-display {
+    font-family: var(--fuente-display);
+    font-size: var(--fs-seccion);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   SUBTÍTULOS
+   ============================================================ */
+.titulo-seccion {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-seccion);
+    letter-spacing: 1px;
+}
+
+.subtitulo {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-subtitulo);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.titulo-card {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-card);
+    letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   PÁRRAFOS
+   ============================================================ */
+.parrafo {
+    font-family: var(--fuente-texto);
+    font-size: var(--fs-parrafo);
+}
+
+.parrafo-mini {
+    font-family: var(--fuente-texto);
+    font-size: var(--fs-parrafo-mini);
+}
+
+/* NUEVO: texto con tipografía suave (Poppins) */
+.texto-suave {
+    font-family: var(--fuente-suave);
+    font-weight: 500;
+}
+
+
+/* ============================================================
+   UTILIDADES DE COLOR
+   ============================================================ */
+.texto-blanco { color: var(--blanco); }
+.texto-negro  { color: var(--negro); }
+.texto-gris   { color: var(--gris); }
+.texto-rojo   { color: var(--rojo); }
+
+.fondo-negro  { background: var(--negro); }
+.fondo-rojo   { background: var(--rojo); }
+.fondo-blanco { background: var(--blanco); }
+.fondo-beige  { background: var(--beige); }   
+
+

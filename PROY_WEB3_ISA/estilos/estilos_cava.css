@@ -1,0 +1,377 @@
+/* ================================================================
+   1. MAQUETACIÓN PERSONAL
+   .container: grid que va a agrupar toda la página
+   ================================================================ */
+
+.container {
+    display: grid;
+    grid-template-columns: [col-header] 1fr [col-last];
+    grid-template-rows:
+        [row-header]  auto
+        [row-hero]    auto
+        [row-intro]   auto
+        [row-vinos]   auto
+        [row-galeria] auto
+        [row-carta]   auto
+        [row-footer]  auto
+        [row-last];
+    min-height: 100vh;
+}
+
+/* Asignación de cada bloque a su fila nombrada */
+.header          { grid-column: col-header / col-last; grid-row: row-header; }
+.encabezado-cava { grid-column: col-header / col-last; grid-row: row-hero; }
+.intro-cava      { grid-column: col-header / col-last; grid-row: row-intro; }
+.cuerpo-pagina   { grid-column: col-header / col-last; grid-row: row-vinos; }
+.galeria-cava    { grid-column: col-header / col-last; grid-row: row-galeria; }
+.boton-carta     { grid-column: col-header / col-last; grid-row: row-carta; }
+.footer          { grid-column: col-header / col-last; grid-row: row-footer; }
+
+
+/* ================================================================
+   2. PORTADA (TITULO con la imagen de fondo)
+   ================================================================ */
+
+.encabezado-cava {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.encabezado-cava img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Capa oscura sobre la imagen */
+.encabezado-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+/* Título sobre la imagen */
+.encabezado-cava .titulo-hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+
+/* ================================================================
+   3. SECCIÓN INTRO (copas + texto lado a lado)
+   ================================================================ */
+
+.intro-cava {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3.1rem;
+    background-color: var(--negro);
+    color: rgb(200, 220, 235);
+    padding: 3.75rem 2.5rem;
+}
+
+/* La imagen es muy ancha y las copas están a la izquierda: se recorta mostrando esa zona */
+.figura-intro {
+    width: 100%;
+    max-width: 30rem;
+    margin-left: auto;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.figura-intro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    display: block;
+}
+
+.texto-intro {
+    max-width: 30rem;
+    text-align: center;
+}
+
+.texto-intro .parrafo-mini {
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+
+/* ================================================================
+   4. SECCIÓN CARTA DE VINOS (3 cards)
+   ================================================================ */
+
+.cuerpo-pagina {
+    background-color: var(--beige);
+    color: var(--negro);
+    padding: 2.5rem 3.75rem 3.75rem;
+}
+
+.cuerpo-pagina .titulo-seccion {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.grid-vinos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.875rem;
+    max-width: 62.5rem;
+    margin: 0 auto;
+}
+
+.card-vino {
+    margin: 0;
+    text-align: center;
+}
+
+.card-vino img {
+    width: 100%;
+    height: 22rem;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.titulo-vino {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-card);
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+
+/* ================================================================
+   5. GALERÍA (paisaje + almacén)
+   ================================================================ */
+
+.galeria-cava {
+    display: flex;
+    justify-content: center;
+    gap: 1.875rem;
+    background-color: #7d0610;
+    padding: 3.1rem 3.75rem;
+}
+
+.galeria-cava figure {
+    margin: 0;
+    width: 40%;
+    max-width: 37.5rem;
+}
+
+.galeria-cava img {
+    width: 100%;
+    height: 23.75rem;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+
+/* ================================================================
+   6. BOTÓN CARTA (carta de vinos)
+   ================================================================ */
+
+.boton-carta {
+    text-align: center;
+    background-color: var(--beige);
+    color: var(--negro);
+    padding: 1.56rem;
+}
+
+.titulo-carta {
+    font-family: var(--fuente-titulos);
+    font-size: var(--fs-card);
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 1.25rem;
+}
+
+.boton-carta a {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    color: var(--blanco);
+    background-color: #7d0610;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.boton-carta a:hover {
+    background-color: #4f0309;
+    color: var(--blanco);
+}
+
+
+/* ================================================================
+   7. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
+   ================================================================ */
+
+/* CELULARES */
+@media (max-width: 480px) {
+    .encabezado-cava {
+        height: 110vh;
+    }
+
+    .encabezado-cava .titulo-hero {
+        font-size: 3rem;
+    }
+
+    .intro-cava {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2.5rem 1.25rem;
+    }
+
+    .figura-intro {
+        margin: 0 auto;
+        max-width: 20rem;
+    }
+
+    .cuerpo-pagina {
+        padding: 1.875rem 1.25rem 2.5rem;
+    }
+
+    .cuerpo-pagina .titulo-seccion {
+        font-size: 2.2rem;
+        margin-bottom: 1.875rem;
+    }
+
+    .grid-vinos {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .card-vino img {
+        height: 20rem;
+    }
+
+    .galeria-cava {
+        flex-direction: column;
+        align-items: center;
+        padding: 1.875rem 1.25rem;
+    }
+
+    .galeria-cava figure {
+        width: 100%;
+    }
+
+    .galeria-cava img {
+        height: 18rem;
+    }
+
+    .titulo-vino,
+    .titulo-carta {
+        font-size: 1.4rem;
+    }
+}
+
+/* TABLETS */
+@media (min-width: 481px) and (max-width: 768px) {
+    .encabezado-cava {
+        height: 100vh;
+    }
+
+    .encabezado-cava .titulo-hero {
+        font-size: 3.5rem;
+    }
+
+    .intro-cava {
+        grid-template-columns: 1fr;
+        gap: 1.875rem;
+        padding: 3.1rem 1.875rem;
+    }
+
+    .figura-intro {
+        margin: 0 auto;
+        max-width: 24rem;
+    }
+
+    .cuerpo-pagina {
+        padding: 2.5rem 1.875rem 3.1rem;
+    }
+
+    .cuerpo-pagina .titulo-seccion {
+        font-size: 2.6rem;
+    }
+
+    .grid-vinos {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .card-vino img {
+        height: 15rem;
+    }
+
+    .titulo-vino {
+        font-size: 1.3rem;
+    }
+
+    .galeria-cava {
+        padding: 2.5rem 1.875rem;
+    }
+
+    .galeria-cava figure {
+        width: 50%;
+    }
+
+    .galeria-cava img {
+        height: 18rem;
+    }
+}
+
+/* LAPTOPS */
+@media (min-width: 769px) and (max-width: 1279px) {
+    .encabezado-cava {
+        height: 100vh;
+    }
+
+    .encabezado-cava .titulo-hero {
+        font-size: 4.5rem;
+    }
+
+    .intro-cava {
+        gap: 2rem;
+        padding: 3.1rem 2.5rem;
+    }
+
+    .cuerpo-pagina {
+        padding: 2.5rem 2.5rem 3.1rem;
+    }
+
+    .grid-vinos {
+        gap: 1.25rem;
+    }
+
+    .card-vino img {
+        height: 18rem;
+    }
+
+    .galeria-cava {
+        padding: 3.1rem 2.5rem;
+    }
+
+    .galeria-cava img {
+        height: 20rem;
+    }
+}
+
+/* PC */
+@media (min-width: 1280px) {
+    .encabezado-cava {
+        height: 100vh;
+    }
+}

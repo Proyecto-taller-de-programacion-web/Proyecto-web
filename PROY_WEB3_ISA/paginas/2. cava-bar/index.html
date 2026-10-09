@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descripcion" content="Conoce la selección de bebidas y opciones de nuestra Cava Bar para acompañar tus carnes y parrillas.">
+
+    <!--Importación desde GoogleFont para las fuentes-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+
+    <!--Título y la conexión a css-->
+    <title>CAVA/BAR</title>
+    <link rel="stylesheet" href="../../estilos/estilos_cava.css">
+    <link rel="stylesheet" href="../../estilos/estilos_global.css">
+</head>
+
+<body>
+
+    <!-- Contenedor principal: agrupa toda la página en un grid de filas -->
+    <div class="container">
+
+        <!---------BARRA DE NAVEGACIÓN (menú hamburguesa responsive)---------->
+        <header class="header">
+
+            <!-- Checkbox oculto — debe ir primero para que el selector ~ alcance al nav -->
+            <input type="checkbox" id="checkmenu">
+
+            <!-- Logo: siempre visible a la izquierda (order:1 en CSS) -->
+            <figure class="logo-container">
+                <img class="logo-principal" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+            </figure>
+
+            <!-- Ícono hamburguesa: visible solo en móvil/tablet, a la derecha (order:2) -->
+            <label for="checkmenu" class="lblmenu">&#9776;</label>
+
+            <!-- Nav: order:3, cae debajo en móvil al abrir el menú -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="../../index.html">INICIO</a></li>
+                    <li><a href="../../paginas/1. carnes/index.html">CARNES</a></li>
+                    <li><a href="#">CAVA/BAR</a></li>
+                    <li><a href="../../paginas/3. nosotros/index.html">NOSOTROS</a></li>
+                    <li><a href="../../paginas/4. sedes/index.html">SEDES</a></li>
+                    <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
+                    <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <!---------PORTADA PRINCIPAL (encabezado hero)---------->
+        <section class="encabezado-cava">
+            <div class="encabezado-overlay"></div>
+            <img src="../../img/bartender.jpeg" alt="Imagen de un barista">
+            <h1 class="titulo-hero">CAVA/BAR</h1>
+        </section>
+
+
+        <!---------SECCIÓN: Introducción con copas---------->
+        <section class="intro-cava">
+            <figure class="figura-intro">
+                <img src="../../img/copas2.avif" alt="Copas de vino en la Cava/Bar">
+            </figure>
+
+            <div class="texto-intro">
+                <p class="parrafo-mini">Nuestra carta de bebidas está seleccionada con los mejores licores entre ron, whisky, vodka, tequila,
+                    gin, pisco, entre otros.</p>
+
+                <p class="parrafo-mini">Los mejores vinos tintos Australianos, Estadounidenses, Franceses, Italianos, Españoles, Chilenos,
+                    Argentinos, Uruguayos y Peruanos reposan en nuestra cava manteniéndolos a temperatura ideal para
+                    cualquier ocasión.</p>
+
+                <p class="parrafo-mini">Para los diferentes gustos también contamos con diferentes bebidas entre vino blanco, espumantes y
+                    champagnes.</p>
+            </div>
+        </section>
+
+
+        <!---------SECCIÓN: Carta de vinos (3 vinos)---------->
+        <section class="cuerpo-pagina">
+
+            <h2 class="titulo-seccion">NUESTRA CARTA DE VINOS</h2>
+
+            <div class="grid-vinos">
+                <figure class="card-vino">
+                    <img src="../../img/vino 1.jpeg" alt="Imagen de vino">
+                    <h3 class="titulo-vino">Selección Clásica</h3>
+                    <p class="parrafo-mini">Un vino elegante, de aroma intenso y sabor equilibrado. Ideal para una ocasión especial.</p>
+                </figure>
+
+                <figure class="card-vino">
+                    <img src="../../img/vino 2.jpeg" alt="Imagen de vino">
+                    <h3 class="titulo-vino">Selección Premium</h3>
+                    <p class="parrafo-mini">Un vino robusto y complejo, con aromas intensos y un cuerpo lleno. Perfecto para degustar en
+                        compañía.</p>
+                </figure>
+
+                <figure class="card-vino">
+                    <img src="../../img/vino 3.jpeg" alt="Imagen de vino">
+                    <h3 class="titulo-vino">Selección Especial</h3>
+                    <p class="parrafo-mini">Un vino excepcional, con una complejidad única y un final persistente. Ideal para momentos
+                        memorables.</p>
+                </figure>
+            </div>
+
+        </section>
+
+
+        <!---------SECCIÓN: Galería (paisaje y almacén de vinos)---------->
+        <section class="galeria-cava">
+            <figure>
+                <img src="../../img/paisajevino.jpeg" alt="Paisaje de vinos">
+            </figure>
+            <figure>
+                <img src="../../img/almacenvinos.jpeg" alt="Almacén de vinos">
+            </figure>
+        </section>
+
+
+        <!---------SECCIÓN: Conoce toda nuestra carta---------->
+        <section class="boton-carta">
+            <h3 class="titulo-carta">Conoce toda nuestra carta:</h3>
+            <a class="parrafo-mini" href="../../pdf_cartas/cartacava.pdf" target="_blank">Ver carta de vinos</a>
+        </section>
+
+        <!---------PIE DE PÁGINA---------->
+
+        <footer class="footer">
+
+            <figure>
+                <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+                <h2 class="titulo-logo">LA VACA ROJA</h2>
+                </figure>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">SEDES</h4>
+                <p>Av. Santa Cruz N° 940 - Miraflores, Lima.</p>
+                <p>Calle Pancho Fierro 15073 - San Isidro, Lima.</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">TELÉFONO</h4>
+                <p>(01) 352 1472</p>
+                <p>982 140 582</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">EMAIL</h4>
+                <p>info@lavacaroja.pe</p>
+                <p>Consultas y reservas</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">HORARIO DE ATENCIÓN</h4>
+                <p>Martes a Sábado: 12:00 pm - 10:00 pm</p>
+                <p>Domingos: 12:00 pm - 7:00 pm</p>
+                <p>Lunes: Cerrado</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">SERVICIOS</h4>
+                <p>Atención en salón</p>
+                <p>Reservas de mesa</p>
+                <p>Atención para familias</p>
+            </div>
+
+            <div class="caja-footer">
+                <h4 class="informacion-footer">REDES SOCIALES</h4>
+                <br>
+                <img src="../../img/logoFacebook.png" alt="Logo de Facebook">
+                <img src="../../img/logoWhatsApp.png" alt="Logo de WhatsApp">
+                <img src="../../img/logoTiktok.png" alt="Logo de TikTok">
+            </div>
+
+        </footer>
+
+    </div>
+
+</body>
+</html>
