@@ -57,11 +57,17 @@
     color: #A90816;
 }
 
+
 /* Botón "Iniciar Sesión" */
 .boton-login {
     background-color: rgb(227, 21, 38);
     border-radius: 0.4rem;
     padding: 0.2rem 0.8rem;
+}
+
+.boton-login a:hover {
+    color: white;
+    cursor: url("../img/cursor_carne.png"), auto;
 }
 
 
