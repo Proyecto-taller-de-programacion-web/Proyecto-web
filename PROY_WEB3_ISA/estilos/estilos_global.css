@@ -1,64 +1,85 @@
-/*----------------------------CURSOR GLOBAL----------------------------*/
+/* =========================================================
+   1. CONFIGURACIÓN GLOBAL
+   ========================================================= */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     cursor: url("../img/cursor_carne.png"), auto;
 }
 
 
+/* =========================================================
+   2. BARRA DE NAVEGACIÓN GLOBAL
+   ========================================================= */
 
-/*----------------------------BARRA DE NAVEGACIÓN GLOBAL----------------------------*/
+/* HEADER: diseño para laptop y PC */
 
-/*------- MENÚ DE NAVEGACIÓN PENSADO EN GRANDE-------*/
-
-/* Contenedor que agrupa la imagen y la Barra de navegación*/
 .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     background-color: rgb(0, 0, 0);
-    
-    height: 5rem;                   /* relativo: equivale a ~80px */
-    padding: 0rem 1.5rem;   /* relativo */
+
+    min-height: 5rem;
+    padding: 0 1.5rem;
+}
+
+/* Contenedor del logo */
+
+.logo-container {
+    width: 5rem;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.logo-principal {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* El logo del HEADER no debe tener animaciones */
+.header .logo-container,
+.header .logo-principal {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Navegación */
+
+.nav {
+    display: flex;
     align-items: center;
 }
 
-.logo-container{
-    width: 5rem;
-}
-
-.logo-principal{
-    width: 100%;
-}
-
-/*Barra de navegación*/
 .nav ul {
     display: flex;
     flex-wrap: wrap;
+    gap: 3rem;
 
-    gap: 5rem;
     justify-content: center;
     align-items: center;
-    list-style-type: none; /*quitar las viñetas*/
 
+    list-style: none;
 }
 
 .nav a {
     color: white;
     text-decoration: none;
-    font-family: 'Google Sans Flex', sans-serif;
+    font-family: "Google Sans Flex", sans-serif;
 }
 
 .nav a:hover {
     color: #A90816;
 }
 
+/* Botón iniciar sesión */
 
-/* Botón "Iniciar Sesión" */
 .boton-login {
     background-color: rgb(227, 21, 38);
     border-radius: 0.4rem;
@@ -67,218 +88,377 @@
 
 .boton-login a:hover {
     color: white;
-    cursor: url("../img/cursor_carne.png"), auto;
 }
 
+/* Checkbox oculto */
 
-/*----BOTON ESTILO HAMBURGUESA----*/
-
-/* Boton menú — oculto en escritorio, visible en móvil */
-.lblmenu {
-    font-size: 2rem;    /*tamaño de las 3 barritas*/
-    cursor: pointer;    /*cambia el cursor*/
-    display: none;       /* desactivada media query lo activa en móvil/tablet */
-    order: 3;            /* se ubica a la DERECHA del logo y el nav */
-    color:var(--blanco)
-}
-
-/* Checkbox SIEMPRE oculto, solo sirve cuando ponemos las 3 barras encima */
 #checkmenu {
     display: none;
 }
 
+/* Botón hamburguesa: oculto en laptop y PC */
+
+.lblmenu {
+    display: none;
+    font-size: 2rem;
+    color: var(--blanco);
+    cursor: pointer;
+}
 
 
-/*---------------------------FOOTER GLOBAL----------------------------*/
+/* =========================================================
+   3. FOOTER GLOBAL
+   ========================================================= */
 
-.footer{
+.footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-
+    align-items: start;
     text-align: center;
-    background-color: rgb(250, 227, 207);
-    font-family: Google Sans Flex;
-    color: rgb(147, 30, 55);
-    padding: 60px 0px 40px 0px;
-    
-    clear:both;
+
+    background-color: var(--negro);
+    border-top: 4px solid var(--rojo);
+
+    font-family: "Google Sans Flex", sans-serif;
+    color: var(--gris);
+
+    padding: 3rem 3rem 2rem;
+    clear: both;
 }
 
-.logo-footer{
-    width: 240px;
-}
-
-.titulo-logo{
-    font-family: "Fjalla One"
-}
-
-.caja-footer{
-    margin:20px;
-}
-
-.informacion-footer{
-    font-family: Google Sans Flex;
-}
+/* Logo y nombre */
 
 .footer figure {
+    margin-bottom: 1rem;
+}
+
+.logo-footer {
+    width: 10rem;
+    max-width: 100%;
+}
+
+.titulo-logo {
+    font-family: "Fjalla One", sans-serif;
+    color: var(--rojo);
+    letter-spacing: 2px;
+}
+
+/* Bloques del footer */
+
+.caja-footer {
+    margin: 0;
+    padding: 1rem;
+    transition: transform 0.5s ease;
+}
+
+.caja-footer:hover {
+    transform: translateY(-4px);
+}
+
+.footer p {
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* Títulos */
+
+.informacion-footer {
+    display: inline-block;
+
+    font-family: "Fjalla One", sans-serif;
+    font-weight: normal;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+
+    color: var(--blanco);
+
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.8rem;
+
+    border-bottom: 2px solid var(--rojo);
+}
+
+/* Redes sociales */
+
+.caja-footer img {
+    width: 2.5rem;
+    margin: 0.5rem 0.4rem 0;
+    transition: transform 0.5s ease;
+}
+
+.caja-footer img:hover {
+    transform: scale(1.2);
+}
+
+/* Derechos de autor */
+
+.derechos-footer {
     grid-column: 1 / -1;
+    margin-top: 1rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--linea);
+    font-size: 0.85rem;
 }
 
 
-/*---------------------------DISEÑOS RESPONSIVOS GLOBALES----------------------------*/
+/* =========================================================
+   4. DISEÑO RESPONSIVO
+   ========================================================= */
 
 
+/* ---------------------------------------------------------
+   CELULARES: hasta 480px
+   Logo del NAV a la izquierda; hamburguesa a la derecha.
+   El logo del FOOTER queda arriba de sus bloques.
+   --------------------------------------------------------- */
 
-/* ================================================================
-   10. DISEÑO RESPONSIVE — 4 breakpoints
-   ================================================================ */
-
-/*---CELULARES---*/
 @media (max-width: 480px) {
-    .nav {
+
+    /* El logo del NAV se mantiene a la izquierda */
+    .header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        padding: 0.8rem 1rem;
+        gap: 0.5rem;
+    }
+
+    .header .logo-container {
+        order: 1;
+        width: 5rem;
+        align-self: auto;
+    }
+
+    /* Hamburguesa a la derecha del logo */
+    .header .lblmenu {
+        display: block;
+        order: 2;
+        margin-left: auto;
+    }
+
+    /* Menú cerrado por defecto; al abrirse baja a otra fila */
+    .header .nav {
         display: none;
-        flex-direction: column;
         order: 3;
         width: 100%;
+        justify-content: center;
     }
 
-    #checkmenu:checked ~ .nav {
+    /* Mostrar menú al pulsar hamburguesa */
+
+    .header #checkmenu:checked ~ .nav {
         display: flex;
-    }
-
-    #checkmenu:checked ~ .nav ul {
         flex-direction: column;
-        width: 100%;
-        padding: 0;
-        gap: 2rem;
     }
 
-    #checkmenu:checked ~ .nav ul li {
+    .header #checkmenu:checked ~ .nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        padding: 0.5rem 0;
+        gap: 1.5rem;
+    }
+
+    .header #checkmenu:checked ~ .nav ul li {
         width: 100%;
         text-align: center;
     }
 
-    .header {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 0.6rem 1.25rem;
-    }
-
-    .logo-container { order: 1; }
-
-    .lblmenu {
-        display: block;
-        order: 2;
-    }
+    /* Footer en una columna */
 
     .footer {
-        display: grid;
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 0.5rem;
+        padding: 2rem 1rem 1.5rem;
+    }
+
+    .marca-footer {
+        grid-column: 1 / -1;
     }
 }
 
-/*---TABLET---*/
+
+/* ---------------------------------------------------------
+   TABLETS: de 481px a 768px
+   Logo del NAV a la izquierda; hamburguesa a la derecha.
+   El logo del FOOTER queda arriba de sus bloques.
+   --------------------------------------------------------- */
+
 @media (min-width: 481px) and (max-width: 768px) {
+
     .header {
+        flex-direction: row;
         flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
         height: auto;
-        padding: 0.625rem 1.25rem;
+        padding: 1rem 1.25rem;
+        gap: 0.5rem;
+    }
+
+    /* El logo del NAV permanece a la izquierda */
+    .header .logo-container {
+        order: 1;
+        width: 5rem;
+        align-self: auto;
+    }
+
+    /* Hamburguesa a la derecha */
+    .header .lblmenu {
+        display: block;
+        order: 2;
+        margin-left: auto;
+    }
+
+    /* Menú oculto; cuando se abre ocupa una fila debajo */
+    .header .nav {
+        display: none;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        background-color: black;
+    }
+
+    /* Menú abierto */
+
+    .header #checkmenu:checked ~ .nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header #checkmenu:checked ~ .nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        padding: 0.5rem 0;
+        gap: 1.5rem;
+    }
+
+    .header #checkmenu:checked ~ .nav ul li {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    /* Footer en dos columnas */
+
+    .footer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 2.5rem 2rem 1.5rem;
+    }
+
+    .marca-footer {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   LAPTOPS: de 769px a 1279px
+   Logo en una columna izquierda y menú a la derecha
+   --------------------------------------------------------- */
+
+@media (min-width: 769px) and (max-width: 1279px) {
+
+    .header {
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
-    .logo-container { order: 1; }
+    .logo-container {
+        order: 1;
+        width: 5rem;
+    }
 
     .lblmenu {
-        display: block;
-        order: 2;
+        display: none;
     }
 
     .nav {
-        display: none;
-        order: 3;
-        width: 100%;
-        background-color: black;
+        display: flex !important;
+        order: 2;
+        width: auto;
     }
-
-    #checkmenu:checked ~ .nav {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #checkmenu:checked ~ .nav ul {
-        flex-direction: column;
-        width: 100%;
-        padding: 0.625rem 0;
-        gap: 2rem;
-    }
-
-    #checkmenu:checked ~ .nav ul li {
-        width: 100%;
-        text-align: center;
-        padding: 0.625rem 0;
-    }
-
-    .footer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-}
-
-/*----LAPTOPS---*/
-@media (min-width: 769px) and (max-width: 1279px) {
-    .lblmenu { display: none; }
-
-    .nav { display: flex !important; }
 
     .nav ul {
-        display: flex;
+        flex-wrap: nowrap;
         gap: 1.5rem;
         font-size: 0.8rem;
     }
 
+    /* Footer en cuatro columnas */
+
     .footer {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+        padding: 3rem 1.5rem 2rem;
+    }
+
+    .caja-footer {
+        min-width: 0;
+        padding: 0.5rem;
     }
 }
 
-/*---PC---*/
-@media (min-width: 1280px) {
-    .lblmenu { display: none; }
 
-    .nav { display: flex !important; }
+/* ---------------------------------------------------------
+   PC: desde 1280px
+   Logo en una columna izquierda y menú a la derecha
+   --------------------------------------------------------- */
+
+@media (min-width: 1280px) {
+
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-container {
+        order: 1;
+        width: 5rem;
+    }
+
+    .lblmenu {
+        display: none;
+    }
+
+    .nav {
+        display: flex !important;
+        order: 2;
+    }
 
     .nav ul {
-        display: flex;
+        flex-wrap: nowrap;
         gap: 3rem;
     }
 
+    /* Footer en cuatro columnas */
+
     .footer {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.5rem;
     }
 }
 
 
+/* =========================================================
+   5. VARIABLES GLOBALES
+   ========================================================= */
 
-
-
-/*-------------------------------CLASES REUTILIZABLES--------------------------------*/
-
-
-/* ============================================================
-   VARIABLES (TOKENS)
-   ============================================================ */
 :root {
-    /* --- Colores --- */
+    /* Colores */
+
     --negro: #0a0908;
     --negro-2: #141210;
     --rojo: #c41f24;
@@ -286,15 +466,17 @@
     --blanco: #f5f2ee;
     --gris: #b9b2a8;
     --linea: rgba(245, 242, 238, 0.16);
-    --beige: #FFE5CE;          /* NUEVO: fondo claro de algunas secciones */
+    --beige: #FFE5CE;
 
-    /* --- Tipografías --- */
-    --fuente-titulos: "Fjalla One", sans-serif;     /* Hero, logo, nav */
-    --fuente-texto: "Inter", sans-serif;             /* Párrafos generales */
-    --fuente-display: "Playfair Display", serif;     /* NUEVO: títulos elegantes */
-    --fuente-suave: "Poppins", sans-serif;           /* NUEVO: textos descriptivos */
+    /* Tipografías */
 
-    /* --- Tamaños de letra --- */
+    --fuente-titulos: "Fjalla One", sans-serif;
+    --fuente-texto: "Inter", sans-serif;
+    --fuente-display: "Playfair Display", serif;
+    --fuente-suave: "Poppins", sans-serif;
+
+    /* Tamaños de letra */
+
     --fs-hero: 6rem;
     --fs-titulo: 3.75rem;
     --fs-seccion: 3.1rem;
@@ -303,18 +485,23 @@
     --fs-parrafo: 1.25rem;
     --fs-parrafo-mini: 1rem;
 
-    /* --- Espaciado --- */
+    /* Espaciado */
+
     --espacio-sm: 0.5rem;
     --espacio-md: 1rem;
     --espacio-lg: 2rem;
     --espacio-xl: 4rem;
 
-    /* --- Bordes --- */
+    /* Bordes */
+
     --radio: 8px;
 }
-/* ============================================================
-   TÍTULOS
-   ============================================================ */
+
+
+/* =========================================================
+   6. CLASES REUTILIZABLES: TÍTULOS
+   ========================================================= */
+
 .titulo-hero {
     font-family: var(--fuente-titulos);
     font-size: var(--fs-hero);
@@ -329,7 +516,6 @@
     color: var(--blanco);
 }
 
-/* NUEVO: título grande con tipografía serif elegante (Playfair Display) */
 .titulo-display {
     font-family: var(--fuente-display);
     font-size: var(--fs-seccion);
@@ -338,9 +524,10 @@
 }
 
 
-/* ============================================================
-   SUBTÍTULOS
-   ============================================================ */
+/* =========================================================
+   7. CLASES REUTILIZABLES: SUBTÍTULOS
+   ========================================================= */
+
 .titulo-seccion {
     font-family: var(--fuente-titulos);
     font-size: var(--fs-seccion);
@@ -361,9 +548,10 @@
 }
 
 
-/* ============================================================
-   PÁRRAFOS
-   ============================================================ */
+/* =========================================================
+   8. CLASES REUTILIZABLES: PÁRRAFOS
+   ========================================================= */
+
 .parrafo {
     font-family: var(--fuente-texto);
     font-size: var(--fs-parrafo);
@@ -374,24 +562,44 @@
     font-size: var(--fs-parrafo-mini);
 }
 
-/* NUEVO: texto con tipografía suave (Poppins) */
 .texto-suave {
     font-family: var(--fuente-suave);
     font-weight: 500;
 }
 
 
-/* ============================================================
-   UTILIDADES DE COLOR
-   ============================================================ */
-.texto-blanco { color: var(--blanco); }
-.texto-negro  { color: var(--negro); }
-.texto-gris   { color: var(--gris); }
-.texto-rojo   { color: var(--rojo); }
+/* =========================================================
+   9. UTILIDADES DE COLOR
+   ========================================================= */
 
-.fondo-negro  { background: var(--negro); }
-.fondo-rojo   { background: var(--rojo); }
-.fondo-blanco { background: var(--blanco); }
-.fondo-beige  { background: var(--beige); }   
+.texto-blanco {
+    color: var(--blanco);
+}
 
+.texto-negro {
+    color: var(--negro);
+}
 
+.texto-gris {
+    color: var(--gris);
+}
+
+.texto-rojo {
+    color: var(--rojo);
+}
+
+.fondo-negro {
+    background: var(--negro);
+}
+
+.fondo-rojo {
+    background: var(--rojo);
+}
+
+.fondo-blanco {
+    background: var(--blanco);
+}
+
+.fondo-beige {
+    background: var(--beige);
+}
