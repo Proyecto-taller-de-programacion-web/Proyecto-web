@@ -375,3 +375,86 @@
         height: 100vh;
     }
 }
+
+/* ================================================================
+   8. ANIMACIONES, TRANSICIONES Y TRANSFORMACIONES
+   ================================================================ */
+
+/* --- Portada: zoom lento en la imagen y entrada del título --- */
+.encabezado-cava img {
+    animation: zoomLento 20s ease-out forwards;
+}
+
+.encabezado-cava .titulo-hero {
+    animation: tituloEntra 2s ease-out both;
+}
+
+@keyframes zoomLento {
+    from { transform: scale(1); }
+    to   { transform: scale(1.12); }
+}
+
+/* El título ya se centra con translate(-50%, -50%), por eso se repite aquí */
+@keyframes tituloEntra {
+    from { opacity: 0; transform: translate(-50%, -30%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* --- Intro: la imagen de las copas "respira" suavemente --- */
+.figura-intro img {
+    animation: respirar 8s ease-in-out infinite alternate;
+}
+
+@keyframes respirar {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+}
+
+/* --- Cards de vino: se elevan y la foto hace zoom --- */
+.card-vino {
+    transition: transform 0.6s ease;
+}
+
+.card-vino:hover {
+    transform: translateY(-8px);
+}
+
+.card-vino img {
+    transition: transform 0.8s ease, box-shadow 0.8s ease;
+}
+
+.card-vino:hover img {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Galería: zoom suave en hover --- */
+.galeria-cava figure {
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.galeria-cava img {
+    transition: transform 0.8s ease;
+}
+
+.galeria-cava figure:hover img {
+    transform: scale(1.08);
+}
+
+/* --- Botón de carta: pulso suave y elevación en hover --- */
+.boton-carta a {
+    transition: background-color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+    animation: pulso 3s ease-in-out infinite;
+}
+
+.boton-carta a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+    animation: none;
+}
+
+@keyframes pulso {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(125, 6, 16, 0.5); }
+    50%      { box-shadow: 0 0 0 10px rgba(125, 6, 16, 0); }
+}
