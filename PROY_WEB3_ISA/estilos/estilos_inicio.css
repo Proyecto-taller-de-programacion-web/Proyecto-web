@@ -25,14 +25,267 @@
 .opiniones          { grid-column: col-header / col-last; grid-row: row-opiniones; }
 .footer             { grid-column: col-header / col-last; grid-row: row-footer; }
 
-
 /* ================================================================
-   1. CONTENEDOR DE CADA SECCION
+   ANIMACIONES
+   Solo propiedades del PDF: Duración · Timing · Delay · Repetir ·
+   Dirección · Fill-mode
    ================================================================ */
 
 
-/* Ancho máximo para centrar el contenido dentro de cada sección */
+/* ================================================================
+   ENCABEZADO
+   Animaciones: MOVER (logo, título, párrafo, botón) · CRECER lento (imagen de fondo) · PARPADEAR (botón Reservar)
+   ================================================================ */
 
+/* MOVER (Duración) */
+@keyframes moverLogo {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes moverArriba {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.header .logo-container .logo-principal {
+    animation-name: moverLogo;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+/* Título, párrafo y botón entran uno tras otro (Delay: 0s, 0.2s, 0.4s) */
+.encabezado-inicio .titulo-hero {
+    animation-name: moverArriba;
+    animation-duration: 0.9s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-fill-mode: both;
+}
+
+.encabezado-contenido .parrafo {
+    animation-name: moverArriba;
+    animation-duration: 0.9s;
+    animation-timing-function: ease-out;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+/* CRECER lento (Timing: ease-in-out) sobre la imagen de fondo */
+@keyframes crecerLento {
+    from { transform: scale(1); }
+    to   { transform: scale(1.1); }
+}
+
+.encabezado-inicio img {
+    animation-name: crecerLento;
+    animation-duration: 14s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+/* PARPADEAR (Repetir): botón con dos animaciones a la vez
+   1) entra moviéndose  2) luego parpadea sin parar */
+@keyframes parpadear {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.3; }
+}
+
+.boton--encabezado {
+    animation-name: moverArriba, parpadear;
+    animation-duration: 0.9s, 1s;
+    animation-timing-function: ease-out, ease-in-out;
+    animation-delay: 0.4s, 1.6s;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
+}
+
+.boton--encabezado:hover {
+    animation-play-state: running, paused;
+}
+
+
+/* ================================================================
+   NUESTRA ESENCIA
+   Animaciones: DIRECCIÓN alternate (imágenes al pasar el cursor) · CRECER al hacer scroll (columnas)
+   ================================================================ */
+
+/* DIRECCIÓN (alternate): sube, se agranda y vuelve a su estado */
+@keyframes subirCrecer {
+    from { transform: translateY(0) scale(1); }
+    to   { transform: translateY(var(--subir, -8px)) scale(var(--escala, 1.05)); }
+}
+
+.esencia__img:hover {
+    animation-name: subirCrecer;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: 2;
+}
+
+/* CRECER (Timing) al llegar con el scroll */
+@keyframes crecer {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@supports (animation-timeline: view()) {
+    .esencia__item {
+        animation-name: crecer;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 70%;
+    }
+}
+
+
+/* ================================================================
+   RECONOCIMIENTOS
+   Animaciones: DIRECCIÓN alternate (imágenes se mueven, giran y regresan al pasar el cursor) · APARECER (párrafo)
+   ================================================================ */
+
+/* DIRECCIÓN (alternate): sube y gira un ángulo, luego regresa a su estado normal.
+   Imagen 1 gira a la izquierda, imagen 2 a la derecha. */
+@keyframes inclinarIzq {
+    from { transform: translateY(0) rotate(0deg); }
+    to   { transform: translateY(-8px) rotate(-3deg); }
+}
+
+@keyframes inclinarDer {
+    from { transform: translateY(0) rotate(0deg); }
+    to   { transform: translateY(-8px) rotate(3deg); }
+}
+
+.reconocimiento__img:nth-child(odd):hover {
+    animation-name: inclinarIzq;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: 2;
+}
+
+.reconocimiento__img:nth-child(even):hover {
+    animation-name: inclinarDer;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: 2;
+}
+
+/* APARECER con mini zoom (Timing) */
+@keyframes aparecer {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    10%, 90% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.reconocimientos__texto .parrafo-mini {
+    animation-name: aparecer;
+    animation-duration: 10s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+
+/* ================================================================
+   OPINIONES
+   Animaciones: DIRECCIÓN alternate (imagen, cajas y estrellas) · ROTAR con delay (avatar) · FILL-MODE (botón Encuéntranos aquí cambia de color)
+   ================================================================ */
+
+/* DIRECCIÓN (alternate): imagen y cajas suben y se agrandan al pasar el cursor */
+.opiniones__img:hover,
+.opinion-item:hover {
+    animation-name: subirCrecer;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: 2;
+}
+
+.opinion-item:hover {
+    --subir: -6px;
+    --escala: 1.03;
+}
+
+/* ROTAR (Delay): el avatar gira 360° al pasar el cursor sobre la caja */
+@keyframes rotar {
+    from { transform: rotate(0deg) scale(1); }
+    to   { transform: rotate(360deg) scale(1.1); }
+}
+
+.opinion-item:hover .opinion-item__avatar {
+    animation-name: rotar;
+    animation-duration: 0.8s;
+    animation-delay: 0.1s;
+    animation-fill-mode: forwards;
+}
+
+/* DIRECCIÓN (alternate): las estrellas se separan y vuelven */
+@keyframes espaciar {
+    from { letter-spacing: 2px; }
+    to   { letter-spacing: 5px; }
+}
+
+.opinion-item:hover .opinion-item__estrellas {
+    animation-name: espaciar;
+    animation-duration: 0.4s;
+    animation-direction: alternate;
+    animation-iteration-count: 2;
+}
+
+/* FILL-MODE (forwards): al pasar el cursor el botón cambia de color
+   (fondo crema y texto vino, que contrastan con el fondo rojo) y conserva el color final */
+@keyframes cambiarColor {
+    from {
+        background-color: transparent;
+        color: #ffffff;
+        border-color: #ffffff;
+    }
+    to {
+        background-color: #FFE5CE;
+        color: #7d0610;
+        border-color: #FFE5CE;
+    }
+}
+
+.boton--outline:hover {
+    animation-name: cambiarColor;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
 
 
 /* ================================================================
