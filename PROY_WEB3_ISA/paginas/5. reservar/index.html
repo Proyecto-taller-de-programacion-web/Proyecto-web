@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="descripcion" content="Realiza tu reserva en La Vaca Roja y disfruta de nuestras carnes y parrillas en un ambiente agradable.">  
+    <meta name="description" content="Realiza tu reserva en La Vaca Roja y disfruta de nuestras carnes y parrillas en un ambiente agradable.">
 
-<!--Importación desde GoogleFont para las fuentes-->
+    <!-- Importación desde Google Fonts para las fuentes -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fjalla+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
-    
-    <!--Título y la conexión a css-->
-    <title>Reservar</title>
 
+    <!-- Título y conexión a los CSS -->
+    <title>Reservar</title>
     <link rel="stylesheet" href="../../estilos/estilos_reserva.css">
     <link rel="stylesheet" href="../../estilos/estilos_global.css">
-
 </head>
-
 
 <body>
 
@@ -29,18 +25,17 @@
         <!---------BARRA DE NAVEGACIÓN (menú hamburguesa responsive)---------->
         <header class="header">
 
-            <!-- Checkbox oculto — debe ir primero para que el selector ~ alcance al nav -->
+            <!-- Checkbox oculto: debe ir primero para que el selector ~ alcance al nav -->
             <input type="checkbox" id="checkmenu">
 
-            <!-- Logo: siempre visible a la izquierda (order:1 en CSS) -->
+            <!-- Logo: siempre visible a la izquierda -->
             <figure class="logo-container">
                 <img class="logo-principal" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
             </figure>
 
-            <!-- Ícono hamburguesa: visible solo en móvil/tablet, a la derecha (order:2) -->
+            <!-- Ícono hamburguesa: visible solo en móvil y tablet -->
             <label for="checkmenu" class="lblmenu">&#9776;</label>
 
-            <!-- Nav: order:3, cae debajo en móvil al abrir el menú -->
             <nav class="nav">
                 <ul>
                     <li><a href="../../index.html">INICIO</a></li>
@@ -62,198 +57,266 @@
             <p class="parrafo">No se quede sin un lugar, realice su reserva ahora</p>
         </section>
 
-
-        <!---------SECCIÓN: Formulario de reserva---------->
+        <!---------SECCIÓN: Formulario de reserva por pasos---------->
         <section class="seccion-reserva">
             <form class="formReserva" name="formReserva" method="get" action="confirmacion.html">
-        <fieldset class="fieldDatosReserva">
-          <legend>DATOS DE LA RESERVA</legend>
-          <div class="form-group">
-            <p>1 SELECCIONE SU SEDE</p>
 
-            <input type="radio" name="sede" id="sede-san-isidro" value="san-isidro" required/>
-            <label for="sede-san-isidro">San Isidro</label>
+                <!-- Radios ocultos: el que está marcado define qué paso se ve.
+                     El CSS los lee con :has() desde el formulario. -->
+                <input type="radio" name="paso" id="paso1" class="control-paso" checked>
+                <input type="radio" name="paso" id="paso2" class="control-paso">
+                <input type="radio" name="paso" id="paso3" class="control-paso">
+                <input type="radio" name="paso" id="paso4" class="control-paso">
 
-            <input type="radio" name="sede" id="sede-miraflores" value="miraflores"/>
-            <label for="sede-miraflores">Miraflores</label>
-          </div>
-          <div class="form-group">
-            <p>2 SELECCIONE SU CONSUMO</p>
+                <!-- Checkbox oculto: abre y cierra el aviso de "limpiar formulario" -->
+                <input type="checkbox" id="confirmar-limpiar" class="control-paso">
 
-            <input type="radio" name="tipo-consumo" id="consumo-almuerzo" value="almuerzo" required/>
-            <label for="consumo-almuerzo">Almuerzo</label>
+                <!-- Indicador de progreso -->
+                <div class="progreso">
+                    <ol class="progreso-pasos">
+                        <li><span class="progreso-num">1</span>Dónde</li>
+                        <li><span class="progreso-num">2</span>Cuándo</li>
+                        <li><span class="progreso-num">3</span>Detalles</li>
+                        <li><span class="progreso-num">4</span>Tus datos</li>
+                    </ol>
+                    <div class="progreso-barra">
+                        <div class="progreso-relleno"></div>
+                    </div>
+                </div>
 
-            <input type="radio" name="tipo-consumo" id="consumo-cena" value="cena"/>
-            <label for="consumo-cena">Cena</label>
+                <!-- PASO 1: lugar de la reserva -->
+                <fieldset class="paso paso-1">
+                    <legend>¿DÓNDE QUIERES RESERVAR?</legend>
 
-            <input type="radio" name="tipo-consumo" id="consumo-brunch" value="brunch"/>
-            <label for="consumo-brunch">Brunch</label>
+                    <div class="form-group">
+                        <p>SELECCIONE SU SEDE</p>
 
-            <input type="radio" name="tipo-consumo" id="consumo-evento-especial" value="evento-especial"/>
-            <label for="consumo-evento-especial">Evento Especial</label>
-          </div>
-          <div class="form-group">
-            <p>3 SELECCIONE UNA ZONA</p>
+                        <input type="radio" name="sede" id="sede-san-isidro" value="san-isidro" required>
+                        <label for="sede-san-isidro">San Isidro</label>
 
-            <input type="radio" name="zona" id="zona-salon-principal" value="salon-principal" required/>
-            <label for="zona-salon-principal">Salón Principal</label>
+                        <input type="radio" name="sede" id="sede-miraflores" value="miraflores">
+                        <label for="sede-miraflores">Miraflores</label>
+                    </div>
 
-            <input type="radio" name="zona" id="zona-lounge" value="lounge"/>
-            <label for="zona-lounge">Lounge</label>
+                    <div class="form-group">
+                        <p>SELECCIONE UNA ZONA</p>
 
-            <input type="radio" name="zona" id="zona-terraza-alta" value="terraza-alta"/>
-            <label for="zona-terraza-alta">Terraza Alta</label>
-          </div>
-          <div class="form-group">
-            <label for="numero-personas">4 SELECCIONE EL NÚMERO DE PERSONAS</label>
-            <select id="numero-personas" name="total-personas" required>
-              <option value="" disabled selected hidden>Seleccione</option>
-              <option value="1">1 persona</option>
-              <option value="2">2 personas</option>
-              <option value="3">3 personas</option>
-              <option value="4">4 personas</option>
-              <option value="5">5 personas</option>
-              <option value="6">6 personas</option>
-              <option value="7">7 personas</option>
-              <option value="8">8 personas</option>
-              <option value="9">9 personas</option>
-              <option value="10">10 personas</option>
-              <option value="11">11 personas</option>
-              <option value="12">12 personas</option>
-              <option value="13">13 personas</option>
-              <option value="14">14 personas</option>
-              <option value="15">15 personas</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="fecha-reserva">5 SELECCIONE LA FECHA</label>
-            <input type="date" name="fechas" id="fecha-reserva" value="" min="2026-09-08" required/>
-          </div>
-          <div class="form-group">
-            <label for="hora-reserva">6 SELECCIONE LA HORA</label>
-            <select id="hora-reserva" name="hora" required>
-              <option value="" disabled selected hidden>Seleccione</option>
-              <option value="12:00pm">12:00 PM</option>
-              <option value="1:00pm">1:00 PM</option>
-              <option value="2:00pm">2:00 PM</option>
-              <option value="3:00pm">3:00 PM</option>
-              <option value="4:00pm">4:00 PM</option>
-              <option value="5:00pm">5:00 PM</option>
-              <option value="6:00pm">6:00 PM</option>
-              <option value="7:00pm">7:00 PM</option>
-              <option value="9:00pm">9:00 PM</option>
-              <option value="10:00pm">10:00 PM</option>
-            </select>
-          </div>
-        </fieldset>
+                        <input type="radio" name="zona" id="zona-salon-principal" value="salon-principal" required>
+                        <label for="zona-salon-principal">Salón Principal</label>
 
-        <fieldset>
-          <legend>INFORMACIÓN EXTRA (NO OBLIGATORIO)</legend>
-          <div class="form-group">
-            <label for="requerimiento">¿Tienes algún requerimiento especial?</label>
-            <textarea name="comentario-req" id="requerimiento" placeholder="Ejm: Mesa junto a la ventana..."></textarea>
-          </div>
-          <div class="form-group">
-            <label for="necesidad">¿Alguna necesidad a tomar en cuenta?</label>
-            <textarea name="comentario-nec" id="necesidad" placeholder="Ejm: Acceso para silla de ruedas..."></textarea>
-          </div>
-          <div class="form-group">
-            <label for="alegias">¿Alguna alergia, intolerancia o restricción alimentaria?</label>
-            <textarea name="comentario-ale" id="alegias" placeholder="Ejm: Alergia a mariscos..."></textarea>
-          </div>
-        </fieldset>
+                        <input type="radio" name="zona" id="zona-lounge" value="lounge">
+                        <label for="zona-lounge">Lounge</label>
 
-        <fieldset class="fieldDatos">
-          <legend>DATOS DE LA PERSONA</legend>
-          <div class="form-group">
-            <label for="nombre">NOMBRE</label>
-            <input type="text" name="nombre" id="nombre" placeholder="Nombre" required minlength="2"/>
-          </div>
-          <div class="form-group">
-            <label for="apellido">APELLIDO</label>
-            <input type="text" name="apellido" id="apellido" placeholder="Apellido" required minlength="2"/>
-          </div>
-          <div class="form-group">
-            <label for="correo">CORREO ELECTRÓNICO</label>
-            <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required/>
-          </div>
-          <div class="form-group">
-            <label for="telefono">TELÉFONO</label>
-            <input type="tel" name="telefono" id="telefono" placeholder="999999999" required pattern="[0-9]{9}"/>
-          </div>
-        </fieldset>
+                        <input type="radio" name="zona" id="zona-terraza-alta" value="terraza-alta">
+                        <label for="zona-terraza-alta">Terraza Alta</label>
+                    </div>
 
-        <div class="checkbox-line">
-          <input type="checkbox" name="terminos" id="terminos" required/>
-          <label class="parrafo-mini" for="terminos">Acepto los <a href="../../pdf_cartas/terminosycondiciones.pdf" target="_blank">términos y condiciones</a></label>
-          
-        </div>
+                    <div class="form-action">
+                        <label for="paso2" class="btn-paso btn-siguiente">SIGUIENTE</label>
+                    </div>
+                </fieldset>
 
-        <div class="form-action">
-          <button type="submit" class="btn-submit">RESERVAR</button>
-          <input type="reset" class="btn-reset" value="LIMPIAR FORMULARIO"/>
-        </div>
-      </form>
+                <!-- PASO 2: disponibilidad (consumo, personas, fecha y hora) -->
+                <fieldset class="paso paso-2">
+                    <legend>¿CUÁNDO Y CUÁNTOS?</legend>
+
+                    <div class="form-group">
+                        <p>SELECCIONE SU CONSUMO</p>
+
+                        <input type="radio" name="tipo-consumo" id="consumo-almuerzo" value="almuerzo" required>
+                        <label for="consumo-almuerzo">Almuerzo</label>
+
+                        <input type="radio" name="tipo-consumo" id="consumo-cena" value="cena">
+                        <label for="consumo-cena">Cena</label>
+
+                        <input type="radio" name="tipo-consumo" id="consumo-brunch" value="brunch">
+                        <label for="consumo-brunch">Brunch</label>
+
+                        <input type="radio" name="tipo-consumo" id="consumo-evento-especial" value="evento-especial">
+                        <label for="consumo-evento-especial">Evento Especial</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numero-personas">SELECCIONE EL NÚMERO DE PERSONAS</label>
+                        <select id="numero-personas" name="total-personas" required>
+                            <option value="" disabled selected hidden>Seleccione</option>
+                            <option value="1">1 persona</option>
+                            <option value="2">2 personas</option>
+                            <option value="3">3 personas</option>
+                            <option value="4">4 personas</option>
+                            <option value="5">5 personas</option>
+                            <option value="6">6 personas</option>
+                            <option value="7">7 personas</option>
+                            <option value="8">8 personas</option>
+                            <option value="9">9 personas</option>
+                            <option value="10">10 personas</option>
+                            <option value="11">11 personas</option>
+                            <option value="12">12 personas</option>
+                            <option value="13">13 personas</option>
+                            <option value="14">14 personas</option>
+                            <option value="15">15 personas</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha-reserva">SELECCIONE LA FECHA</label>
+                        <input type="date" name="fechas" id="fecha-reserva" min="2026-10-13" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora-reserva">SELECCIONE LA HORA</label>
+                        <select id="hora-reserva" name="hora" required>
+                            <option value="" disabled selected hidden>Seleccione</option>
+                            <option value="12:00pm">12:00 PM</option>
+                            <option value="1:00pm">1:00 PM</option>
+                            <option value="2:00pm">2:00 PM</option>
+                            <option value="3:00pm">3:00 PM</option>
+                            <option value="4:00pm">4:00 PM</option>
+                            <option value="5:00pm">5:00 PM</option>
+                            <option value="6:00pm">6:00 PM</option>
+                            <option value="7:00pm">7:00 PM</option>
+                            <option value="8:00pm">8:00 PM</option>
+                            <option value="9:00pm">9:00 PM</option>
+                            <option value="10:00pm">10:00 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-action">
+                        <label for="paso1" class="btn-paso btn-atras">ATRÁS</label>
+                        <label for="paso3" class="btn-paso btn-siguiente">SIGUIENTE</label>
+                    </div>
+                </fieldset>
+
+                <!-- PASO 3: información extra (todo opcional, Siguiente siempre activo) -->
+                <fieldset class="paso paso-3">
+                    <legend>DETALLES ADICIONALES (NO OBLIGATORIO)</legend>
+
+                    <div class="form-group">
+                        <label for="requerimiento">¿Tienes algún requerimiento especial?</label>
+                        <textarea name="comentario-req" id="requerimiento" placeholder="Ejm: Mesa junto a la ventana..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="necesidad">¿Alguna necesidad a tomar en cuenta?</label>
+                        <textarea name="comentario-nec" id="necesidad" placeholder="Ejm: Acceso para silla de ruedas..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alergias">¿Alguna alergia, intolerancia o restricción alimentaria?</label>
+                        <textarea name="comentario-ale" id="alergias" placeholder="Ejm: Alergia a mariscos..."></textarea>
+                    </div>
+
+                    <div class="form-action">
+                        <label for="paso2" class="btn-paso btn-atras">ATRÁS</label>
+                        <label for="paso4" class="btn-paso btn-siguiente">SIGUIENTE</label>
+                    </div>
+                </fieldset>
+
+                <!-- PASO 4: datos de la persona y envío -->
+                <fieldset class="paso paso-4">
+                    <legend>TUS DATOS</legend>
+
+                    <div class="form-group">
+                        <label for="nombre">NOMBRE</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required minlength="2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellido">APELLIDO</label>
+                        <input type="text" name="apellido" id="apellido" placeholder="Apellido" required minlength="2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">CORREO ELECTRÓNICO</label>
+                        <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">TELÉFONO</label>
+                        <input type="tel" name="telefono" id="telefono" placeholder="999999999" required pattern="[0-9]{9}">
+                    </div>
+
+                    <div class="checkbox-line">
+                        <input type="checkbox" name="terminos" id="terminos" required>
+                        <label class="parrafo-mini" for="terminos">Acepto los <a href="../../pdf_cartas/terminosycondiciones.pdf" target="_blank">términos y condiciones</a></label>
+                    </div>
+
+                    <div class="form-action">
+                        <label for="paso3" class="btn-paso btn-atras">ATRÁS</label>
+                        <label for="confirmar-limpiar" class="btn-paso btn-reset">LIMPIAR FORMULARIO</label>
+                        <button type="submit" class="btn-submit">RESERVAR</button>
+                    </div>
+                </fieldset>
+                <!-- Aviso de confirmación para limpiar el formulario -->
+                <div class="aviso-limpiar">
+                    <div class="aviso-caja">
+                        <p>¿Seguro que quieres limpiar el formulario? Se borrará toda la información escrita.</p>
+                        <div class="form-action">
+                            <label for="confirmar-limpiar" class="btn-paso btn-atras">CANCELAR</label>
+                            <input type="reset" class="btn-submit" value="SÍ, LIMPIAR">
+                        </div>
+                    </div>
+                </div>
+            </form>
         </section>
 
         <!---------PIE DE PÁGINA---------->
+        <footer class="footer">
 
-<footer class="footer">
- 
-    <!-- Columna 1: marca -->
-    <figure class="marca-footer">
-        <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
-        <h2 class="titulo-logo">LA VACA ROJA</h2>
-    </figure>
- 
-    <!-- Columna 2: sedes y contacto -->
-    <div class="caja-footer">
-        <h4 class="informacion-footer">SEDES</h4>
-        <p>Av. Santa Cruz N° 940 - Miraflores, Lima.</p>
-        <p>Calle Pancho Fierro 15073 - San Isidro, Lima.</p>
-        <br>
+            <!-- Columna 1: marca -->
+            <figure class="marca-footer">
+                <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+                <h2 class="titulo-logo">LA VACA ROJA</h2>
+            </figure>
 
-        <h4 class="informacion-footer">TELÉFONO</h4>
-        <p>(01) 352 1472</p>
-        <p>982 140 582</p>
-        <br>
-        
-        <h4 class="informacion-footer">EMAIL</h4>
-        <p>info@lavacaroja.pe</p>
-        <p>Consultas y reservas</p>
-    </div>
- 
-    <!-- Columna 3: horario y servicios -->
-    <div class="caja-footer">
-        <h4 class="informacion-footer">HORARIO DE ATENCIÓN</h4>
-        <p>Martes a Sábado: 12:00 pm - 10:00 pm</p>
-        <p>Domingos: 12:00 pm - 7:00 pm</p>
-        <p>Lunes: Cerrado</p>
-        <br>
+            <!-- Columna 2: sedes y contacto -->
+            <div class="caja-footer">
+                <h4 class="informacion-footer">SEDES</h4>
+                <p>Av. Santa Cruz N° 940 - Miraflores, Lima.</p>
+                <p>Calle Pancho Fierro 15073 - San Isidro, Lima.</p>
+                <br>
 
-        <h4 class="informacion-footer">SERVICIOS</h4>
-        <p>Atención en salón</p>
-        <p>Reservas de mesa</p>
-        <p>Atención para familias</p>
-    </div>
- 
-    <!-- Columna 4: redes y libro de reclamaciones -->
-    <div class="caja-footer">
-        <h4 class="informacion-footer">REDES SOCIALES</h4>
-        <div class="redes-footer">
-            <img src="../../img/logoFacebook.png" alt="Logo de Facebook">
-            <img src="../../img/logoWhatsApp.png" alt="Logo de WhatsApp">
-            <img src="../../img/logoTiktok.png" alt="Logo de TikTok">
-        </div>
-        <br>
- 
-        <h4 class="informacion-footer">LIBRO DE RECLAMACIONES</h4>
-        <a class="libro-reclamaciones" href="#">
-            <img src="../../img/libro_de_reclamaciones.jpg" alt="Libro de Reclamaciones">
-        </a>
-    </div>
- 
-</footer>
+                <h4 class="informacion-footer">TELÉFONO</h4>
+                <p>(01) 352 1472</p>
+                <p>982 140 582</p>
+                <br>
+
+                <h4 class="informacion-footer">EMAIL</h4>
+                <p>info@lavacaroja.pe</p>
+                <p>Consultas y reservas</p>
+            </div>
+
+            <!-- Columna 3: horario y servicios -->
+            <div class="caja-footer">
+                <h4 class="informacion-footer">HORARIO DE ATENCIÓN</h4>
+                <p>Martes a Sábado: 12:00 pm - 10:00 pm</p>
+                <p>Domingos: 12:00 pm - 7:00 pm</p>
+                <p>Lunes: Cerrado</p>
+                <br>
+
+                <h4 class="informacion-footer">SERVICIOS</h4>
+                <p>Atención en salón</p>
+                <p>Reservas de mesa</p>
+                <p>Atención para familias</p>
+            </div>
+
+            <!-- Columna 4: redes y libro de reclamaciones -->
+            <div class="caja-footer">
+                <h4 class="informacion-footer">REDES SOCIALES</h4>
+                <div class="redes-footer">
+                    <img src="../../img/logoFacebook.png" alt="Logo de Facebook">
+                    <img src="../../img/logoWhatsApp.png" alt="Logo de WhatsApp">
+                    <img src="../../img/logoTiktok.png" alt="Logo de TikTok">
+                </div>
+                <br>
+
+                <h4 class="informacion-footer">LIBRO DE RECLAMACIONES</h4>
+                <a class="libro-reclamaciones" href="#">
+                    <img src="../../img/libro_de_reclamaciones.jpg" alt="Libro de Reclamaciones">
+                </a>
+            </div>
+
+        </footer>
 
     </div>
 

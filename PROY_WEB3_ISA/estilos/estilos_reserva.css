@@ -8,7 +8,6 @@
   --grey: #b9b2a8;
   --line: rgba(245, 242, 238, 0.16);
 
-  ---texto: #c41f24;
   --subtitulo: #f5f2ee;
 }
 
@@ -27,7 +26,7 @@ body {
 
 /* ================================================================
    1. MAQUETACIÓN PERSONAL
-   .container: grid que va a agrupar toda la página
+   .container: grid que agrupa toda la página
    ================================================================ */
 
 .container {
@@ -56,6 +55,7 @@ body {
 .encabezado-reserva {
   padding: 56px 24px 0;
   text-align: center;
+  animation: aparecer 0.8s ease backwards;
 }
 
 .encabezado-reserva .titulo-hero {
@@ -85,7 +85,7 @@ body {
 
 
 /* ================================================================
-   3. SECCIÓN FORMULARIO DE RESERVA
+   3. FORMULARIO: CONTENEDOR Y CAMPOS
    ================================================================ */
 
 .seccion-reserva {
@@ -103,6 +103,7 @@ body {
 }
 
 .formReserva {
+  position: relative;
   width: 92%;
   max-width: 1100px;
   margin: 0 auto;
@@ -114,6 +115,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 26px;
+  animation: aparecer 0.8s ease 0.15s backwards;
 }
 
 fieldset {
@@ -147,22 +149,14 @@ legend {
   margin-bottom: 8px;
 }
 
+/* Radios de opciones (sede, zona, consumo)
+   El radio real se oculta y el círculo se dibuja dentro del label,
+   así círculo y texto nunca se separan al saltar de línea */
 input[type="radio"] {
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: transparent;
-  margin-right: 6px;
-  vertical-align: middle;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-input[type="radio"]:checked {
-  background: var(--red);
-  border-color: var(--red);
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 input[type="radio"] + label {
@@ -174,8 +168,43 @@ input[type="radio"] + label {
   letter-spacing: normal;
   color: var(--white);
   cursor: pointer;
+  transition: color 0.25s ease;
 }
 
+input[type="radio"] + label:hover {
+  color: var(--red);
+}
+
+/* Círculo dibujado con CSS */
+input[type="radio"] + label::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  vertical-align: middle;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+input[type="radio"] + label:hover::before {
+  border-color: var(--red);
+}
+
+input[type="radio"]:checked + label::before {
+  background: var(--red);
+  border-color: var(--red);
+  transform: scale(1.25);
+}
+
+/* Borde visible cuando se navega con teclado */
+input[type="radio"]:focus-visible + label::before {
+  outline: 1px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* Checkbox de términos y condiciones */
 input[type="checkbox"] {
   appearance: none;
   width: 14px;
@@ -185,6 +214,7 @@ input[type="checkbox"] {
   cursor: pointer;
   flex-shrink: 0;
   margin-top: 2px;
+  transition: background 0.25s ease;
 }
 
 input[type="checkbox"]:checked {
@@ -218,6 +248,7 @@ input[type="checkbox"]:checked {
   opacity: 0.75;
 }
 
+/* Campos de texto, fecha, selects y textareas */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -232,6 +263,7 @@ textarea {
   font-size: 14px;
   padding: 12px 14px;
   outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 input::placeholder,
@@ -265,13 +297,127 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+
+/* ================================================================
+   4. CONTROL DE PASOS (radios ocultos + :has())
+   :has() permite elegir un elemento según lo que tiene adentro.
+   Aquí: "el formulario que tiene marcado el radio #pasoN".
+   ================================================================ */
+
+/* Los radios de control nunca se ven */
+.control-paso {
+  display: none;
+}
+
+/* Por defecto todos los pasos están ocultos */
+.paso {
+  display: none;
+}
+
+/* Se muestra solo el paso cuyo radio está marcado */
+.formReserva:has(#paso1:checked) .paso-1,
+.formReserva:has(#paso2:checked) .paso-2,
+.formReserva:has(#paso3:checked) .paso-3,
+.formReserva:has(#paso4:checked) .paso-4 {
+  display: flex;
+  animation: entrarPaso 0.45s ease;
+}
+
+/* "Siguiente" se apaga mientras el paso tenga algún campo inválido
+   (:invalid lo activa el navegador en los campos required vacíos) */
+.paso:has(:invalid) .btn-siguiente {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+
+/* ================================================================
+   5. INDICADOR DE PROGRESO
+   ================================================================ */
+
+.progreso-pasos {
+  display: flex;
+  list-style: none;
+  margin-bottom: 14px;
+}
+
+.progreso-pasos li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 25%;
+  font-family: 'Oswald', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--grey);
+  transition: color 0.4s ease;
+}
+
+.progreso-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 13px;
+  transition: background 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+}
+
+/* Pasos ya alcanzados (el actual y los anteriores) se ven en blanco */
+.formReserva:has(#paso1:checked) .progreso-pasos li:nth-child(-n+1),
+.formReserva:has(#paso2:checked) .progreso-pasos li:nth-child(-n+2),
+.formReserva:has(#paso3:checked) .progreso-pasos li:nth-child(-n+3),
+.formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(-n+4) {
+  color: var(--white);
+}
+
+/* Paso actual: círculo rojo y un poco más grande */
+.formReserva:has(#paso1:checked) .progreso-pasos li:nth-child(1) .progreso-num,
+.formReserva:has(#paso2:checked) .progreso-pasos li:nth-child(2) .progreso-num,
+.formReserva:has(#paso3:checked) .progreso-pasos li:nth-child(3) .progreso-num,
+.formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(4) .progreso-num {
+  background: var(--red);
+  border-color: var(--red);
+  transform: scale(1.15);
+}
+
+/* Barra que se va llenando */
+.progreso-barra {
+  height: 2px;
+  background: var(--line);
+}
+
+.progreso-relleno {
+  width: 0;
+  height: 100%;
+  background: var(--red);
+  transition: width 0.5s ease;
+}
+
+.formReserva:has(#paso1:checked) .progreso-relleno { width: 25%; }
+.formReserva:has(#paso2:checked) .progreso-relleno { width: 50%; }
+.formReserva:has(#paso3:checked) .progreso-relleno { width: 75%; }
+.formReserva:has(#paso4:checked) .progreso-relleno { width: 100%; }
+
+
+/* ================================================================
+   6. BOTONES
+   ================================================================ */
+
 .form-action {
   display: flex;
   gap: 12px;
+  margin-top: 8px;
 }
 
+/* Base común: Siguiente, Atrás, Limpiar y Reservar */
 .btn-submit,
-.btn-reset {
+.btn-reset,
+.btn-paso {
   flex: 1;
   padding: 14px 0;
   background: transparent;
@@ -280,29 +426,82 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  text-align: center;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease,
+              opacity 0.25s ease, transform 0.25s ease;
 }
 
-.btn-submit {
+.btn-submit:hover,
+.btn-reset:hover,
+.btn-paso:hover {
+  transform: translateY(-2px);
+}
+
+/* Botones principales (avanzar / enviar) */
+.btn-submit,
+.btn-siguiente {
   border: 1px solid var(--white);
   color: var(--white);
 }
 
-.btn-submit:hover {
+.btn-submit:hover,
+.btn-siguiente:hover {
   background: var(--red);
   border-color: var(--red);
 }
 
-.btn-reset {
+/* Botones secundarios (volver / limpiar) */
+.btn-reset,
+.btn-atras {
   border: 1px solid var(--line);
   color: var(--grey);
 }
 
-.btn-reset:hover {
+.btn-reset:hover,
+.btn-atras:hover {
   border-color: var(--grey);
   color: var(--white);
 }
+
+/* Aviso de confirmación: cubre el formulario y se abre con el checkbox oculto */
+.aviso-limpiar {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.formReserva:has(#confirmar-limpiar:checked) .aviso-limpiar {
+  display: flex;
+  animation: fundido 0.3s ease;
+}
+
+.aviso-caja {
+  width: 100%;
+  max-width: 380px;
+  padding: 28px 24px;
+  background: var(--black-2);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--red);
+  text-align: center;
+  animation: aparecer 0.3s ease;
+}
+
+.aviso-caja p {
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ================================================================
+   7. PÁGINA DE CONFIRMACIÓN
+   ================================================================ */
 
 .exito-container {
   max-width: 460px;
@@ -313,6 +512,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-top: 2px solid var(--red);
   padding: 48px 38px;
   text-align: center;
+  animation: aparecer 0.7s ease backwards;
+}
+
+/* Círculo rojo con check dibujado solo con CSS */
+.exito-icono {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pop 0.6s ease 0.2s backwards;
+}
+
+.exito-icono::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 28px;
+  border: solid var(--white);
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -60%) rotate(45deg);
+  animation: dibujarCheck 0.5s ease 0.6s backwards;
 }
 
 .exito-container h1 {
@@ -344,16 +568,54 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
 
 .btn-home:hover {
   background: var(--red);
   border-color: var(--red);
+  transform: translateY(-2px);
 }
 
+
 /* ================================================================
-   4. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
+   8. ANIMACIONES (@keyframes)
+   ================================================================ */
+
+/* Entrada general: aparece subiendo un poco */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cambio de paso: entra deslizando desde la derecha */
+@keyframes entrarPaso {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Círculo de éxito: crece, se pasa un poco y se asienta */
+@keyframes pop {
+  0%   { transform: scale(0); }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Check de éxito: aparece girando hasta su posición final */
+@keyframes dibujarCheck {
+  from { opacity: 0; transform: translate(-50%, -60%) rotate(0deg) scale(0); }
+  to   { opacity: 1; transform: translate(-50%, -60%) rotate(45deg) scale(1); }
+}
+
+/* Aparición simple solo con opacidad */
+@keyframes fundido {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/* ================================================================
+   9. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
    ================================================================ */
 
 /* CELULARES */
@@ -374,6 +636,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
     padding: 24px 16px;
     gap: 22px;
+  }
+
+  .progreso-pasos li {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .progreso-num {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
 
   .form-action {
@@ -425,5 +698,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .formReserva {
     width: 92%;
+  }
+}
+
+
+/* ================================================================
+   10. ACCESIBILIDAD: sin animaciones si el usuario las desactivó
+   en su sistema (se puede borrar esta sección si no la quieren)
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }
