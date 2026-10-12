@@ -42,12 +42,17 @@
     height: auto;
 }
 
-/* El logo del HEADER no debe tener animaciones */
+/* El logo del HEADER no debe tener animaciones, pero el logo si */
 .header .logo-container,
 .header .logo-principal {
     animation: none !important;
-    transition: none !important;
-    transform: none !important;
+    transform-origin: 50% 80% 100%;
+    transition: transform 0.35s ease-out;
+}
+
+.header .logo-container:hover,
+.header .logo-principal:hover {
+    transform: scale(1.1) rotate(-4deg);
 }
 
 /* Navegación */
@@ -78,16 +83,53 @@
     color: #A90816;
 }
 
-/* Botón iniciar sesión */
-
-.boton-login {
-    background-color: rgb(227, 21, 38);
-    border-radius: 0.4rem;
-    padding: 0.2rem 0.8rem;
+.header .nav ul li:not(.boton-login)>a {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.25rem;
 }
 
-.boton-login a:hover {
+.header .nav ul li:not(.boton-login)>a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: var(--rojo);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease-out;
+}
+
+.header .nav ul li:not(.boton-login)>a:hover::after,
+.header .nav ul li:not(.boton-login)>a:focus-visible::after,
+.header .nav ul li:not(.boton-login)>a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+/* Botón iniciar sesión */
+
+.boton-login > a:link,
+.boton-login > a:visited {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
     color: white;
+    text-align: center;
+    background-color: rgb(227, 21, 38);
+    border-radius: 0.4rem;
+    transition:
+        background-color 0.18s ease,
+        transform 0.35s ease-out,
+        box-shadow 0.35s ease-out;
+}
+
+.boton-login > a:hover,
+.boton-login > a:focus-visible {
+    color: white;
+    background-color: #d91d2d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(217, 29, 45, 0.4);
 }
 
 /* Checkbox oculto */
@@ -250,12 +292,12 @@
 
     /* Mostrar menú al pulsar hamburguesa */
 
-    .header #checkmenu:checked ~ .nav {
+    .header #checkmenu:checked~.nav {
         display: flex;
         flex-direction: column;
     }
 
-    .header #checkmenu:checked ~ .nav ul {
+    .header #checkmenu:checked~.nav ul {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -265,7 +307,7 @@
         gap: 1.5rem;
     }
 
-    .header #checkmenu:checked ~ .nav ul li {
+    .header #checkmenu:checked~.nav ul li {
         width: 100%;
         text-align: center;
     }
@@ -327,12 +369,12 @@
 
     /* Menú abierto */
 
-    .header #checkmenu:checked ~ .nav {
+    .header #checkmenu:checked~.nav {
         display: flex;
         flex-direction: column;
     }
 
-    .header #checkmenu:checked ~ .nav ul {
+    .header #checkmenu:checked~.nav ul {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -342,7 +384,7 @@
         gap: 1.5rem;
     }
 
-    .header #checkmenu:checked ~ .nav ul li {
+    .header #checkmenu:checked~.nav ul li {
         width: 100%;
         text-align: center;
         padding: 0.5rem 0;
