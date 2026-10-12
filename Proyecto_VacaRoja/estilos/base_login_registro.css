@@ -206,11 +206,11 @@ body::after {
 }
 
 button:focus-visible,
-input:focus-visible,
-a:focus-visible {
+input:focus-visible,not a:focus-visible {
   outline: 1px solid var(--rojo);
   outline-offset: 3px;
 }
+
 
 @keyframes fadeUp {
   from {
