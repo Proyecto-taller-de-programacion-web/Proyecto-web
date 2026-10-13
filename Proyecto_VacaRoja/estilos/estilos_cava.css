@@ -1,7 +1,4 @@
-/* ================================================================
-   1. MAQUETACIÓN PERSONAL
-   .container: grid que va a agrupar toda la página
-   ================================================================ */
+/* ----------------1. MAQUETACIÓN PERSONAL --------------------- */
 
 .container {
     display: grid;
@@ -28,9 +25,7 @@
 .footer          { grid-column: col-header / col-last; grid-row: row-footer; }
 
 
-/* ================================================================
-   2. PORTADA (TITULO con la imagen de fondo)
-   ================================================================ */
+/*----------------2. PORTADA (TITULO con la imagen de fondo)----------------*/
 
 .encabezado-cava {
     position: relative;
@@ -67,9 +62,7 @@
 }
 
 
-/* ================================================================
-   3. SECCIÓN INTRODUCTORIA (imagen grande centrada + texto)
-   ================================================================ */
+/* ----------------3. SECCIÓN INTRODUCTORIA (imagen grande centrada + texto)---------------- */
 
 .intro-cava {
     display: flex;
@@ -97,9 +90,7 @@
 }
 
 
-/* ================================================================
-   4. SECCIÓN CARTA DE VINOS (3 cards)
-   ================================================================ */
+/* ----------------4. SECCIÓN CARTA DE VINOS (3 cards)---------------- */
 
 .cuerpo-pagina {
     background-color: var(--beige);
@@ -143,9 +134,7 @@
 }
 
 
-/* ================================================================
-   5. GALERÍA (paisaje + almacén)
-   ================================================================ */
+/* ----------------5. GALERÍA (paisaje + almacén)---------------- */
 
 .galeria-cava {
     display: flex;
@@ -170,9 +159,7 @@
 }
 
 
-/* ================================================================
-   6. BOTÓN CARTA (carta de vinos)
-   ================================================================ */
+/* ----------------6. BOTÓN CARTA (carta de vinos) */
 
 .boton-carta {
     text-align: center;
@@ -204,9 +191,7 @@
 }
 
 
-/* ================================================================
-   7. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
-   ================================================================ */
+/* ----------------7. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos */
 
 /* CELULARES */
 @media (max-width: 480px) {
@@ -353,9 +338,7 @@
     }
 }
 
-/* ================================================================
-   8. ANIMACIONES, TRANSICIONES Y TRANSFORMACIONES
-   ================================================================ */
+/* ----------------8. ANIMACIONES, TRANSICIONES Y TRANSFORMACIONES---------------- */
 
 /* --- Portada: zoom lento en la imagen y entrada del título --- */
 .encabezado-cava img {
