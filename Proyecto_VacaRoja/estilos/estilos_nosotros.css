@@ -534,15 +534,20 @@ tfoot {
     .seccion-horarios .titulo-seccion {
         font-size: 2.8rem;
     }
+
+    .contenedor-horarios {
+        flex-direction: column;
+        gap: 2rem;
+    }
  
     .tabla-scroll {
-        flex: 0 0 55%;
+        width: 100%;
+        flex: 0 0 auto;
     }
  
     .img-horarios {
         flex: 0 0 auto;
         width: 100%;
-        max-width: 400px;
     }
  
     .seccion-historia {
@@ -565,12 +570,20 @@ tfoot {
     }
  
     .seccion-servicios1 {
-        width: 50%;
+        width: 100%;
         padding: 3rem 0 3rem 3.75rem;
     }
  
     .seccion-servicios1 .titulo-seccion {
         font-size: 2.8rem;
+    }
+
+
+    .img-secundaria {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+    display: block;
     }
  
     .grid-servicios {
