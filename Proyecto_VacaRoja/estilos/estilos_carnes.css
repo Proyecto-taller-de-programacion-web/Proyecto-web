@@ -1,11 +1,12 @@
 /* ================================================================
    1. MAQUETACIÓN PERSONAL
    .container: grid que va a agrupar toda la página
+   .pagina-carnes limita estos estilos a la página de carnes.
    ================================================================ */
 
-.container {
+.pagina-carnes .container {
     display: grid;
-    grid-template-columns: [col-header] 1fr [col-last];
+    grid-template-columns: [col-header] minmax(0, 1fr) [col-last];
     grid-template-rows:
         [row-header]   auto
         [row-hero]     auto
@@ -18,26 +19,26 @@
 }
 
 /* Asignación de cada bloque a su fila nombrada */
-.header            { grid-column: col-header / col-last; grid-row: row-header; }
-.encabezado-carnes { grid-column: col-header / col-last; grid-row: row-hero; }
-.intro-carnes      { grid-column: col-header / col-last; grid-row: row-intro; }
-.seccion-estrella  { grid-column: col-header / col-last; grid-row: row-estrella; }
-.seccion-carta     { grid-column: col-header / col-last; grid-row: row-carta; }
-.footer            { grid-column: col-header / col-last; grid-row: row-footer; }
+.pagina-carnes .header            { grid-column: col-header / col-last; grid-row: row-header; }
+.pagina-carnes .encabezado-carnes { grid-column: col-header / col-last; grid-row: row-hero; }
+.pagina-carnes .intro-carnes      { grid-column: col-header / col-last; grid-row: row-intro; }
+.pagina-carnes .seccion-estrella  { grid-column: col-header / col-last; grid-row: row-estrella; }
+.pagina-carnes .seccion-carta     { grid-column: col-header / col-last; grid-row: row-carta; }
+.pagina-carnes .footer            { grid-column: col-header / col-last; grid-row: row-footer; }
 
 
 /* ================================================================
    2. PORTADA (TITULO con la imagen de fondo)
    ================================================================ */
 
-.encabezado-carnes {
+.pagina-carnes .encabezado-carnes {
     position: relative;
     height: 100vh;
     width: 100%;
     overflow: hidden;
 }
 
-.encabezado-carnes img {
+.pagina-carnes .encabezado-carnes img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -45,7 +46,7 @@
 }
 
 /* Capa oscura sobre la imagen */
-.encabezado-overlay {
+.pagina-carnes .encabezado-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -56,12 +57,19 @@
 }
 
 /* Título sobre la imagen */
-.encabezado-carnes .titulo-hero {
+.pagina-carnes .encabezado-carnes .titulo-hero {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+    animation: carnes-aparecer 1.2s ease-out;
+}
+
+/* Animación básica: el título aparece suavemente al cargar la página. */
+@keyframes carnes-aparecer {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 
@@ -69,7 +77,7 @@
    3. SECCIÓN INTRODUCTORIA (párrafo principal)
    ================================================================ */
 
-.intro-carnes {
+.pagina-carnes .intro-carnes {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,7 +87,7 @@
     text-align: center;
 }
 
-.intro-carnes img {
+.pagina-carnes .intro-carnes img {
     width: 100%;
     max-width: 20rem;
     height: auto;
@@ -88,7 +96,7 @@
 }
 
 /* Ancho máximo solo para el párrafo del intro */
-.intro-carnes .parrafo {
+.pagina-carnes .intro-carnes .parrafo {
     max-width: 40rem;
     margin: 0 auto;
 }
@@ -98,29 +106,29 @@
    4. SECCIÓN PLATOS ESTRELLA (fondos alternados)
    ================================================================ */
 
-.seccion-estrella {
+.pagina-carnes .seccion-estrella {
     background-color: var(--beige);
     padding: 0 0 3.75rem;
 }
 
-.seccion-roja {
+.pagina-carnes .seccion-roja {
     padding: 2.5rem 3.75rem;
     background-color: var(--rojo-dim);
     color: var(--blanco);
 }
 
-.seccion-blanco {
+.pagina-carnes .seccion-blanco {
     padding: 2.5rem 3.75rem;
     background-color: var(--beige);
     color: var(--negro);
 }
 
-.seccion-roja .titulo-seccion {
+.pagina-carnes .seccion-roja .titulo-seccion {
     margin-bottom: 3.1rem;
     text-align: center;
 }
 
-.articulo-plato {
+.pagina-carnes .articulo-plato {
     display: flex;
     align-items: center;
     gap: 3.1rem;
@@ -128,25 +136,128 @@
     margin: 0 auto;
 }
 
-.articulo-plato .invertido {
+.pagina-carnes .articulo-plato .invertido {
     flex-direction: row;
 }
 
-.articulo-plato figure,
-.articulo-plato .texto-plato {
+.pagina-carnes .articulo-plato figure,
+.pagina-carnes .articulo-plato .texto-plato {
     flex: 1;
+    min-width: 0;
+    width: 100%;
     margin: 0;
 }
 
-.articulo-plato img {
+/* El marco recorta el zoom para que la imagen no invada el texto. */
+.pagina-carnes .articulo-plato figure {
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.pagina-carnes .articulo-plato img {
     width: 100%;
     height: 20rem;
     object-fit: cover;
     border-radius: 6px;
     display: block;
+    transition: transform 0.4s ease;
 }
 
-.titulo-plato {
+/* Reseña sobre la foto: la capa oscura aparece con una transición. */
+.pagina-carnes .foto-plato {
+    position: relative;
+}
+
+.pagina-carnes .resena-plato {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.4) 55%, transparent);
+    color: var(--blanco);
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Solo el texto se desplaza; el degradado conserva su posición. */
+.pagina-carnes .resena-plato > * {
+    transform: translateY(12px);
+    transition: transform 0.4s ease;
+}
+
+.pagina-carnes .resena-plato strong {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.pagina-carnes .resena-plato p {
+    max-width: 28rem;
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* El efecto sigue activo al pasar el cursor por encima de la reseña. */
+@media (hover: hover) {
+    .pagina-carnes .foto-plato:hover img {
+        transform: scale(1.04);
+    }
+
+    .pagina-carnes .foto-plato:hover .resena-plato {
+        opacity: 1;
+    }
+
+    .pagina-carnes .foto-plato:hover .resena-plato > * {
+        transform: translateY(0);
+    }
+}
+
+/* También se puede mostrar la reseña usando Tab en el teclado. */
+.pagina-carnes .foto-plato:focus-visible {
+    outline: 3px solid var(--blanco);
+    outline-offset: 4px;
+}
+
+.pagina-carnes .foto-plato:focus-visible img {
+    transform: scale(1.04);
+}
+
+.pagina-carnes .foto-plato:focus-visible .resena-plato {
+    opacity: 1;
+}
+
+.pagina-carnes .foto-plato:focus-visible .resena-plato > * {
+    transform: translateY(0);
+}
+
+/* En pantallas táctiles la reseña queda visible al pie de la foto. */
+@media (hover: none) {
+    .pagina-carnes .resena-plato {
+        opacity: 1;
+        padding: 0.75rem;
+        gap: 0.4rem;
+    }
+
+    .pagina-carnes .resena-plato > * {
+        transform: translateY(0);
+    }
+
+    .pagina-carnes .resena-plato strong {
+        font-size: 1.2rem;
+    }
+
+    .pagina-carnes .resena-plato p {
+        font-size: 0.9rem;
+    }
+}
+
+.pagina-carnes .titulo-plato {
     font-family: var(--fuente-titulos);
     font-size: var(--fs-card);
     font-weight: normal;
@@ -154,8 +265,12 @@
     margin-bottom: 0.75rem;
 }
 
-.texto-plato .parrafo-mini {
+.pagina-carnes .texto-plato .parrafo-mini {
     line-height: 1.6;
+}
+
+.pagina-carnes .frase-plato {
+    margin-bottom: 0.75rem;
 }
 
 
@@ -163,14 +278,14 @@
    5. SECCIÓN DESCARGA DE CARTA
    ================================================================ */
 
-.seccion-carta {
+.pagina-carnes .seccion-carta {
     background-color: rgb(254, 254, 254);
     color: var(--negro);
     text-align: center;
     padding: 1.56rem 1.56rem 2.5rem;
 }
 
-.titulo-carta {
+.pagina-carnes .titulo-carta {
     font-family: var(--fuente-titulos);
     font-size: var(--fs-card);
     font-weight: normal;
@@ -178,7 +293,7 @@
     margin-bottom: 1.25rem;
 }
 
-.seccion-carta a {
+.pagina-carnes .seccion-carta a {
     display: inline-block;
     padding: 0.625rem 1.25rem;
     background-color: var(--rojo-dim);
@@ -186,11 +301,18 @@
     border-radius: 5px;
     text-decoration: none;
     font-size: 0.8rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.seccion-carta a:hover {
+.pagina-carnes .seccion-carta a:hover,
+.pagina-carnes .seccion-carta a:focus-visible {
     background-color: #4f0309;
-    transition: background-color 0.3s ease;
+    transform: translateY(-3px);
+}
+
+.pagina-carnes .seccion-carta a:focus-visible {
+    outline: 2px solid var(--negro);
+    outline-offset: 4px;
 }
 
 
@@ -200,105 +322,131 @@
 
 /* CELULARES */
 @media (max-width: 480px) {
-    .encabezado-carnes {
-        height: 110vh;
+    .pagina-carnes .encabezado-carnes {
+        height: 70vh;
     }
 
-    .encabezado-carnes .titulo-hero {
+    .pagina-carnes .encabezado-carnes .titulo-hero {
         font-size: 3rem;
     }
 
-    .intro-carnes {
+    .pagina-carnes .intro-carnes {
         padding: 2.5rem 1.25rem;
     }
 
-    .seccion-roja,
-    .seccion-blanco {
+    .pagina-carnes .seccion-roja,
+    .pagina-carnes .seccion-blanco {
         padding: 1.875rem 1.25rem;
     }
 
-    .seccion-roja .titulo-seccion {
+    .pagina-carnes .seccion-roja .titulo-seccion {
         font-size: 2.2rem;
         margin-bottom: 1.875rem;
     }
 
-    .articulo-plato,
-    .articulo-plato.invertido {
+    .pagina-carnes .articulo-plato,
+    .pagina-carnes .articulo-plato.invertido {
         flex-direction: column;
         gap: 1.25rem;
     }
 
-    .articulo-plato img {
+    .pagina-carnes .articulo-plato img {
         height: 14rem;
     }
 
-    .titulo-plato,
-    .titulo-carta {
+    .pagina-carnes .titulo-plato,
+    .pagina-carnes .titulo-carta {
         font-size: 1.4rem;
+    }
+}
+
+/* Respeta la preferencia de quienes necesitan reducir el movimiento. */
+@media (prefers-reduced-motion: reduce) {
+    .pagina-carnes .encabezado-carnes .titulo-hero {
+        animation: none;
+    }
+
+    .pagina-carnes .articulo-plato img,
+    .pagina-carnes .foto-plato:hover img,
+    .pagina-carnes .foto-plato:focus-visible img,
+    .pagina-carnes .seccion-carta a,
+    .pagina-carnes .seccion-carta a:hover,
+    .pagina-carnes .seccion-carta a:focus-visible {
+        transition: none;
+        transform: none;
+    }
+
+    .pagina-carnes .resena-plato {
+        transition: none;
+    }
+
+    .pagina-carnes .resena-plato > * {
+        transition: none;
+        transform: none;
     }
 }
 
 /* TABLETS */
 @media (min-width: 481px) and (max-width: 768px) {
-    .encabezado-carnes {
+    .pagina-carnes .encabezado-carnes {
         height: 100vh;
     }
 
-    .encabezado-carnes .titulo-hero {
+    .pagina-carnes .encabezado-carnes .titulo-hero {
         font-size: 3.5rem;
     }
 
-    .intro-carnes {
+    .pagina-carnes .intro-carnes {
         padding: 3.1rem 1.875rem;
     }
 
-    .seccion-roja,
-    .seccion-blanco {
+    .pagina-carnes .seccion-roja,
+    .pagina-carnes .seccion-blanco {
         padding: 2.5rem 1.875rem;
     }
 
-    .seccion-roja .titulo-seccion {
+    .pagina-carnes .seccion-roja .titulo-seccion {
         font-size: 2.6rem;
     }
 
-    .articulo-plato,
-    .articulo-plato.invertido {
+    .pagina-carnes .articulo-plato,
+    .pagina-carnes .articulo-plato.invertido {
         flex-direction: column;
         gap: 1.5rem;
     }
 
-    .articulo-plato img {
+    .pagina-carnes .articulo-plato img {
         height: 18rem;
     }
 }
 
 /* LAPTOPS */
 @media (min-width: 769px) and (max-width: 1279px) {
-    .encabezado-carnes {
+    .pagina-carnes .encabezado-carnes {
         height: 100vh;
     }
 
-    .encabezado-carnes .titulo-hero {
+    .pagina-carnes .encabezado-carnes .titulo-hero {
         font-size: 4.5rem;
     }
 
-    .seccion-roja,
-    .seccion-blanco {
+    .pagina-carnes .seccion-roja,
+    .pagina-carnes .seccion-blanco {
         padding: 2.5rem 2.5rem;
     }
 
-    .articulo-plato {
+    .pagina-carnes .articulo-plato {
         gap: 2.5rem;
     }
 
-    .articulo-plato img {
+    .pagina-carnes .articulo-plato img {
         height: 17rem;
     }
 }
 
 /* PC */
 @media (min-width: 1280px) {
-    .encabezado-carnes {
+    .pagina-carnes .encabezado-carnes {
         height: 100vh;
     }
 }

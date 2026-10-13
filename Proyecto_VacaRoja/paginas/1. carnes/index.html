@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../estilos/estilos_global.css">
 </head>
 
-<body>
+<body class="pagina-carnes">
 
     <!-- Contenedor principal: agrupa toda la página en un grid de filas -->
     <div class="container">
@@ -56,7 +56,7 @@
 
         </header>
 
-        <!---------PORTADA PRINCIPAL (encabezado hero)---------->
+        
         <section class="encabezado-carnes">
             <div class="encabezado-overlay"></div>
             <img src="../../img/carne0.jpg" alt="Corte de carne a la parrilla">
@@ -64,7 +64,7 @@
         </section>
 
 
-        <!---------SECCIÓN: Texto principal---------->
+       
         <section class="intro-carnes">
             <img src="../../img/carne1-1.jpg" alt="Corte de carne sobre la parrilla">
             <p class="parrafo">
@@ -74,51 +74,62 @@
         </section>
 
 
-        <!---------SECCIÓN: Platos estrella---------->
+        
         <section class="seccion-estrella">
 
-            <!-- Plato 1: fondo rojo -->
+            
             <div class="seccion-roja">
 
                 <h2 class="titulo-seccion">PLATOS ESTRELLA</h2>
 
                 <article class="articulo-plato">
-                    <figure>
+                    <figure class="foto-plato" tabindex="0" aria-labelledby="resena-bife">
                         <img src="../../img/carne4.jpg" alt="Bife de Chorizo a la Parrilla">
+                        <figcaption class="resena-plato" id="resena-bife">
+                            <strong>El punto perfecto</strong>
+                            <p>Un corte jugoso, dorado al exterior y preparado a la parrilla para resaltar todo su sabor.</p>
+                        </figcaption>
                     </figure>
                     <div class="texto-plato">
                         <h3 class="titulo-plato">Bife de Chorizo a la Parrilla</h3>
-                        <p class="parrafo-mini">Jugoso corte de carne a la parrilla servido en láminas sobre una
-                            generosa cama de papas fritas crujientes y sazonadas. Acompañado de chimichurri artesanal y
-                            salsa especial de la casa.</p>
+                        <p class="parrafo-mini frase-plato">Un clásico de la parrilla hecho para los amantes de la buena carne.</p>
+                        <p class="parrafo-mini">Sellado al fuego para conseguir una superficie dorada y un interior jugoso, con ese sabor ahumado característico de nuestra parrilla.</p>
                     </div>
                 </article>
             </div>
 
-            <!-- Plato 2: fondo claro -->
+            
             <div class="seccion-blanco">
                 <article class="articulo-plato invertido">
-                    <figure>
+                    <figure class="foto-plato" tabindex="0" aria-labelledby="resena-parrillada">
                         <img src="../../img/carne5.jpg" alt="Parrillada mixta La Vaca Roja">
+                        <figcaption class="resena-plato" id="resena-parrillada">
+                            <strong>¿Qué incluye?</strong>
+                            <p>Chorizos, cortes de res, costillas, papas crocantes y acompañamientos seleccionados de la casa.</p>
+                        </figcaption>
                     </figure>
                     <div class="texto-plato">
                         <h3 class="titulo-plato">Parrillada Mixta La Vaca Roja</h3>
-                        <p class="parrafo-mini">Selección de cortes y achuras a la parrilla, ideal para compartir,
-                            acompañada de chimichurri de la casa.</p>
+                        <p class="parrafo-mini frase-plato">Una experiencia hecha para compartir.</p>
+                        <p class="parrafo-mini">Una combinación de sabores, texturas y aromas de nuestra parrilla, pensada para quienes quieren disfrutar un poco de todo.</p>
                     </div>
                 </article>
             </div>
 
-            <!-- Plato 3: fondo rojo -->
+            
             <div class="seccion-roja">
                 <article class="articulo-plato">
-                    <figure>
+                    <figure class="foto-plato" tabindex="0" aria-labelledby="resena-anticuchos">
                         <img src="../../img/carne1.jpeg" alt="Anticuchos tradicionales">
+                        <figcaption class="resena-plato" id="resena-anticuchos">
+                            <strong>El secreto está en el aderezo</strong>
+                            <p>Marinados antes de pasar por la parrilla y preparados al carbón para conservar el sabor tradicional de los anticuchos.</p>
+                        </figcaption>
                     </figure>
                     <div class="texto-plato">
                         <h3 class="titulo-plato">Anticuchos Tradicionales</h3>
-                        <p class="parrafo-mini">Brochetas marinadas con nuestra receta tradicional, asadas al carbón y
-                            servidas con papa y choclo.</p>
+                        <p class="parrafo-mini frase-plato">Un clásico peruano que nunca falla.</p>
+                        <p class="parrafo-mini">Marinados con especias y llevados al carbón para conseguir un sabor intenso, tradicional y ligeramente ahumado.</p>
                     </div>
                 </article>
             </div>
@@ -126,23 +137,23 @@
         </section>
 
 
-        <!---------SECCIÓN: Conoce toda nuestra carta---------->
+       
         <section class="seccion-carta">
             <h3 class="titulo-carta">Conoce toda nuestra carta:</h3>
             <a href="../../pdf_cartas/pdf-carnes.pdf" class="parrafo-mini" target="_blank">Descargar carta completa</a>
         </section>
 
-        <!---------PIE DE PÁGINA---------->
+      
 
         <footer class="footer">
 
-            <!-- Columna 1: marca -->
+            
             <figure class="marca-footer">
                 <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
                 <h2 class="titulo-logo">LA VACA ROJA</h2>
             </figure>
 
-            <!-- Columna 2: sedes y contacto -->
+           
             <div class="caja-footer">
                 <h4 class="informacion-footer">SEDES</h4>
                 <p>Av. Santa Cruz N° 940 - Miraflores, Lima.</p>
@@ -159,7 +170,7 @@
                 <p>Consultas y reservas</p>
             </div>
 
-            <!-- Columna 3: horario y servicios -->
+            
             <div class="caja-footer">
                 <h4 class="informacion-footer">HORARIO DE ATENCIÓN</h4>
                 <p>Martes a Sábado: 12:00 pm - 10:00 pm</p>
@@ -173,7 +184,7 @@
                 <p>Atención para familias</p>
             </div>
 
-            <!-- Columna 4: redes y libro de reclamaciones -->
+            
             <div class="caja-footer">
                 <h4 class="informacion-footer">REDES SOCIALES</h4>
                 <div class="redes-footer">
