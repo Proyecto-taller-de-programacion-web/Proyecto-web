@@ -28,24 +28,86 @@
 .footer              { grid-column: col-header / col-last; grid-row: row-footer; }
 
 
+
+
 /* ================================================================
    2. ANIMACIONES
    Definición de keyframes y clases reutilizables.
    Se aplican a secciones y cards al cargar la página.
    ================================================================ */
 
+/* HOVER EN CARDS CON SCALE Y ROTACIÓN */
+.card {
+    transition: transform 0.3s ease;
+}
+ 
+.card:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+ 
+
+/* KEYFRAMES */
+@keyframes zoom1 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes zoom2 {
+    0% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
 
 
-   
-/*aqui todas las animaciones dejalo vacio*/
+ 
+ 
+/* ANIMACIONES AL HOVER - SOLO PARA IMÁGENES */
+ 
+/* Imagen Horarios - Zoom al pasar mouse */
+.img-horarios {
+    transition: transform 0.8s ease-in-out;
+}
+ 
+.img-horarios:hover {
+    animation-name: zoom1;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
 
 
+/* Imagen Historia - Zoom al pasar mouse */
+.img-historia {
+    transition: transform 0.8s ease-in-out;
+}
+ 
+.img-historia:hover {
+    animation-name: zoom2;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+ 
 
-
-
-
-
-
+ 
+/* Imagen Secundaria - Zoom + Rotación al pasar mouse */
+.img-secundaria {
+    transition: transform 0.8s ease-out;
+}
+ 
+.img-secundaria:hover {
+    animation-name: zoomRotate;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
 
 
 
@@ -239,15 +301,16 @@ tfoot {
 .grid-servicios {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    padding: 0 9.375rem;   /* relativo: ~150px */
+    gap: 4rem;
+    padding: 0 7rem;   /* relativo: ~150px */
 }
 
 .card {
     background-color: #c6c9c791;
     margin-bottom: 1.875rem;
     text-align: center;
-    padding:0.5rem;
+    padding: 1.5rem;
+
 }
 
 .card figure {
