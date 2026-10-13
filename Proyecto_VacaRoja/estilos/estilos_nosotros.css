@@ -1,7 +1,8 @@
-/* ================================================================
+/* ----------------------------
    1. MAQUETACIÓN PERSONAL
    .container: grid que va a agrupar todo la página
-   ================================================================ */
+   ----------------------------
+*/
 
 .container {
     display: grid;
@@ -29,12 +30,7 @@
 
 
 
-
-/* ================================================================
-   2. ANIMACIONES
-   Definición de keyframes y clases reutilizables.
-   Se aplican a secciones y cards al cargar la página.
-   ================================================================ */
+/*----------- ANIMACIONES  ----------------*/
 
 /* HOVER EN CARDS CON SCALE Y ROTACIÓN */
 .card {
@@ -74,9 +70,9 @@
 
 
 
- 
- 
+/* ----------------------------
 /* ANIMACIONES AL HOVER - SOLO PARA IMÁGENES */
+/* ----------------------------
 
 /* Titulo principal*/
 .encabezado-nosotros .titulo-hero {
@@ -124,9 +120,7 @@
 
 
 
-/* ================================================================
-   1. PORTADA (TITULO con la imagen de fondo)
-   ================================================================ */
+/* ---------------1. PORTADA (TITULO con la imagen de fondo)-------------*/
 
 .encabezado-nosotros {
     position: relative;
@@ -163,9 +157,8 @@
 }
 
 
-/* ================================================================
-   2. SECCIÓN HORARIOS
-   ================================================================ */
+/* ---------------2. SECCIÓN HORARIOS-------------*/
+   
 
 .seccion-horarios {
     background-color: #B3171E;
@@ -244,9 +237,8 @@ tfoot {
 }
 
 
-/* ================================================================
-   3. SECCIÓN NUESTRA HISTORIA
-   ================================================================ */
+/* ---------------3. SECCIÓN NUESTRA HISTORIA-------------*/
+   
 
 .seccion-historia {
     background-color: #FFE8D3;
@@ -280,9 +272,7 @@ tfoot {
 }
 
 
-/* ================================================================
-   4. SECCIÓN BANNER DE SERVICIOS
-   ================================================================ */
+/* ---------------4. SECCIÓN BANNER DE SERVICIOS-------------*/
 
 .contenedor-banner {
     display: flex;
@@ -301,10 +291,7 @@ tfoot {
 }
 
 
-/* ================================================================
-   4. SECCIÓN GRID DE CARDS (Servicios)
-   En escritorio: 2 columnas. El grid cambia por breakpoint.
-   ================================================================ */
+/* ---------------SECCIÓN GRID DE CARDS (Servicios)-------------*/
 
 .seccion-servicios2 {
     background-color: white;
@@ -342,9 +329,8 @@ tfoot {
     font-weight: bold;
 }
 
-/* ================================================================
-   RESPONSIVE DESIGN
-   ================================================================ */
+   /*------------Diseño Responsivo----------------*/
+     
  
 /* CELULARES - max-width: 480px */
 @media (max-width: 480px) {
