@@ -13,11 +13,9 @@ body {
   color: var(--blanco);
 }
 
-/* ================================================================
-   1. MAQUETACIÓN PERSONAL
-   .container: grid que agrupa toda la página
-   ================================================================ */
+/* 1. MAQUETACIÓN PERSONAL */
 
+/* .container: grid que agrupa toda la página */
 .container {
   display: grid;
   grid-template-columns: [col-header] 1fr [col-last];
@@ -37,9 +35,7 @@ body {
 .footer             { grid-column: col-header / col-last; grid-row: row-footer; }
 
 
-/* ================================================================
-   2. ENCABEZADO (título de la página)
-   ================================================================ */
+/* 2. ENCABEZADO (título de la página) */
 
 .encabezado-reserva {
   padding: 56px 24px 0;
@@ -73,9 +69,7 @@ body {
 }
 
 
-/* ================================================================
-   3. FORMULARIO: CONTENEDOR Y CAMPOS
-   ================================================================ */
+/* 3. FORMULARIO: CONTENEDOR Y CAMPOS */
 
 .seccion-reserva {
   padding: 32px 24px 70px;
@@ -138,9 +132,7 @@ legend {
   margin-bottom: 8px;
 }
 
-/* Radios de opciones (sede, zona, consumo)
-   El radio real se oculta y el círculo se dibuja dentro del label,
-   así círculo y texto nunca se separan al saltar de línea */
+/* Radios de opciones (sede, zona, consumo) El radio real se oculta y el círculo se dibuja dentro del label, así círculo y texto nunca se separan al saltar de línea */
 input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -287,11 +279,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* ================================================================
-   4. CONTROL DE PASOS (radios ocultos + :has())
-   :has() permite elegir un elemento según lo que tiene adentro.
-   Aquí: "el formulario que tiene marcado el radio #pasoN".
-   ================================================================ */
+/* 4. CONTROL DE PASOS (radios ocultos + :has()) */
 
 /* Los radios de control nunca se ven */
 .control-paso {
@@ -320,9 +308,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* ================================================================
-   5. INDICADOR DE PROGRESO
-   ================================================================ */
+/* 5. INDICADOR DE PROGRESO */
 
 .progreso-pasos {
   display: flex;
@@ -393,9 +379,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .formReserva:has(#paso4:checked) .progreso-relleno { width: 100%; }
 
 
-/* ================================================================
-   6. BOTONES
-   ================================================================ */
+/* 6. BOTONES */
 
 .form-action {
   display: flex;
@@ -488,9 +472,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   line-height: 1.6;
 }
 
-/* ================================================================
-   7. PÁGINA DE CONFIRMACIÓN
-   ================================================================ */
+/* 7. PÁGINA DE CONFIRMACIÓN */
 
 .exito-container {
   max-width: 460px;
@@ -567,9 +549,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* ================================================================
-   8. ANIMACIONES (@keyframes)
-   ================================================================ */
+/* 8. ANIMACIONES - @keyframes */
 
 /* Entrada general: aparece subiendo un poco */
 @keyframes aparecer {
@@ -603,9 +583,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* ================================================================
-   9. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
-   ================================================================ */
+/* 9. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos */
 
 /* CELULARES */
 @media (max-width: 480px) {
@@ -687,18 +665,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .formReserva {
     width: 92%;
-  }
-}
-
-
-/* ================================================================
-   10. ACCESIBILIDAD: sin animaciones si el usuario las desactivó
-   en su sistema (se puede borrar esta sección si no la quieren)
-   ================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
   }
 }
