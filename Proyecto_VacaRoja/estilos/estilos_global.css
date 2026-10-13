@@ -230,6 +230,17 @@
     transition: transform 0.5s ease;
 }
 
+.caja-footer .libro-reclamaciones img {
+    display: block;
+    width: 6rem;
+    margin: 0.5rem auto 0;
+    transition: transform 0.5s ease;
+}
+
+.caja-footer .libro-reclamaciones {
+    display: block;
+}
+
 .caja-footer img:hover {
     transform: scale(1.2);
 }
