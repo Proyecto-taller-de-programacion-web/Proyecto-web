@@ -1,7 +1,4 @@
-/* ================================================================
-   1. MAQUETACIÓN PERSONAL
-   .container: grid que va a agrupar toda la página
-   ================================================================ */
+/* ----------------1. MAQUETACIÓN PERSONAL --------------------- */
 
 .container {
     display: grid;
@@ -25,17 +22,11 @@
 .opiniones          { grid-column: col-header / col-last; grid-row: row-opiniones; }
 .footer             { grid-column: col-header / col-last; grid-row: row-footer; }
 
-/* ================================================================
-   ANIMACIONES
-   Solo propiedades del PDF: Duración · Timing · Delay · Repetir ·
-   Dirección · Fill-mode
-   ================================================================ */
+
+/* --------------------------ANIMACIONES-------------------------- */
 
 
-/* ================================================================
-   ENCABEZADO
-   Animaciones: MOVER (logo, título, párrafo, botón) · CRECER lento (imagen de fondo) · PARPADEAR (botón Reservar)
-   ================================================================ */
+/* -----ENCABEZADO----- */
 
 /* MOVER (Duración) */
 @keyframes moverLogo {
@@ -118,10 +109,7 @@
 }
 
 
-/* ================================================================
-   NUESTRA ESENCIA
-   Animaciones: DIRECCIÓN alternate (imágenes al pasar el cursor) · CRECER al hacer scroll (columnas)
-   ================================================================ */
+/*-----NUESTRA ESENCIA------ */
 
 /* DIRECCIÓN (alternate): sube, se agranda y vuelve a su estado */
 @keyframes subirCrecer {
@@ -161,10 +149,7 @@
 }
 
 
-/* ================================================================
-   RECONOCIMIENTOS
-   Animaciones: DIRECCIÓN alternate (imágenes se mueven, giran y regresan al pasar el cursor) · APARECER (párrafo)
-   ================================================================ */
+/*-----RECONOCIMIENTOS----- */
 
 /* DIRECCIÓN (alternate): sube y gira un ángulo, luego regresa a su estado normal.
    Imagen 1 gira a la izquierda, imagen 2 a la derecha. */
@@ -219,10 +204,7 @@
 }
 
 
-/* ================================================================
-   OPINIONES
-   Animaciones: DIRECCIÓN alternate (imagen, cajas y estrellas) · ROTAR con delay (avatar) · FILL-MODE (botón Encuéntranos aquí cambia de color)
-   ================================================================ */
+/* -----OPINIONES----- */
 
 /* DIRECCIÓN (alternate): imagen y cajas suben y se agrandan al pasar el cursor */
 .opiniones__img:hover,
@@ -288,9 +270,7 @@
 }
 
 
-/* ================================================================
-   1. BOTONES
-   ================================================================ */
+/* -----BOTONES----- */
 
 .boton {
     display: inline-block;
@@ -320,9 +300,7 @@
 
 
 /*------------------CONTENIDO DE LA PÁGINA---------------------------*/
-/* ================================================================
-   1. PORTADA (TITULO con la imagen de fondo)
-   ================================================================ */
+/* -----1. PORTADA (TITULO con la imagen de fondo)----- */
 
 .encabezado-inicio {
     position: relative;
@@ -374,9 +352,7 @@
 }
 
 
-/* ================================================================
-   2. SECCIÓN NUESTRA ESENCIA
-   ================================================================ */
+/* -----2. SECCIÓN NUESTRA ESENCIA----- */
 
 
 .nuestra-esencia {
@@ -451,9 +427,7 @@
 }
 
 
-/* ================================================================
-   6. SECCIÓN RECONOCIMIENTOS
-   ================================================================ */
+/* -----3. SECCIÓN RECONOCIMIENTOS----- */
 
 .reconocimientos {
     display: flex;
@@ -501,9 +475,7 @@
 }
 
 
-/* ================================================================
-   7. SECCIÓN OPINIONES
-   ================================================================ */
+/*-----4. SECCIÓN OPINIONES----- */
 
 .opiniones {
     display: flex;
@@ -609,9 +581,7 @@
 }
 
 
-/* ================================================================
-   8. DISEÑO RESPONSIVE PERSONAL — 4 dispositivos
-   ================================================================ */
+/* --------------------------DISEÑO RESPONSIVE PERSONAL — 4 dispositivos-------------------------- */
 
 /* CELULARES */
 @media (max-width: 480px) {
