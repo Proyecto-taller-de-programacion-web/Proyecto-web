@@ -329,163 +329,352 @@ tfoot {
     font-weight: bold;
 }
 
-
 /* ================================================================
-
-
-/* CELULARES */
+   RESPONSIVE DESIGN
+   ================================================================ */
+ 
+/* CELULARES - max-width: 480px */
 @media (max-width: 480px) {
-    .celdas-tipo1,
-    .celdas-tipo2,
-    tfoot td {
-        font-size: 0.60rem;
-    }
-
+ 
     .encabezado-nosotros {
-        height: 110vh;
+        height: 50vh;
     }
-
+ 
     .encabezado-nosotros .titulo-hero {
-        font-size: 3rem;
+        font-size: 2rem;
     }
-
+ 
     .seccion-horarios {
         padding: 1.875rem 1.25rem 3.75rem;
     }
-
+ 
+    .seccion-horarios .titulo-seccion {
+        font-size: 2.2rem;
+    }
+ 
     .contenedor-horarios {
         flex-direction: column;
+        gap: 1.5rem;
     }
-
+ 
     .tabla-scroll {
+        flex: 0 0 100%;
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 1.875rem;
     }
-
+ 
+    .tabla-scroll table {
+        font-size: 0.7rem;
+    }
+ 
+    .tabla-scroll th,
+    .tabla-scroll td {
+        padding: 0.3rem;
+    }
+ 
+    .img-horarios {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+ 
     .seccion-historia {
         padding: 1.25rem 1.25rem 3.75rem;
     }
-
+ 
+    .seccion-historia .titulo-seccion {
+        font-size: 2.2rem;
+    }
+ 
+    .img-historia {
+        width: 100%;
+    }
+ 
+    .caja-parrafo-historia {
+        padding: 1.5rem;
+    }
+ 
+    .caja-parrafo-historia .parrafo-mini {
+        font-size: 0.95rem;
+    }
+ 
     .contenedor-banner {
         flex-direction: column;
     }
-
-    .titulo-horarios {
-        font-size: 3rem;
-    }
-
+ 
     .seccion-servicios1 {
         width: 100%;
         padding: 2.5rem 1.25rem;
     }
-
+ 
+    .seccion-servicios1 .titulo-seccion {
+        font-size: 2.2rem;
+    }
+ 
     .grid-servicios {
         grid-template-columns: 1fr;
-        padding: 0;
+        padding: 0 1.25rem;
+        gap: 1.5rem;
     }
-
+ 
     .seccion-servicios2 {
         padding: 1.875rem 1.25rem;
     }
+ 
+    .card .titulo-servicios {
+        font-size: 1.5rem;
+    }
+ 
 }
-
-/* TABLETS */
+ 
+ 
+/* TABLETS - 481px a 768px */
 @media (min-width: 481px) and (max-width: 768px) {
-    .encabezado-nosotros { height: 100vh; }
-
+ 
+    .encabezado-nosotros {
+        height: 60vh;
+    }
+ 
     .encabezado-nosotros .titulo-hero {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
-
+ 
     .seccion-horarios {
-        padding: 2.5rem 1.875rem 5rem;
+        padding: 2.5rem 1.875rem 4rem;
     }
-
+ 
+    .seccion-horarios .titulo-seccion {
+        font-size: 2.5rem;
+    }
+ 
     .contenedor-horarios {
         flex-direction: column;
+        gap: 2rem;
     }
-
+ 
     .tabla-scroll {
+        flex: 0 0 100%;
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 1.875rem;
     }
-
+ 
+    .tabla-scroll table {
+        font-size: 0.8rem;
+    }
+ 
+    .img-horarios {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+ 
     .seccion-historia {
-        padding: 1.25rem 2.5rem 5rem;
+        padding: 2rem 1.875rem 4rem;
     }
-
+ 
+    .seccion-historia .titulo-seccion {
+        font-size: 2.5rem;
+    }
+ 
+    .img-historia {
+        width: 80%;
+        max-width: 500px;
+    }
+ 
+    .caja-parrafo-historia {
+        padding: 2rem;
+    }
+ 
+    .caja-parrafo-historia .parrafo-mini {
+        font-size: 1.05rem;
+    }
+ 
     .contenedor-banner {
         flex-direction: column;
     }
-
+ 
     .seccion-servicios1 {
         width: 100%;
         padding: 2.5rem 1.875rem;
     }
-
+ 
+    .seccion-servicios1 .titulo-seccion {
+        font-size: 2.5rem;
+    }
+ 
     .grid-servicios {
         grid-template-columns: repeat(2, 1fr);
-        padding: 0;
+        padding: 0 1.875rem;
+        gap: 2rem;
     }
-
+ 
     .seccion-servicios2 {
         padding: 2.5rem 1.875rem;
     }
+ 
+    .card .titulo-servicios {
+        font-size: 1.8rem;
+    }
+ 
 }
-
-/* LAPTOPS */
+ 
+ 
+/* LAPTOPS - 769px a 1279px */
 @media (min-width: 769px) and (max-width: 1279px) {
-    .encabezado-nosotros { height: 100vh; }
-
+ 
+    .encabezado-nosotros {
+        height: 80vh;
+    }
+ 
+    .encabezado-nosotros .titulo-hero {
+        font-size: 4rem;
+    }
+ 
+    .seccion-horarios {
+        padding: 2.5rem 2rem 4rem;
+    }
+ 
+    .seccion-horarios .titulo-seccion {
+        font-size: 2.8rem;
+    }
+ 
+    .tabla-scroll {
+        flex: 0 0 55%;
+    }
+ 
+    .img-horarios {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 400px;
+    }
+ 
+    .seccion-historia {
+        padding: 2rem 2.5rem 4rem;
+    }
+ 
+    .seccion-historia .titulo-seccion {
+        font-size: 2.8rem;
+    }
+ 
+    .img-historia {
+        width: 70%;
+        max-width: 400px;
+    }
+ 
+    .caja-parrafo-historia {
+        padding: 2.5rem;
+        max-width: 800px;
+        margin: 2rem auto 0;
+    }
+ 
+    .seccion-servicios1 {
+        width: 50%;
+        padding: 3rem 0 3rem 3.75rem;
+    }
+ 
+    .seccion-servicios1 .titulo-seccion {
+        font-size: 2.8rem;
+    }
+ 
+    .grid-servicios {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 2.5rem;
+        gap: 2.5rem;
+    }
+ 
+    .seccion-servicios2 {
+        padding: 3rem 2rem;
+    }
+ 
+    .card .titulo-servicios {
+        font-size: 2rem;
+    }
+ 
+}
+ 
+ 
+/* DESKTOPS - 1280px+ */
+@media (min-width: 1280px) {
+ 
+    .encabezado-nosotros {
+        height: 100vh;
+    }
+ 
     .encabezado-nosotros .titulo-hero {
         font-size: 4.5rem;
     }
-
+ 
     .seccion-horarios {
-        padding: 3.1rem 2.5rem 5rem;
+        padding: 3.1rem 5rem 6.25rem 5rem;
     }
-
+ 
+    .seccion-horarios .titulo-seccion {
+        font-size: 3.1rem;
+    }
+ 
     .tabla-scroll {
-        width: 55%;
-        margin-right: 2.5rem;
+        flex: 0 0 50%;
     }
-
-    .img-horarios { width: 100%; }
-
+ 
+    .img-horarios {
+        flex: 0 0 38rem;
+        width: 38rem;
+    }
+ 
     .seccion-historia {
-        padding: 1.25rem 3.75rem 5rem;
+        padding: 1.25rem 6.875rem 6.25rem 6.875rem;
     }
-
-    .img-historia { width: 34.375rem; }
-
+ 
+    .seccion-historia .titulo-seccion {
+        font-size: 3.1rem;
+    }
+ 
+    .img-historia {
+        width: 43.75rem;
+    }
+ 
+    .caja-parrafo-historia {
+        padding: 2.8rem;
+    }
+ 
     .seccion-servicios1 {
-        padding: 4.06rem 0 4.06rem 3.75rem;
+        width: 45%;
+        padding: 4.06rem 0 4.06rem 9.375rem;
     }
-
+ 
+    .seccion-servicios1 .titulo-seccion {
+        font-size: 3.1rem;
+    }
+ 
     .grid-servicios {
         grid-template-columns: repeat(2, 1fr);
-        padding: 0 3.75rem;
+        padding: 0 7rem;
+        gap: 4rem;
     }
-
+ 
     .seccion-servicios2 {
-        padding: 3.1rem 2.5rem;
+        padding: 4.06rem;
     }
-
+ 
+    .card .titulo-servicios {
+        font-size: 2.315rem;
+    }
+ 
 }
-
-/* PC */
-@media (min-width: 1280px) {
-    .encabezado-nosotros { height: 100vh; }
-
+ 
+ 
+/* PANTALLAS UHD - 1920px+ */
+@media (min-width: 1920px) {
+ 
+    .seccion-horarios {
+        padding: 3.1rem 7rem 6.25rem 7rem;
+    }
+ 
     .tabla-scroll {
-        width: 50%;
-        margin-right: 5rem;
+        flex: 0 0 50%;
+        margin-right: 3rem;
     }
-
+ 
     .grid-servicios {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0 9.375rem;
+        padding: 0 12rem;
+        gap: 5rem;
     }
+ 
 }
