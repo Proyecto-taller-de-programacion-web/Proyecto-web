@@ -87,7 +87,7 @@
     height: auto;
     display: block;
     margin-bottom: 1.875rem;
-    border-radius:0.5rem
+    border-radius:0.5rem;
 }
 
 .intro-cava .parrafo {
@@ -371,6 +371,11 @@
     to   { transform: scale(1.12); }
 }
 
+/* intro-cava img */
+.intro-cava img {
+    animation: respirar2 3s ease-in-out infinite alternate;
+}
+
 /* El título ya se centra con translate(-50%, -50%), por eso se repite aquí */
 @keyframes tituloEntra {
     from { opacity: 0; transform: translate(-50%, -30%); }
@@ -385,6 +390,11 @@
 @keyframes respirar {
     from { transform: scale(1); }
     to   { transform: scale(1.08); }
+}
+
+@keyframes respirar2 {
+    from { transform: scale(1); }
+    to   { transform: scale(1.02); }
 }
 
 /* --- Cards de vino: se elevan y la foto hace zoom --- */
