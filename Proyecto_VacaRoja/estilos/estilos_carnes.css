@@ -93,6 +93,13 @@
     height: auto;
     display: block;
     margin-bottom: 1.875rem;
+    animation: carnes-respirar 4s ease-in-out infinite;
+}
+
+/* Respiración suave, sin cambiar el espacio que ocupa la imagen. */
+@keyframes carnes-respirar {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.03); }
 }
 
 /* Ancho máximo solo para el párrafo del intro */
@@ -108,7 +115,7 @@
 
 .pagina-carnes .seccion-estrella {
     background-color: var(--beige);
-    padding: 0 0 3.75rem;
+    padding: 0;
 }
 
 .pagina-carnes .seccion-roja {
@@ -279,17 +286,22 @@
    ================================================================ */
 
 .pagina-carnes .seccion-carta {
-    background-color: rgb(254, 254, 254);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--beige);
     color: var(--negro);
     text-align: center;
-    padding: 1.56rem 1.56rem 2.5rem;
+    padding: 4.875rem 1.56rem;
 }
 
 .pagina-carnes .titulo-carta {
     font-family: var(--fuente-titulos);
-    font-size: var(--fs-card);
-    font-weight: normal;
+    font-size: var(--fs-seccion);
+    font-weight: 700;
     letter-spacing: 1px;
+    text-transform: uppercase;
     margin-bottom: 1.25rem;
 }
 
@@ -354,14 +366,21 @@
         height: 14rem;
     }
 
-    .pagina-carnes .titulo-plato,
-    .pagina-carnes .titulo-carta {
+    .pagina-carnes .titulo-plato {
         font-size: 1.4rem;
+    }
+
+    .pagina-carnes .titulo-carta {
+        font-size: 2.2rem;
     }
 }
 
 /* Respeta la preferencia de quienes necesitan reducir el movimiento. */
 @media (prefers-reduced-motion: reduce) {
+    .pagina-carnes .intro-carnes img {
+        animation: none;
+    }
+
     .pagina-carnes .encabezado-carnes .titulo-hero {
         animation: none;
     }
