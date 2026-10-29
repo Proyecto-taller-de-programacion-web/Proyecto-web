@@ -4,7 +4,7 @@
   --rojo-oscuro: #7a1216;
   --rojo-negruzco: #150a09;
 
-  --linea: rgba(245, 242, 238, 0.16);
+  /*--linea: rgba(245, 242, 238, 0.16);*/
   --fondo-resplandor-rojo: rgba(196, 31, 36, 0.20);
   --fondo-resplandor-rojo-suave: rgba(196, 31, 36, 0.10);
   --superposicion-negra: rgba(0, 0, 0, 0.75);
@@ -36,11 +36,11 @@ body {
   overflow-x: hidden;
 }
 
-/*body::before {
+body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   background:
     radial-gradient(ellipse 900px 560px at 50% 8%, var(--fondo-resplandor-rojo), transparent 60%),
     radial-gradient(ellipse 700px 500px at 85% 100%, var(--fondo-resplandor-rojo-suave), transparent 55%),
@@ -51,10 +51,14 @@ body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   background: radial-gradient(ellipse 100% 100% at 50% 40%, transparent 50%, var(--superposicion-negra) 100%);
   pointer-events: none;
-}*/
+}
+
+.header::after {
+  display: none;
+}
 
 .referencia::before {
   content: "";
