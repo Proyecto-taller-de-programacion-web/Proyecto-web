@@ -1,3 +1,4 @@
+
 /* ============ MAIN ============ */
 .login-seccion {
   position: relative;
@@ -89,17 +90,7 @@
 }
 
 
-.remember-password {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12.5px;
-  color: var(--gris);
-}
 
-.checkbox-line {
-  align-items: center;
-}
 
 .texto-cambio {
   text-align: center;

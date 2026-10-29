@@ -42,7 +42,7 @@
     height: auto;
 }
 
-/* El logo del HEADER no debe tener animaciones, pero el logo si */
+/* El logo del HEADER no debe tener animaciones, pero si transformacion */
 .header .logo-container,
 .header .logo-principal {
     animation: none !important;
@@ -53,6 +53,39 @@
 .header .logo-container:hover,
 .header .logo-principal:hover {
     transform: scale(1.1) rotate(-4deg);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Línea de progreso debajo del encabezado */
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--rojo-dim), var(--rojo),var(--blanco));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+  border-radius: 5px;
+}
+
+@supports (animation-timeline: scroll()) {
+  .header::after {
+    animation: crecer-linea linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes crecer-linea {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 /* Navegación */
