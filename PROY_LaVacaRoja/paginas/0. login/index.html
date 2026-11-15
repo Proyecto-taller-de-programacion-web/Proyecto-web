@@ -52,8 +52,8 @@
         <li><a href="../../paginas/2. cava-bar/index.html">CAVA/BAR</a></li>
         <li><a href="../../paginas/3. nosotros/index.html">NOSOTROS</a></li>
         <li><a href="../../paginas/4. sedes/index.html">SEDES</a></li>
-        <li><a href="#">RESERVAR</a></li>
-        <li class="boton-login"><a href="#" aria-current="page">Iniciar Sesión</a></li>
+        <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
+        <li class="boton-login"><a id="enlaceSesion" href="#" aria-current="page">Iniciar Sesión</a></li>
       </ul>
     </nav>
 
@@ -73,7 +73,7 @@
     </div>
 
     <div class="form-card">
-      <form id="login-form" action="../5. reservar/index.html" method="get">
+      <form id="login-form" onsubmit="iniciarSesion(event)">
         <div class="input-box">
           <label for="login-email">Correo electrónico</label>
           <input type="email" name="login-email" id="login-email" placeholder="tucorreo@ejemplo.com" required>
@@ -82,18 +82,19 @@
           <label for="login-pass">Contraseña</label>
           <input type="password" name="login-pass" id="login-pass" placeholder="Contraseña" required>
         </div>
-        
-        <button type="submit" class="btn-principal">Iniciar sesión</button>
+
+        <div id="mgError"></div>
+
+        <button type="submit" class="btn-principal" id="btn-login">
+          INICIAR SESIÓN
+        </button>
+
         <p class="texto-cambio">¿Aún no tienes cuenta? <a class="link-red"
             href="../../paginas/0. registrar/index.html">Regístrate aquí</a></p>
       </form>
     </div>
   </main>
-
-
-
-
-
+  <script src="../../codigo/login.js"></script>
 
 </body>
 

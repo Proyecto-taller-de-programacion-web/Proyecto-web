@@ -50,12 +50,12 @@
     <nav class="nav">
       <ul>
         <li><a href="../../index.html">INICIO</a></li>
-        <li><a href="#">CARNES</a></li>
+        <li><a href="../../paginas/1. carnes/index.html">CARNES</a></li>
         <li><a href="../../paginas/2. cava-bar/index.html">CAVA/BAR</a></li>
         <li><a href="../../paginas/3. nosotros/index.html">NOSOTROS</a></li>
         <li><a href="../../paginas/4. sedes/index.html">SEDES</a></li>
-        <li><a href="../../paginas/0. login/index.html">RESERVAR</a></li>
-        <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
+        <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
+        <li class="boton-login"><a id="enlaceSesion" href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
       </ul>
     </nav>
 
@@ -69,10 +69,16 @@
     <div class="divider-flame"></div>
 
     <div class="form-card">
-      <form id="register-form">
-        <div class="input-box">
-          <label for="nombre-completo">Nombre completo</label>
-          <input type="text" name="nombre-completo" id="nombre-completo" placeholder="Tu nombre" required>
+      <form id="register-form" onsubmit="registrarUsuario(event)">
+        <div class="row-two">
+          <div class="input-box">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" required minlength="2">
+          </div>
+          <div class="input-box">
+            <label for="apellido">Apellido</label>
+            <input type="text" name="apellido" id="apellido" placeholder="Tu apellido" required minlength="2">
+          </div>
         </div>
         <div class="row-two">
           <div class="input-box">
@@ -81,8 +87,8 @@
           </div>
           <div class="input-box">
             <label for="telefono">Teléfono</label>
-            <input type="tel" name="telefono" id="telefono" placeholder="+51 999 999 999" maxlength="9" required
-              pattern="[0-9]+">
+            <input type="tel" name="telefono" id="telefono" placeholder="999999999" maxlength="9" required
+              pattern="[0-9]{9}" title="Ingresa 9 dígitos">
           </div>
         </div>
 
@@ -103,6 +109,8 @@
             <span>Acepto los términos del restaurante y la política de reservas.</span>
           </label>
         </div>
+        <div id="mgError"></div>
+
         <button type="submit" class="btn-principal">Crear cuenta</button>
 
         <p class="switch-line">¿Ya tienes cuenta? <a class="link-red" href="../../paginas/0. login/index.html">Inicia
@@ -110,9 +118,7 @@
       </form>
     </div>
   </main>
-
-
-
+  <script src="../../codigo/registro.js"></script>
 
 </body>
 
