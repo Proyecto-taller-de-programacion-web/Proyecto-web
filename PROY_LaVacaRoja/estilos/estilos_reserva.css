@@ -295,9 +295,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .formReserva:has(#paso1:checked) .paso-1,
 .formReserva:has(#paso2:checked) .paso-2,
 .formReserva:has(#paso3:checked) .paso-3,
-.formReserva:has(#paso4:checked) .paso-4 {
-  display: flex;
-  animation: entrarPaso 0.45s ease;
+.formReserva:has(#paso4:checked) .paso-4,
+.formReserva:has(#paso5:checked) .paso-5 {
+    display: flex;
+    animation: entrarPaso 0.45s ease;
 }
 
 /* "Siguiente" se apaga mientras el paso tenga algún campo inválido
@@ -321,7 +322,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 25%;
+  width: 20%;
   font-family: 'Oswald', sans-serif;
   font-size: 10.5px;
   letter-spacing: 0.16em;
@@ -346,18 +347,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .formReserva:has(#paso1:checked) .progreso-pasos li:nth-child(-n+1),
 .formReserva:has(#paso2:checked) .progreso-pasos li:nth-child(-n+2),
 .formReserva:has(#paso3:checked) .progreso-pasos li:nth-child(-n+3),
-.formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(-n+4) {
-  color: var(--blanco);
+.formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(-n+4),
+.formReserva:has(#paso5:checked) .progreso-pasos li:nth-child(-n+5) {
+    color: var(--blanco);
 }
 
 /* Paso actual: círculo rojo y un poco más grande */
 .formReserva:has(#paso1:checked) .progreso-pasos li:nth-child(1) .progreso-num,
 .formReserva:has(#paso2:checked) .progreso-pasos li:nth-child(2) .progreso-num,
 .formReserva:has(#paso3:checked) .progreso-pasos li:nth-child(3) .progreso-num,
-.formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(4) .progreso-num {
-  background: var(--rojo);
-  border-color: var(--rojo);
-  transform: scale(1.15);
+.formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(4) .progreso-num,
+.formReserva:has(#paso5:checked) .progreso-pasos li:nth-child(5) .progreso-num {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    transform: scale(1.15);
 }
 
 /* Barra que se va llenando */
@@ -373,10 +376,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   transition: width 0.5s ease;
 }
 
-.formReserva:has(#paso1:checked) .progreso-relleno { width: 25%; }
-.formReserva:has(#paso2:checked) .progreso-relleno { width: 50%; }
-.formReserva:has(#paso3:checked) .progreso-relleno { width: 75%; }
-.formReserva:has(#paso4:checked) .progreso-relleno { width: 100%; }
+.formReserva:has(#paso1:checked) .progreso-relleno { width: 20%; }
+.formReserva:has(#paso2:checked) .progreso-relleno { width: 40%; }
+.formReserva:has(#paso3:checked) .progreso-relleno { width: 60%; }
+.formReserva:has(#paso4:checked) .progreso-relleno { width: 80%; }
+.formReserva:has(#paso5:checked) .progreso-relleno { width: 100%; }
 
 
 /* 6. BOTONES */
@@ -665,5 +669,281 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .formReserva {
     width: 92%;
+  }
+}
+
+/* 7. CONTENEDOR DE HORARIOS DINÁMICOS */
+
+.texto-horarios {
+  color: var(--gris);
+  font-size: 14px;
+  margin-top: -10px;
+}
+
+/* JavaScript insertará los botones dentro de esta rejilla. */
+.rejilla-horarios {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.leyenda-horarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--gris);
+  font-size: 12px;
+}
+
+.leyenda-horarios span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.punto {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.punto-disponible { background: #35b489; }
+.punto-ocupado { background: #999da5; }
+.punto-seleccionado { background: var(--rojo); }
+
+@media (max-width: 700px) {
+  .rejilla-horarios {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .leyenda-horarios { gap: 12px; }
+}
+
+/* =====================================================
+   VENTANAS MODALES (dialog)
+   Mismo lenguaje visual del sitio: fondo oscuro, línea roja
+   arriba, títulos en mayúsculas y la paleta de estilos_global.
+   ===================================================== */
+
+.modal-vr {
+  width: min(92vw, 540px);
+  max-height: 90vh;
+  overflow: hidden;
+  margin: auto;
+  padding: 40px 40px 32px;
+  background:
+    linear-gradient(180deg, rgba(196, 31, 36, 0.10) 0%, rgba(196, 31, 36, 0) 160px),
+    var(--negro-2);
+  border: 1px solid var(--linea);
+  border-top: 3px solid var(--rojo);
+  border-radius: 2px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  color: var(--blanco);
+  text-align: left;
+}
+
+.modal-vr:focus {
+  outline: none;
+}
+
+/* Solo cuando está abierto: título y botones fijos, la lista de datos se desplaza */
+.modal-vr[open] {
+  display: flex;
+  flex-direction: column;
+  animation: modalEntrada 0.35s ease;
+}
+
+.modal-vr::backdrop {
+  background: rgba(6, 5, 4, 0.78);
+  backdrop-filter: blur(4px);
+}
+
+@keyframes modalEntrada {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Título pequeño en rojo (igual que "NUEVAS RESERVAS" de la página) */
+.modal-eyebrow {
+  margin: 0 0 10px;
+  font-family: var(--fuente-texto);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--rojo);
+}
+
+.modal-titulo {
+  margin: 0 0 18px;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(26px, 5vw, 34px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blanco);
+}
+
+.modal-titulo::after {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 2px;
+  margin-top: 16px;
+  background: var(--rojo);
+}
+
+.modal-texto {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--gris);
+}
+
+/* ---------- Reporte: secciones y filas ---------- */
+
+.modal-reporte {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 6px -8px 0 0;
+  padding-right: 8px;
+  overflow-y: auto;
+  font-family: var(--fuente-texto);
+  scrollbar-width: thin;
+  scrollbar-color: var(--rojo-dim) transparent;
+}
+
+.modal-seccion {
+  margin: 20px 0 4px;
+  padding-left: 10px;
+  border-left: 2px solid var(--rojo);
+  font-family: var(--fuente-texto);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--blanco);
+}
+
+.modal-reporte p {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  margin: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(245, 242, 238, 0.08);
+  font-size: 14.5px;
+}
+
+.modal-reporte strong {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.modal-reporte span {
+  text-align: right;
+  overflow-wrap: anywhere;
+  color: var(--blanco);
+}
+
+.modal-reporte .fila-codigo span {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #f0565b;
+}
+
+/* ---------- Botones ---------- */
+
+.modal-acciones {
+  display: flex;
+  flex-shrink: 0;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-modal {
+  flex: 1;
+  padding: 14px 18px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--fuente-texto);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.btn-modal:hover {
+  transform: translateY(-2px);
+}
+
+.btn-modal:focus-visible {
+  outline: 2px solid var(--blanco);
+  outline-offset: 3px;
+}
+
+.btn-modal-principal {
+  background: var(--rojo);
+  border-color: var(--rojo);
+  color: var(--blanco);
+}
+
+.btn-modal-principal:hover {
+  background: #a8181d;
+  border-color: #a8181d;
+}
+
+.btn-modal-secundario {
+  background: transparent;
+  border-color: var(--blanco);
+  color: var(--blanco);
+}
+
+.btn-modal-secundario:hover {
+  background: rgba(245, 242, 238, 0.10);
+}
+
+/* Botón blanco (Cancelar reserva) */
+.btn-modal-blanco {
+  background: var(--blanco);
+  border-color: var(--blanco);
+  color: var(--negro);
+}
+
+.btn-modal-blanco:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 520px) {
+  .modal-vr {
+    padding: 30px 22px 24px;
+  }
+
+  .modal-acciones {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .btn-modal {
+    padding: 13px 14px;
+  }
+
+  .modal-reporte p {
+    gap: 14px;
   }
 }

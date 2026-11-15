@@ -1,3 +1,11 @@
+/* Mensaje de error de los formularios (se escribe con innerHTML) */
+#mgError {
+  color: #ff5a5a;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 6px 0 14px;
+}
+
 :root {
 
   --negro-secundario: #141210;

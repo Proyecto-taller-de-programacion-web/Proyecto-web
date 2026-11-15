@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Realiza tu reserva en La Vaca Roja y disfruta de nuestras carnes y parrillas en un ambiente agradable.">
+    <meta name="description"
+        content="Realiza tu reserva en La Vaca Roja y disfruta de nuestras carnes y parrillas en un ambiente agradable.">
 
     <!-- Importación desde Google Fonts para las fuentes -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fjalla+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
@@ -15,6 +18,50 @@
     <title>Reservar</title>
     <link rel="stylesheet" href="../../estilos/estilos_reserva.css">
     <link rel="stylesheet" href="../../estilos/estilos_global.css">
+    <script src="../../codigo/reserva.js" defer></script>
+
+    <style>
+        #contenedor-horarios .horario {
+            min-height: 44px;
+            padding: 10px 14px;
+            border: 1px solid #b9b9b9;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        #contenedor-horarios .horario.disponible {
+            color: #f5f8f7;
+            border-color: #13770f;
+            background: rgb(5, 170, 46);
+        }
+
+        #contenedor-horarios .horario.ocupado {
+            color: #fafafa;
+            border-color: #6d0505;
+            background: #943131;
+            cursor: not-allowed;
+            opacity: .75;
+        }
+
+        #contenedor-horarios .horario.seleccionado {
+            color: #111111;
+            border: 2px solid  rgb(116, 115, 115);
+            background: rgb(158, 157, 157);
+        }
+
+        #contenedor-horarios .horario:focus-visible {
+            outline: 3px solid #222;
+            outline-offset: 2px;
+        }
+
+        .mensaje-horarios {
+            grid-column: 1 / -1;
+            margin: 8px 0;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -46,7 +93,7 @@
                     <li><a href="../../paginas/3. nosotros/index.html">NOSOTROS</a></li>
                     <li><a href="../../paginas/4. sedes/index.html">SEDES</a></li>
                     <li><a href="#" aria-current="page">RESERVAR</a></li>
-                    <li class="boton-login"><a href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
+                    <li class="boton-login"><a id="enlaceSesion" href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
                 </ul>
             </nav>
 
@@ -61,7 +108,7 @@
 
         <!-- SECCIÓN: Formulario de reserva por pasos -->
         <section class="seccion-reserva">
-            <form class="formReserva" name="formReserva" method="get" action="confirmacion.html">
+            <form class="formReserva" name="formReserva" onsubmit="finalizarReserva(event)" onreset="limpiarReserva()">
 
                 <!-- Radios ocultos: el que está marcado define qué paso se ve.
                      El CSS los lee con :has() desde el formulario. -->
@@ -69,6 +116,8 @@
                 <input type="radio" name="paso" id="paso2" class="control-paso">
                 <input type="radio" name="paso" id="paso3" class="control-paso">
                 <input type="radio" name="paso" id="paso4" class="control-paso">
+                <input type="radio" name="paso" id="paso5" class="control-paso">
+
 
                 <!-- Checkbox oculto: abre y cierra el aviso de "limpiar formulario" -->
                 <input type="checkbox" id="confirmar-limpiar" class="control-paso">
@@ -78,8 +127,9 @@
                     <ol class="progreso-pasos">
                         <li><span class="progreso-num">1</span>Dónde</li>
                         <li><span class="progreso-num">2</span>Cuándo</li>
-                        <li><span class="progreso-num">3</span>Detalles</li>
-                        <li><span class="progreso-num">4</span>Tus datos</li>
+                        <li><span class="progreso-num">3</span>Horarios</li>
+                        <li><span class="progreso-num">4</span>Datos</li>
+                        <li><span class="progreso-num">5</span>Adicional</li>
                     </ol>
                     <div class="progreso-barra">
                         <div class="progreso-relleno"></div>
@@ -118,25 +168,9 @@
                     </div>
                 </fieldset>
 
-                <!-- PASO 2: disponibilidad (consumo, personas, fecha y hora) -->
+                <!-- PASO 2: filtros de disponibilidad (personas y fecha) -->
                 <fieldset class="paso paso-2">
                     <legend>¿CUÁNDO Y CUÁNTOS?</legend>
-
-                    <div class="form-group">
-                        <p>SELECCIONE SU CONSUMO</p>
-
-                        <input type="radio" name="tipo-consumo" id="consumo-almuerzo" value="almuerzo" required>
-                        <label for="consumo-almuerzo">Almuerzo</label>
-
-                        <input type="radio" name="tipo-consumo" id="consumo-cena" value="cena">
-                        <label for="consumo-cena">Cena</label>
-
-                        <input type="radio" name="tipo-consumo" id="consumo-brunch" value="brunch">
-                        <label for="consumo-brunch">Brunch</label>
-
-                        <input type="radio" name="tipo-consumo" id="consumo-evento-especial" value="evento-especial">
-                        <label for="consumo-evento-especial">Evento Especial</label>
-                    </div>
 
                     <div class="form-group">
                         <label for="numero-personas">SELECCIONE EL NÚMERO DE PERSONAS</label>
@@ -162,26 +196,9 @@
 
                     <div class="form-group">
                         <label for="fecha-reserva">SELECCIONE LA FECHA</label>
-                        <input type="date" name="fechas" id="fecha-reserva" min="2026-10-13" required>
+                        <input type="date" name="fechas" id="fecha-reserva" min="2026-11-18" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="hora-reserva">SELECCIONE LA HORA</label>
-                        <select id="hora-reserva" name="hora" required>
-                            <option value="" disabled selected hidden>Seleccione</option>
-                            <option value="12:00pm">12:00 PM</option>
-                            <option value="1:00pm">1:00 PM</option>
-                            <option value="2:00pm">2:00 PM</option>
-                            <option value="3:00pm">3:00 PM</option>
-                            <option value="4:00pm">4:00 PM</option>
-                            <option value="5:00pm">5:00 PM</option>
-                            <option value="6:00pm">6:00 PM</option>
-                            <option value="7:00pm">7:00 PM</option>
-                            <option value="8:00pm">8:00 PM</option>
-                            <option value="9:00pm">9:00 PM</option>
-                            <option value="10:00pm">10:00 PM</option>
-                        </select>
-                    </div>
 
                     <div class="form-action">
                         <label for="paso1" class="btn-paso btn-atras">ATRÁS</label>
@@ -189,34 +206,45 @@
                     </div>
                 </fieldset>
 
-                <!-- PASO 3: información extra (todo opcional, Siguiente siempre activo) -->
+                <!-- PASO 3: SELECCIÓN DE HORARIOS -->
                 <fieldset class="paso paso-3">
-                    <legend>DETALLES ADICIONALES (NO OBLIGATORIO)</legend>
+                    <legend>SELECCIONA UN HORARIO</legend>
 
-                    <div class="form-group">
-                        <label for="requerimiento">¿Tienes algún requerimiento especial?</label>
-                        <textarea name="comentario-req" id="requerimiento" placeholder="Ejm: Mesa junto a la ventana..."></textarea>
+                    <p class="texto-horarios">
+                        Los horarios disponibles dependerán de la sede, el lugar,
+                        el número de personas y la fecha seleccionada.
+                    </p>
+
+                    <!-- JavaScript generará aquí los horarios según los filtros seleccionados. -->
+                    <div class="rejilla-horarios" id="contenedor-horarios" aria-live="polite">
+
+
+
+
                     </div>
 
-                    <div class="form-group">
-                        <label for="necesidad">¿Alguna necesidad a tomar en cuenta?</label>
-                        <textarea name="comentario-nec" id="necesidad" placeholder="Ejm: Acceso para silla de ruedas..."></textarea>
+                    <!-- Leyenda de estados de los horarios -->
+                    <div class="leyenda-horarios">
+                        <span><i class="punto punto-disponible"></i> Disponible</span>
+                        <span><i class="punto punto-ocupado"></i> Seleccionado</span>
+                        <span><i class="punto punto-seleccionado"></i> Ocupado</span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="alergias">¿Alguna alergia, intolerancia o restricción alimentaria?</label>
-                        <textarea name="comentario-ale" id="alergias" placeholder="Ejm: Alergia a mariscos..."></textarea>
-                    </div>
-
+                    <!-- Navegación -->
                     <div class="form-action">
                         <label for="paso2" class="btn-paso btn-atras">ATRÁS</label>
-                        <label for="paso4" class="btn-paso btn-siguiente">SIGUIENTE</label>
+
+                        <!-- Valida el horario seleccionado y continúa al paso 4. -->
+                        <button type="button" id="btn-ir-login" class="btn-paso btn-siguiente" onclick="guardarDatos()">
+                            SIGUIENTE
+                        </button>
+
                     </div>
                 </fieldset>
 
                 <!-- PASO 4: datos de la persona y envío -->
                 <fieldset class="paso paso-4">
-                    <legend>TUS DATOS</legend>
+                    <legend>TITULAR DE LA RESERVA</legend>
 
                     <div class="form-group">
                         <label for="nombre">NOMBRE</label>
@@ -235,34 +263,77 @@
 
                     <div class="form-group">
                         <label for="telefono">TELÉFONO</label>
-                        <input type="tel" name="telefono" id="telefono" placeholder="999999999" required pattern="[0-9]{9}">
+                        <input type="tel" name="telefono" id="telefono" placeholder="999999999" required
+                            pattern="[0-9]{9}">
                     </div>
 
                     <div class="checkbox-line">
                         <input type="checkbox" name="terminos" id="terminos" required>
-                        <label class="parrafo-mini" for="terminos">Acepto los <a href="../../pdf_cartas/terminosycondiciones.pdf" target="_blank">términos y condiciones</a></label>
+                        <label class="parrafo-mini" for="terminos">Acepto los <a
+                                href="../../pdf_cartas/terminosycondiciones.pdf" target="_blank">términos y
+                                condiciones</a></label>
                     </div>
 
                     <div class="form-action">
                         <label for="paso3" class="btn-paso btn-atras">ATRÁS</label>
                         <label for="confirmar-limpiar" class="btn-paso btn-reset">LIMPIAR FORMULARIO</label>
-                        <button type="submit" class="btn-submit">RESERVAR</button>
+                        <label for="paso5" class="btn-paso btn-siguiente">SIGUIENTE</label>
                     </div>
-                </fieldset>
-                <!-- Aviso de confirmación para limpiar el formulario -->
-                <div class="aviso-limpiar">
-                    <div class="aviso-caja">
-                        <p>¿Seguro que quieres limpiar el formulario? Se borrará toda la información escrita.</p>
-                        <div class="form-action">
-                            <label for="confirmar-limpiar" class="btn-paso btn-atras">CANCELAR</label>
-                            <input type="reset" class="btn-submit" value="SÍ, LIMPIAR">
+
+                    <!-- Aviso de confirmación para limpiar el formulario -->
+                    <div class="aviso-limpiar">
+                        <div class="aviso-caja">
+                            <p>¿Seguro que quieres limpiar el formulario? Se borrará toda la información escrita.</p>
+                            <div class="form-action">
+                                <label for="confirmar-limpiar" class="btn-paso btn-atras">CANCELAR</label>
+                                <input type="reset" class="btn-submit" value="SÍ, LIMPIAR">
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                </fieldset>
+
+
+                <!-- PASO 5: información extra (todo opcional, Siguiente siempre activo) -->
+                <fieldset class="paso paso-5">
+                    <legend>DETALLES ADICIONALES (NO OBLIGATORIO)</legend>
+
+                    <div class="form-group">
+                        <label for="motivo-reserva">¿Cuál es el motivo de tu reserva? (Opcional)</label>
+                        <textarea name="motivo-reserva" id="motivo-reserva"
+                            placeholder="Ejm: Cumpleaños, aniversario, reunión familiar..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requerimiento">¿Tienes algún requerimiento especial?</label>
+                        <textarea name="comentario-req" id="requerimiento"
+                            placeholder="Ejm: Mesa junto a la ventana..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="necesidad">¿Alguna necesidad a tomar en cuenta?</label>
+                        <textarea name="comentario-nec" id="necesidad"
+                            placeholder="Ejm: Acceso para silla de ruedas..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alergias">¿Alguna alergia, intolerancia o restricción alimentaria?</label>
+                        <textarea name="comentario-ale" id="alergias"
+                            placeholder="Ejm: Alergia a mariscos..."></textarea>
+                    </div>
+
+                    <div class="form-action">
+                        <label for="paso4" class="btn-paso btn-atras">ATRÁS</label>
+                        <button type="submit" class="btn-submit">RESERVAR</button>
+
+                    </div>
+                </fieldset>
+
+
             </form>
         </section>
 
-        <!---------PIE DE PÁGINA---------->
+        <!---------------------------PIE DE PÁGINA --------------------------------->
         <footer class="footer">
 
             <!-- Columna 1: marca -->
@@ -322,5 +393,34 @@
 
     </div>
 
+    <!---------- VENTANAS MODALES (dialog) ---------->
+
+    <!-- 1. Resumen para confirmar la reserva (al confirmar, va a confirmacion.html) -->
+    <dialog id="modalResumen" class="modal-vr" tabindex="-1" autofocus>
+        <p class="modal-eyebrow">Último paso</p>
+        <h2 class="modal-titulo">Confirma tu reserva</h2>
+        <p class="modal-texto">Revisa que todos los datos sean correctos antes de confirmar.</p>
+        <div id="cajaResumen" class="modal-reporte"></div>
+        <div class="modal-acciones">
+            <button type="button" class="btn-modal btn-modal-secundario" onclick="modalResumen.close()">Volver</button>
+            <button type="button" class="btn-modal btn-modal-principal" onclick="confirmarReserva()">Confirmar reserva</button>
+        </div>
+    </dialog>
+
+    <!-- 2. Un cliente no puede tener más de una reserva activa.
+         Solo tiene 2 opciones: volver al inicio o cancelar la reserva.
+         oncancel: evita cerrarla con la tecla Esc; onclose: si igual se cierra, vuelve a abrirse. -->
+    <dialog id="modalReservaActiva" class="modal-vr" tabindex="-1" autofocus oncancel="event.preventDefault()" onclose="bloquearSiTieneReserva()">
+        <p class="modal-eyebrow">Aviso</p>
+        <h2 class="modal-titulo">Ya tienes una reserva activa</h2>
+        <p class="modal-texto">Cada cliente solo puede tener una reserva a la vez.</p>
+        <div id="cajaReservaActiva" class="modal-reporte"></div>
+        <div class="modal-acciones">
+            <button type="button" class="btn-modal btn-modal-blanco" onclick="cancelarReserva()">Cancelar reserva</button>
+            <button type="button" class="btn-modal btn-modal-principal" onclick="irAlInicio()">Volver al inicio</button>
+        </div>
+    </dialog>
+
 </body>
+
 </html>
