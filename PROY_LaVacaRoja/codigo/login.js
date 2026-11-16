@@ -25,8 +25,8 @@ function iniciarSesion(event) {
         return;
     }
 
-    document.getElementById("mgError").innerHTML = "";
     alert("Bienvenido(a), " + usuario.nombre + "!  :)");
+    document.getElementById("mgError").innerHTML = "";
 
     // Simulación de sesión: regresamos a reservas con una marca en la URL.
     location.href = "../5. reservar/index.html?logueado=1";
