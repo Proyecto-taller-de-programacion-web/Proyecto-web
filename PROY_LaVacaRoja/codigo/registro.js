@@ -10,16 +10,15 @@ function registrarUsuario(event) {
     let pass = document.getElementById("pass").value;
     let pass2 = document.getElementById("pass2").value;
 
-    if (nombre === "" || apellido === "" || correo === "" || telefono === "") {
-        document.getElementById("mgError").innerHTML = "Completa todos los campos.";
-        return;
-    }
-
     if (pass !== pass2) {
         document.getElementById("mgError").innerHTML = "Las contraseñas no coinciden.";
         return;
     }
 
-    document.getElementById("mgError").innerHTML =
-        "Los datos son correctos. En esta versión académica no se guardan cuentas nuevas.";
+    //Nos devuelve al Login
+    location.href = "../../paginas/0. login/index.html";
+
+
+
+
 }
