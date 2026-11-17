@@ -90,7 +90,7 @@
 }
 
 
-/* ----------------4. SECCIÓN CARTA DE VINOS (3 cards)---------------- */
+/* ----------------4. SECCIÓN CARTA DE VINOS (carrusel con scroll-snap)---------------- */
 
 .cuerpo-pagina {
     background-color: var(--beige);
@@ -103,25 +103,89 @@
     margin-bottom: 2.5rem;
 }
 
+/* Cada categoría de vinos (un carrusel por categoría) */
+.categoria-vinos {
+    max-width: 62.5rem;               
+    margin: 0 auto 2.5rem;
+    padding: 1.5rem 1rem 0.5rem;     
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Un color por categoría */
+/* 1. Tintos: vino tinto con letras beige y títulos dorados */
+.categoria-vinos:nth-of-type(1) {
+    background-color: #7d0610;
+    color: var(--beige);
+}
+
+.categoria-vinos:nth-of-type(1) > h3 {
+    color: #e6c27a;
+}
+
+/* 2. Blancos: crema claro con títulos en vino tinto */
+.categoria-vinos:nth-of-type(2) {
+    background-color: #fff8ec;
+    color: var(--negro);
+}
+
+.categoria-vinos:nth-of-type(2) > h3 {
+    color: #7d0610;
+}
+
+/* 3. Reserva y Premium: negro elegante con títulos dorados */
+.categoria-vinos:nth-of-type(3) {
+    background-color: #1c1c1c;
+    color: var(--beige);
+}
+
+.categoria-vinos:nth-of-type(3) > h3 {
+    color: #e6c27a;
+}
+
+/* 4. Espumantes y Champagne: tono champagne con títulos en vino tinto */
+.categoria-vinos:nth-of-type(4) {
+    background-color: #ecd9a4;
+    color: var(--negro);
+}
+
+.categoria-vinos:nth-of-type(4) > h3 {
+    color: #7d0610;
+}
+
+.categoria-vinos > h3,
+.categoria-vinos > p {
+    text-align: left;
+    padding-left: 0.5rem;            
+}
+
+/* CARRUSEL: contenedor con desplazamiento horizontal que "imanta" las tarjetas */
 .grid-vinos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.875rem;
+    --gap-vinos: 1rem;
+    display: flex;
+    gap: var(--gap-vinos);
+    overflow-x: auto;                 
+    scroll-snap-type: x mandatory;    
+    scroll-padding-inline: 0.5rem;    
+    padding: 0.75rem 0.5rem 1.5rem;   
     max-width: 62.5rem;
     margin: 0 auto;
 }
 
 .card-vino {
+    flex: 0 0 calc((100% - 2 * var(--gap-vinos)) / 3);   
+    scroll-snap-align: start;         
     margin: 0;
     text-align: center;
 }
 
 .card-vino img {
-    width: 100%;
-    height: 22rem;
-    object-fit: cover;
+    width: auto;                      
+    max-width: 100%;
+    height: 16rem;                    
+    object-fit: contain;              
     display: block;
-    margin-bottom: 1rem;
+    margin: 0 auto 1rem;              
     border-radius: 0.5rem;
 }
 
@@ -131,6 +195,15 @@
     font-weight: normal;
     letter-spacing: 1px;
     margin-bottom: 0.5rem;
+}
+
+/* Texto más angosto para que quede proporcionado con la foto */
+.card-vino h3,
+.card-vino h4,
+.card-vino p {
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -217,13 +290,13 @@
         margin-bottom: 1.875rem;
     }
 
-    .grid-vinos {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+    /* Celular: 1 vino a la vez */
+    .card-vino {
+        flex-basis: 100%;
     }
 
     .card-vino img {
-        height: 20rem;
+        height: 12rem;
     }
 
     .galeria-cava {
@@ -269,13 +342,13 @@
         font-size: 2.6rem;
     }
 
-    .grid-vinos {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
+    /* Tablet: 2 vinos a la vez */
+    .card-vino {
+        flex-basis: calc((100% - var(--gap-vinos)) / 2);
     }
 
     .card-vino img {
-        height: 15rem;
+        height: 12rem;
     }
 
     .titulo-vino {
@@ -314,12 +387,8 @@
         padding: 2.5rem 2.5rem 3.1rem;
     }
 
-    .grid-vinos {
-        gap: 1.25rem;
-    }
-
     .card-vino img {
-        height: 18rem;
+        height: 16rem;
     }
 
     .galeria-cava {
@@ -359,7 +428,7 @@
     animation: respirar2 3s ease-in-out infinite alternate;
 }
 
-/* El título ya se centra con translate(-50%, -50%), por eso se repite aquí */
+/* El título ya se centra con translate */
 @keyframes tituloEntra {
     from { opacity: 0; transform: translate(-50%, -30%); }
     to   { opacity: 1; transform: translate(-50%, -50%); }
@@ -427,4 +496,38 @@
 @keyframes pulso {
     0%, 100% { box-shadow: 0 0 0 0 rgba(125, 6, 16, 0.5); }
     50%      { box-shadow: 0 0 0 10px rgba(125, 6, 16, 0); }
+}
+
+/* --- Carrusel de vinos: avance automático (4 vinos por carrusel) ---*/
+
+.card-vino.clon {
+    display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .grid-vinos {
+        overflow-x: hidden;
+    }
+
+    .card-vino {
+        animation: pasarVinos 10s ease-in-out infinite;
+    }
+
+    .card-vino.clon {
+        display: block;
+    }
+
+    /* Al poner el mouse encima, el carrusel se detiene */
+    .grid-vinos:hover .card-vino {
+        animation-play-state: paused;
+    }
+}
+
+/* bucle de imagen de vinos y no regresa al principio */
+@keyframes pasarVinos {
+    0%, 21%      { transform: translateX(0); }
+    25%, 46%     { transform: translateX(calc(-100% - var(--gap-vinos))); }
+    50%, 71%     { transform: translateX(calc(-200% - 2 * var(--gap-vinos))); }
+    75%, 96%     { transform: translateX(calc(-300% - 3 * var(--gap-vinos))); }
+    100%         { transform: translateX(calc(-400% - 4 * var(--gap-vinos))); }
 }
