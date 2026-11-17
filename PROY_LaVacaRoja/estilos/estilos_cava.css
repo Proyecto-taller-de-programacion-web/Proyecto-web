@@ -105,14 +105,14 @@
 
 /* Cada categoría de vinos (un carrusel por categoría) */
 .categoria-vinos {
-    max-width: 62.5rem;               /* mismo ancho que el carrusel, para alinear a la izquierda */
+    max-width: 62.5rem;               
     margin: 0 auto 2.5rem;
-    padding: 1.5rem 1rem 0.5rem;      /* espacio interno del panel de color */
+    padding: 1.5rem 1rem 0.5rem;     
     border-radius: 1rem;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Un color por categoría (se cuentan los div de la sección: 1.º, 2.º, 3.º y 4.º) */
+/* Un color por categoría */
 /* 1. Tintos: vino tinto con letras beige y títulos dorados */
 .categoria-vinos:nth-of-type(1) {
     background-color: #7d0610;
@@ -156,7 +156,7 @@
 .categoria-vinos > h3,
 .categoria-vinos > p {
     text-align: left;
-    padding-left: 0.5rem;             /* coincide con el padding del carrusel */
+    padding-left: 0.5rem;            
 }
 
 /* CARRUSEL: contenedor con desplazamiento horizontal que "imanta" las tarjetas */
@@ -164,28 +164,28 @@
     --gap-vinos: 1rem;
     display: flex;
     gap: var(--gap-vinos);
-    overflow-x: auto;                 /* permite deslizar de lado */
-    scroll-snap-type: x mandatory;    /* el contenedor imanta las tarjetas */
-    scroll-padding-inline: 0.5rem;    /* alinea el "start" con el padding */
-    padding: 0.75rem 0.5rem 1.5rem;   /* evita que el hover de las cards se recorte */
+    overflow-x: auto;                 
+    scroll-snap-type: x mandatory;    
+    scroll-padding-inline: 0.5rem;    
+    padding: 0.75rem 0.5rem 1.5rem;   
     max-width: 62.5rem;
     margin: 0 auto;
 }
 
 .card-vino {
-    flex: 0 0 calc((100% - 2 * var(--gap-vinos)) / 3);   /* 3 vinos visibles, juntos */
-    scroll-snap-align: start;         /* cada tarjeta se alinea al inicio */
+    flex: 0 0 calc((100% - 2 * var(--gap-vinos)) / 3);   
+    scroll-snap-align: start;         
     margin: 0;
     text-align: center;
 }
 
 .card-vino img {
-    width: auto;                      /* la caja se ajusta a la foto, sin rectángulo de más */
+    width: auto;                      
     max-width: 100%;
-    height: 16rem;                    /* tamaño de la foto */
-    object-fit: contain;              /* se ve la imagen completa, sin recortes */
+    height: 16rem;                    
+    object-fit: contain;              
     display: block;
-    margin: 0 auto 1rem;              /* centra la foto */
+    margin: 0 auto 1rem;              
     border-radius: 0.5rem;
 }
 
@@ -428,7 +428,7 @@
     animation: respirar2 3s ease-in-out infinite alternate;
 }
 
-/* El título ya se centra con translate(-50%, -50%), por eso se repite aquí */
+/* El título ya se centra con translate */
 @keyframes tituloEntra {
     from { opacity: 0; transform: translate(-50%, -30%); }
     to   { opacity: 1; transform: translate(-50%, -50%); }
@@ -498,9 +498,8 @@
     50%      { box-shadow: 0 0 0 10px rgba(125, 6, 16, 0); }
 }
 
-/* --- Carrusel de vinos: avance automático solo con CSS (4 vinos por carrusel) ---
-   Si la persona prefiere menos movimiento, se queda el carrusel manual con scroll-snap. */
-/* Las copias (clones) solo se usan en el bucle automático */
+/* --- Carrusel de vinos: avance automático (4 vinos por carrusel) ---*/
+
 .card-vino.clon {
     display: none;
 }
@@ -524,8 +523,7 @@
     }
 }
 
-/* Bucle 1 2 3 4 1 2 3 4...: al llegar a la copia del vino 1 (posición -4) el ciclo
-   reinicia en 0 y se ve idéntico, por eso no se nota el salto. */
+/* bucle de imagen de vinos y no regresa al principio */
 @keyframes pasarVinos {
     0%, 21%      { transform: translateX(0); }
     25%, 46%     { transform: translateX(calc(-100% - var(--gap-vinos))); }
