@@ -18,6 +18,8 @@
     <title>Reservar</title>
     <link rel="stylesheet" href="../../estilos/estilos_reserva.css">
     <link rel="stylesheet" href="../../estilos/estilos_global.css">
+
+    <script src="../../codigo/almacen.js" defer></script>
     <script src="../../codigo/reserva.js" defer></script>
 
     <style>
@@ -234,7 +236,8 @@
                     <div class="form-action">
                         <label for="paso2" class="btn-paso btn-atras">ATRÁS</label>
 
-                        <!-- Valida el horario seleccionado y continúa al paso 4. -->
+                        <!--Boton que va a recoger los datos de la reserva, para que no
+                            se borren cuando el usuario vaya al login-->
                         <button type="button" id="btn-ir-login" class="btn-paso btn-siguiente" onclick="guardarDatos()">
                             SIGUIENTE
                         </button>
