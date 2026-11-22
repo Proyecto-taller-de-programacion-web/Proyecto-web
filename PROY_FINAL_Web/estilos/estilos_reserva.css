@@ -234,6 +234,7 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 input[type="date"],
+input[type="password"],
 select,
 textarea {
   width: 100%;
@@ -256,6 +257,7 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="tel"]:focus,
 input[type="date"]:focus,
+input[type="password"]:focus,
 select:focus,
 textarea:focus {
   border-color: var(--rojo);
@@ -296,7 +298,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .formReserva:has(#paso2:checked) .paso-2,
 .formReserva:has(#paso3:checked) .paso-3,
 .formReserva:has(#paso4:checked) .paso-4,
-.formReserva:has(#paso5:checked) .paso-5 {
+.formReserva:has(#paso5:checked) .paso-5,
+.formReserva:has(#paso6:checked) .paso-6 {
     display: flex;
     animation: entrarPaso 0.45s ease;
 }
@@ -322,7 +325,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 20%;
+  width: calc(100% / 6);
   font-family: 'Oswald', sans-serif;
   font-size: 10.5px;
   letter-spacing: 0.16em;
@@ -348,7 +351,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .formReserva:has(#paso2:checked) .progreso-pasos li:nth-child(-n+2),
 .formReserva:has(#paso3:checked) .progreso-pasos li:nth-child(-n+3),
 .formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(-n+4),
-.formReserva:has(#paso5:checked) .progreso-pasos li:nth-child(-n+5) {
+.formReserva:has(#paso5:checked) .progreso-pasos li:nth-child(-n+5),
+.formReserva:has(#paso6:checked) .progreso-pasos li:nth-child(-n+6) {
     color: var(--blanco);
 }
 
@@ -357,7 +361,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .formReserva:has(#paso2:checked) .progreso-pasos li:nth-child(2) .progreso-num,
 .formReserva:has(#paso3:checked) .progreso-pasos li:nth-child(3) .progreso-num,
 .formReserva:has(#paso4:checked) .progreso-pasos li:nth-child(4) .progreso-num,
-.formReserva:has(#paso5:checked) .progreso-pasos li:nth-child(5) .progreso-num {
+.formReserva:has(#paso5:checked) .progreso-pasos li:nth-child(5) .progreso-num,
+.formReserva:has(#paso6:checked) .progreso-pasos li:nth-child(6) .progreso-num {
     background: var(--rojo);
     border-color: var(--rojo);
     transform: scale(1.15);
@@ -376,11 +381,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   transition: width 0.5s ease;
 }
 
-.formReserva:has(#paso1:checked) .progreso-relleno { width: 20%; }
-.formReserva:has(#paso2:checked) .progreso-relleno { width: 40%; }
-.formReserva:has(#paso3:checked) .progreso-relleno { width: 60%; }
-.formReserva:has(#paso4:checked) .progreso-relleno { width: 80%; }
-.formReserva:has(#paso5:checked) .progreso-relleno { width: 100%; }
+.formReserva:has(#paso1:checked) .progreso-relleno { width: calc(100% / 6); }
+.formReserva:has(#paso2:checked) .progreso-relleno { width: calc(100% / 3); }
+.formReserva:has(#paso3:checked) .progreso-relleno { width: 50%; }
+.formReserva:has(#paso4:checked) .progreso-relleno { width: calc(100% / 1.5); }
+.formReserva:has(#paso5:checked) .progreso-relleno { width: calc(100% / 1.2); }
+.formReserva:has(#paso6:checked) .progreso-relleno { width: 100%; }
 
 
 /* 6. BOTONES */
@@ -945,5 +951,125 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .modal-reporte p {
     gap: 14px;
+  }
+}
+
+
+/* =====================================================
+   PASO 6 (PAGO) Y VENTANAS NUEVAS
+   ===================================================== */
+
+.fila-pago {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.mensaje-error {
+  display: block;
+  min-height: 18px;
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: #f0565b;
+}
+
+.nota-pago {
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--gris);
+}
+
+/* Ventanas con texto centrado (login y avisos) */
+.modal-centrado {
+  text-align: center;
+}
+
+.modal-centrado .modal-titulo::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-centrado .modal-texto {
+  margin-top: 4px;
+}
+
+/* Candado: el arco "se abre y se cierra" suavemente */
+.icono-candado {
+  display: block;
+  margin: 4px auto 18px;
+  filter: drop-shadow(0 8px 18px rgba(196, 31, 36, 0.45));
+  animation: flotar 3s ease-in-out infinite;
+}
+
+.candado-arco {
+  transform-origin: 20px 28px;
+  animation: abrirCandado 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+@keyframes abrirCandado {
+  0%, 55%, 100% { transform: rotate(0deg); }
+  70%, 85%      { transform: rotate(-14deg); }
+}
+
+/* Lista de reservas vigentes (ventana de límite) */
+.fila-reserva {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(245, 242, 238, 0.08);
+}
+
+.fila-reserva strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blanco);
+}
+
+.fila-reserva span {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--gris);
+}
+
+.btn-fila {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--linea);
+  border-radius: 2px;
+  font-family: var(--fuente-texto);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gris);
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.btn-fila:hover {
+  border-color: var(--rojo);
+  background: var(--rojo);
+  color: var(--blanco);
+}
+
+@media (max-width: 480px) {
+  .fila-pago {
+    grid-template-columns: 1fr;
+  }
+
+  .progreso-pasos li {
+    font-size: 8px;
+    letter-spacing: 0.04em;
   }
 }

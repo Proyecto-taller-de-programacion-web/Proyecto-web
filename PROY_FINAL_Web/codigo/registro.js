@@ -1,5 +1,5 @@
 /* =====================================================
-   registro.js — crea la cuenta y la guarda en localStorage
+   registro.js — crea la cuenta, la guarda en localStorage y abre sesión
    Depende de almacen.js
    ===================================================== */
 
@@ -38,15 +38,19 @@ function registrarUsuario(event) {
 
   document.getElementById("mgError").innerHTML = "";
 
-  usuarios.push({
+  // El rol siempre es "usuario": nadie puede hacerse administrador desde el formulario
+  let nuevo = {
     nombre: nombre,
     apellido: apellido,
     correo: correo,
     telefono: telefono,
-    pass: pass // OJO: solo válido para un proyecto de curso sin servidor
-  });
+    pass: pass, // OJO: solo válido para un proyecto de curso sin servidor
+    rol: "usuario"
+  };
+  usuarios.push(nuevo);
   guardarDato(CLAVES.usuarios, usuarios);
 
-  // Cuenta creada -> al login (la reserva temporal, si hay, sigue guardada)
-  location.href = "../0. login/index.html";
+  // Cuenta creada -> entra directo con su sesión. Si venía de una reserva a medias,
+  // abrirSesion lo devuelve a ella (paso 4); si no, va al inicio.
+  abrirSesion(nuevo);
 }

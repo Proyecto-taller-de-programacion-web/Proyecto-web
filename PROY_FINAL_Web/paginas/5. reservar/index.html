@@ -119,6 +119,7 @@
                 <input type="radio" name="paso" id="paso3" class="control-paso">
                 <input type="radio" name="paso" id="paso4" class="control-paso">
                 <input type="radio" name="paso" id="paso5" class="control-paso">
+                <input type="radio" name="paso" id="paso6" class="control-paso">
 
 
                 <!-- Checkbox oculto: abre y cierra el aviso de "limpiar formulario" -->
@@ -132,6 +133,7 @@
                         <li><span class="progreso-num">3</span>Horarios</li>
                         <li><span class="progreso-num">4</span>Datos</li>
                         <li><span class="progreso-num">5</span>Adicional</li>
+                        <li><span class="progreso-num">6</span>Pago</li>
                     </ol>
                     <div class="progreso-barra">
                         <div class="progreso-relleno"></div>
@@ -198,13 +200,14 @@
 
                     <div class="form-group">
                         <label for="fecha-reserva">SELECCIONE LA FECHA</label>
-                        <input type="date" name="fechas" id="fecha-reserva" min="2026-11-18" required>
+                        <input type="date" name="fechas" id="fecha-reserva" required>
                     </div>
 
 
                     <div class="form-action">
                         <label for="paso1" class="btn-paso btn-atras">ATRÁS</label>
-                        <label for="paso3" class="btn-paso btn-siguiente">SIGUIENTE</label>
+                        <!-- Valida la fecha (máx. 2 reservas por día) antes de pasar al paso 3 -->
+                        <button type="button" class="btn-paso btn-siguiente" onclick="validarPaso2()">SIGUIENTE</button>
                     </div>
                 </fieldset>
 
@@ -236,8 +239,8 @@
                     <div class="form-action">
                         <label for="paso2" class="btn-paso btn-atras">ATRÁS</label>
 
-                        <!--Boton que va a recoger los datos de la reserva, para que no
-                            se borren cuando el usuario vaya al login-->
+                        <!-- Guarda los datos de la reserva (para que no se borren si el usuario va al login).
+                             Si no hay sesión, abre la ventana "Por favor, inicia sesión". -->
                         <button type="button" id="btn-ir-login" class="btn-paso btn-siguiente" onclick="guardarDatos()">
                             SIGUIENTE
                         </button>
@@ -327,8 +330,47 @@
 
                     <div class="form-action">
                         <label for="paso4" class="btn-paso btn-atras">ATRÁS</label>
-                        <button type="submit" class="btn-submit">RESERVAR</button>
+                        <label for="paso6" class="btn-paso btn-siguiente">SIGUIENTE</label>
+                    </div>
+                </fieldset>
 
+
+                <!-- PASO 6: pago de la reserva (simulado: el número y el CVV no se guardan) -->
+                <fieldset class="paso paso-6">
+                    <legend>PAGO DE LA RESERVA</legend>
+
+                    <div class="form-group">
+                        <label for="numero-tarjeta">NÚMERO DE TARJETA (16 DÍGITOS)</label>
+                        <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="0000 0000 0000 0000"
+                            inputmode="numeric" autocomplete="cc-number" maxlength="19" required
+                            pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}" title="Escribe los 16 dígitos de la tarjeta">
+                        <span class="mensaje-error" id="msgTarjeta" aria-live="polite"></span>
+                    </div>
+
+                    <div class="fila-pago">
+                        <div class="form-group">
+                            <label for="vence-tarjeta">FECHA DE VENCIMIENTO</label>
+                            <input type="text" id="vence-tarjeta" name="vence-tarjeta" placeholder="MM/AA"
+                                inputmode="numeric" autocomplete="cc-exp" maxlength="5" required
+                                pattern="(0[1-9]|1[0-2])\/[0-9]{2}" title="Escribe el vencimiento como MM/AA">
+                            <span class="mensaje-error" id="msgVence" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cvv-tarjeta">3 NÚMEROS DE ATRÁS (CVV)</label>
+                            <input type="password" id="cvv-tarjeta" name="cvv-tarjeta" placeholder="•••"
+                                inputmode="numeric" autocomplete="cc-csc" maxlength="3" required
+                                pattern="[0-9]{3}" title="Escribe los 3 números de atrás de la tarjeta">
+                            <span class="mensaje-error" id="msgCvv" aria-live="polite"></span>
+                        </div>
+                    </div>
+
+                    <p class="nota-pago">Pago simulado para el proyecto: los datos de la tarjeta no se guardan.
+                        Al pagar verás el resumen de tu reserva y podrás reservar.</p>
+
+                    <div class="form-action">
+                        <label for="paso5" class="btn-paso btn-atras">ATRÁS</label>
+                        <button type="submit" class="btn-submit">PAGAR</button>
                     </div>
                 </fieldset>
 
@@ -398,29 +440,62 @@
 
     <!---------- VENTANAS MODALES (dialog) ---------->
 
-    <!-- 1. Resumen para confirmar la reserva (al confirmar, va a confirmacion.html) -->
+    <!-- 1. Resumen de la reserva (se abre al pagar en el paso 6).
+         "Reservar" guarda la reserva y va a confirmacion.html -->
     <dialog id="modalResumen" class="modal-vr" tabindex="-1" autofocus>
         <p class="modal-eyebrow">Último paso</p>
-        <h2 class="modal-titulo">Confirma tu reserva</h2>
-        <p class="modal-texto">Revisa que todos los datos sean correctos antes de confirmar.</p>
+        <h2 class="modal-titulo">Resumen de tu reserva</h2>
+        <p class="modal-texto">Revisa que todos los datos sean correctos y pulsa Reservar.</p>
         <div id="cajaResumen" class="modal-reporte"></div>
         <div class="modal-acciones">
             <button type="button" class="btn-modal btn-modal-secundario" onclick="modalResumen.close()">Volver</button>
-            <button type="button" class="btn-modal btn-modal-principal" onclick="confirmarReserva()">Confirmar reserva</button>
+            <button type="button" class="btn-modal btn-modal-principal" onclick="confirmarReserva()">Reservar</button>
         </div>
     </dialog>
 
-    <!-- 2. Un cliente no puede tener más de una reserva activa.
-         Solo tiene 2 opciones: volver al inicio o cancelar la reserva.
+    <!-- 2. Límite: máximo 3 reservas vigentes por cuenta.
          oncancel: evita cerrarla con la tecla Esc; onclose: si igual se cierra, vuelve a abrirse. -->
-    <dialog id="modalReservaActiva" class="modal-vr" tabindex="-1" autofocus oncancel="event.preventDefault()" onclose="bloquearSiTieneReserva()">
+    <dialog id="modalReservaActiva" class="modal-vr" tabindex="-1" autofocus oncancel="event.preventDefault()" onclose="bloquearSiLlegoAlLimite()">
         <p class="modal-eyebrow">Aviso</p>
-        <h2 class="modal-titulo">Ya tienes una reserva activa</h2>
-        <p class="modal-texto">Cada cliente solo puede tener una reserva a la vez.</p>
+        <h2 class="modal-titulo">Llegaste al límite de reservas</h2>
+        <p class="modal-texto">Cada cuenta puede tener como máximo 3 reservas vigentes. Cancela una para poder reservar de nuevo.</p>
         <div id="cajaReservaActiva" class="modal-reporte"></div>
         <div class="modal-acciones">
-            <button type="button" class="btn-modal btn-modal-blanco" onclick="cancelarReserva()">Cancelar reserva</button>
             <button type="button" class="btn-modal btn-modal-principal" onclick="irAlInicio()">Volver al inicio</button>
+        </div>
+    </dialog>
+
+    <!-- 3. "Por favor, inicia sesión": se abre al darle SIGUIENTE en el paso 3 sin tener sesión.
+         Cancelar -> cierra y se queda en el paso 3. Iniciar Sesión -> va al login. -->
+    <dialog id="modalLogin" class="modal-vr modal-centrado" tabindex="-1" autofocus>
+        <p class="modal-eyebrow">Solo falta un paso</p>
+        <h2 class="modal-titulo">Por favor, inicia sesión</h2>
+
+        <!-- Candado dibujado con SVG -->
+        <svg class="icono-candado" viewBox="0 0 64 64" width="84" height="84" aria-hidden="true">
+            <path class="candado-arco" d="M20 28V20a12 12 0 0 1 24 0v8" fill="none" stroke="#f5f2ee" stroke-width="5"
+                stroke-linecap="round" />
+            <rect x="12" y="28" width="40" height="30" rx="4" fill="#c41f24" />
+            <circle cx="32" cy="41" r="4.5" fill="#0a0908" />
+            <rect x="30" y="43" width="4" height="9" rx="2" fill="#0a0908" />
+        </svg>
+
+        <p class="modal-texto">Necesitas una cuenta para continuar con tu reserva. Tus datos elegidos se guardarán
+            y volverás justo aquí al iniciar sesión o crear tu cuenta.</p>
+
+        <div class="modal-acciones">
+            <button type="button" class="btn-modal btn-modal-secundario" onclick="cerrarModalLogin()">Cancelar</button>
+            <button type="button" class="btn-modal btn-modal-principal" onclick="irAlLogin()">Iniciar Sesión</button>
+        </div>
+    </dialog>
+
+    <!-- 4. Aviso general (el título y el texto los pone reserva.js según el caso) -->
+    <dialog id="modalAviso" class="modal-vr modal-centrado" tabindex="-1" autofocus>
+        <p class="modal-eyebrow">Aviso</p>
+        <h2 class="modal-titulo" id="avisoTitulo"></h2>
+        <p class="modal-texto" id="avisoTexto"></p>
+        <div class="modal-acciones">
+            <button type="button" class="btn-modal btn-modal-principal" onclick="modalAviso.close()">Entendido</button>
         </div>
     </dialog>
 

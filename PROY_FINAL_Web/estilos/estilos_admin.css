@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Oswald:wght@500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--negro);
+  font-family: 'Jost', sans-serif;
+  color: var(--blanco);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============ PANEL ============ */
+
+.admin-seccion {
+  flex: 1;
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 0 70px;
+}
+
+.admin-seccion[hidden] {
+  display: none;
+}
+
+.admin-encabezado {
+  text-align: center;
+  animation: aparecer 0.8s ease backwards;
+}
+
+.admin-encabezado .referencia {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--rojo);
+  margin-bottom: 18px;
+}
+
+.admin-encabezado .titulo-hero {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(34px, 6vw, 60px);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.admin-encabezado .parrafo {
+  margin-top: 16px;
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--gris);
+}
+
+.admin-encabezado::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 2px;
+  background: var(--rojo);
+  margin: 28px auto 0;
+}
+
+/* ============ BUSCADOR ============ */
+
+.admin-busqueda {
+  display: flex;
+  gap: 12px;
+  margin: 36px 0 18px;
+  animation: aparecer 0.8s ease 0.1s backwards;
+}
+
+.admin-busqueda input,
+.admin-busqueda select {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--linea);
+  color: var(--blanco);
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-busqueda input {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-busqueda select {
+  width: 220px;
+}
+
+.admin-busqueda input::placeholder {
+  color: rgba(185, 178, 168, 0.5);
+}
+
+.admin-busqueda input:focus,
+.admin-busqueda select:focus {
+  border-color: var(--rojo);
+  box-shadow: 0 0 0 1px var(--rojo);
+}
+
+.admin-busqueda select option {
+  background: var(--negro-2);
+  color: var(--blanco);
+}
+
+/* ============ TABLA ============ */
+
+.admin-tabla-caja {
+  overflow-x: auto;
+  background: rgba(20, 18, 16, 0.66);
+  border: 1px solid var(--linea);
+  border-top: 2px solid var(--rojo);
+  animation: aparecer 0.8s ease 0.2s backwards;
+}
+
+.admin-tabla {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.admin-tabla th {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--linea);
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--gris);
+  white-space: nowrap;
+}
+
+.admin-tabla td {
+  padding: 13px 12px;
+  border-bottom: 1px solid rgba(245, 242, 238, 0.08);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-tabla tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-tabla tbody tr:hover {
+  background: rgba(196, 31, 36, 0.08);
+}
+
+.admin-tabla td:first-child {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #f0565b;
+  white-space: nowrap;
+}
+
+.admin-vacio {
+  padding: 40px 12px;
+  text-align: center;
+  color: var(--gris);
+  font-weight: 300;
+}
+
+.estado {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid var(--linea);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--gris);
+}
+
+.estado-confirmada {
+  border-color: #35b489;
+  color: #35b489;
+}
+
+/* ============ PAGINACIÓN ============ */
+
+.admin-paginacion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.admin-paginacion p {
+  font-size: 13px;
+  color: var(--gris);
+}
+
+#botonesPagina {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.btn-pagina {
+  min-width: 38px;
+  padding: 9px 12px;
+  background: transparent;
+  border: 1px solid var(--linea);
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blanco);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+}
+
+.btn-pagina:hover:not(:disabled) {
+  border-color: var(--rojo);
+}
+
+.btn-pagina.activa {
+  background: var(--rojo);
+  border-color: var(--rojo);
+}
+
+.btn-pagina:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .admin-seccion {
+    padding: 36px 0 50px;
+  }
+
+  .admin-busqueda {
+    flex-direction: column;
+  }
+
+  .admin-busqueda select {
+    width: 100%;
+  }
+}

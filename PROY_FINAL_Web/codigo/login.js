@@ -28,18 +28,8 @@ function iniciarSesion(event) {
 
   document.getElementById("mgError").innerHTML = "";
 
-  // Inicio de sesión correcto: se guarda la sesión (sin la contraseña)
-  guardarDato(CLAVES.sesion, {
-    nombre: usuario.nombre,
-    apellido: usuario.apellido,
-    correo: usuario.correo,
-    telefono: usuario.telefono
-  });
-
-  // Si venía de una reserva a medias, vuelve a ella y continúa en el paso 4
-  if (localStorage.getItem(CLAVES.reservaTemporal)) {
-    location.href = "../../paginas/5. reservar/index.html?continuar=1";
-  } else {
-    location.href = "../../index.html";
-  }
+  // abrirSesion (almacen.js) guarda la sesión y redirige según el rol:
+  //   admin   -> panel de administrador
+  //   usuario -> a su reserva a medias (paso 4) o al inicio
+  abrirSesion(usuario);
 }
