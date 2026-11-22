@@ -250,16 +250,144 @@ function mostrarHorarios() {
 }
 
 
-/* Función para guardar los datos cuando nos mande al LOGIN*/
+/*------------------ REGLAS DE NEGOCIO -----------------*/
 
-function guardarDatos() {
-    // Un cliente no puede tener más de una reserva activa
-    if (bloquearSiTieneReserva()) return;
+// Cada cuenta puede tener, como máximo, 2 reservas por día y 3 reservas vigentes en total.
+// "Vigente" = la fecha de la reserva es hoy o más adelante (las que ya pasaron no cuentan).
+const MAX_RESERVAS_POR_DIA = 2;
+const MAX_RESERVAS_TOTAL = 3;
 
-    if (!horarioSeleccionado || !mesaSeleccionada) {
-        alert("Selecciona primero un horario disponible.");
+// La fecha mínima del calendario siempre es hoy
+selectorFecha.min = fechaDeHoy();
+
+// Reservas de esa cuenta cuya fecha no ha pasado
+function reservasVigentesDe(correo) {
+    let hoy = fechaDeHoy();
+    let guardadas = leerDato(CLAVES.reservasConfirmadas, []);
+    let vigentes = [];
+
+    for (let i = 0; i < guardadas.length; i++) {
+        if (guardadas[i].usuario === correo && guardadas[i].fecha >= hoy) {
+            vigentes.push(guardadas[i]);
+        }
+    }
+
+    return vigentes;
+}
+
+// Cuántas reservas vigentes tiene esa cuenta en un día concreto
+function contarReservasDelDia(correo, fecha) {
+    let vigentes = reservasVigentesDe(correo);
+    let total = 0;
+
+    for (let i = 0; i < vigentes.length; i++) {
+        if (vigentes[i].fecha === fecha) {
+            total++;
+        }
+    }
+
+    return total;
+}
+
+// Valida la fecha elegida. Devuelve un mensaje de error, o "" si todo está bien.
+function validarFechaReserva(correo, fecha) {
+    if (fecha < fechaDeHoy()) {
+        return "Elige una fecha desde hoy en adelante.";
+    }
+
+    if (contarReservasDelDia(correo, fecha) >= MAX_RESERVAS_POR_DIA) {
+        return "Ya tienes " + MAX_RESERVAS_POR_DIA + " reservas para el " + formatearFecha(fecha) +
+            ". Solo se permiten " + MAX_RESERVAS_POR_DIA + " reservas por día: elige un día distinto.";
+    }
+
+    return "";
+}
+
+
+/*------------------ VENTANAS MODALES (dialog) -----------------*/
+
+// Reserva armada que espera la confirmación del cliente
+let reservaPendiente = null;
+
+// Aviso general: título y texto cambian según el caso
+function mostrarAviso(titulo, texto) {
+    document.getElementById("avisoTitulo").textContent = titulo;
+    document.getElementById("avisoTexto").textContent = texto;
+
+    const modal = document.getElementById("modalAviso");
+    if (!modal.open) {
+        modal.showModal();
+        modal.focus(); // el foco queda en la ventana, no sobre un botón
+    }
+}
+
+function avisoAdministrador() {
+    mostrarAviso("Cuenta de administrador",
+        "Las cuentas de administrador solo pueden consultar las reservas. Para reservar, usa una cuenta de cliente.");
+}
+
+// Ventana "Por favor, inicia sesión" (solo para visitantes sin cuenta)
+function abrirModalLogin() {
+    const modal = document.getElementById("modalLogin");
+    modal.showModal();
+    modal.focus();
+}
+
+// "Cancelar": cierra la ventana y se queda en el paso 3 con todo lo elegido
+function cerrarModalLogin() {
+    document.getElementById("modalLogin").close();
+}
+
+function irAlLogin() {
+    // Ruta desde paginas/5. reservar/ hacia paginas/0. login/
+    window.location.href = "../../paginas/0. login/index.html";
+}
+
+function irAlInicio() {
+    localStorage.removeItem(CLAVE_RESERVA); // se descarta lo que estaba armando
+    window.location.href = "../../index.html";
+}
+
+
+/*------------------ PASO 2 y PASO 3 (botones SIGUIENTE) -----------------*/
+
+// SIGUIENTE del paso 2: valida la fecha antes de ver los horarios
+function validarPaso2() {
+    const fecha = selectorFecha.value;
+    if (!fecha || !selectorPersonas.value) return;
+
+    const sesion = obtenerSesion();
+
+    if (sesion && sesion.rol === "usuario") {
+        const mensaje = validarFechaReserva(sesion.correo, fecha);
+        if (mensaje) {
+            mostrarAviso("Elige otro día", mensaje);
+            return;
+        }
+    } else if (fecha < fechaDeHoy()) {
+        mostrarAviso("Fecha no válida", "Elige una fecha desde hoy en adelante.");
         return;
     }
+
+    document.getElementById("paso3").checked = true;
+}
+
+// SIGUIENTE del paso 3: guarda lo elegido y, según quién sea, avanza o pide iniciar sesión
+function guardarDatos() {
+    const sesion = obtenerSesion();
+
+    if (sesion && sesion.rol === "admin") {
+        avisoAdministrador();
+        return;
+    }
+
+    if (bloquearSiLlegoAlLimite()) return;
+
+    if (!horarioSeleccionado || !mesaSeleccionada) {
+        mostrarAviso("Falta un horario", "Selecciona primero un horario disponible.");
+        return;
+    }
+
     const filtros = obtenerFiltros();
     const reservaTemporal = {
         sede: filtros.sede,
@@ -271,25 +399,25 @@ function guardarDatos() {
         mesaId: mesaSeleccionada.id
     };
 
-    localStorage.setItem(CLAVE_RESERVA, JSON.stringify(reservaTemporal)
-    );
+    // Se guarda ANTES de preguntar por el login para no perder lo elegido
+    localStorage.setItem(CLAVE_RESERVA, JSON.stringify(reservaTemporal));
 
-    // Si ya inició sesión antes, no hace falta pasar por el login
-    if (obtenerSesion()) {
+    // Ya inició sesión: pasa al paso 4
+    if (sesion) {
+        const mensaje = validarFechaReserva(sesion.correo, filtros.fecha);
+        if (mensaje) {
+            document.getElementById("paso2").checked = true;
+            mostrarAviso("Elige otro día", mensaje);
+            return;
+        }
         rellenarTitular();
         document.getElementById("paso4").checked = true;
         return;
     }
 
-    // Aún no inició sesión: va directo al login
-    irAlLogin();
+    // Visitante sin cuenta: ventana "Por favor, inicia sesión"
+    abrirModalLogin();
 }
-
-function irAlLogin() {
-    // Ruta desde paginas/5. reservar/ hacia paginas/0. login/
-    window.location.href = "../../paginas/0. login/index.html";
-}
-
 
 // Actualiza la disponibilidad cuando cambie los filtros de la primera etapa
 document.querySelectorAll('input[name="sede"], input[name="zona"]')
@@ -302,7 +430,7 @@ selectorPersonas.addEventListener("change", mostrarHorarios);
 selectorFecha.addEventListener("change", mostrarHorarios);
 
 
-/*------------------ DATOS DEL TITULAR Y RESERVA FINAL -----------------*/
+/*------------------ DATOS DEL TITULAR -----------------*/
 
 // Rellena el paso 4 con los datos de la cuenta (sin pisar lo que ya se escribió)
 function rellenarTitular() {
@@ -349,27 +477,132 @@ function nombreSalon(valor) {
     }
 }
 
-// Envío final (botón RESERVAR del paso 5)
+
+/*------------------ PASO 6: PAGO DE LA RESERVA -----------------*/
+
+// IMPORTANTE: el número completo de la tarjeta y el CVV NUNCA se guardan
+// (ni en localStorage ni en la reserva). Solo se guardan los últimos 4 dígitos.
+
+const campoTarjeta = document.getElementById("numero-tarjeta");
+const campoVence = document.getElementById("vence-tarjeta");
+const campoCvv = document.getElementById("cvv-tarjeta");
+
+// Muestra (o borra) el mensaje de error de un campo
+function mostrarMensaje(idMensaje, texto) {
+    document.getElementById(idMensaje).textContent = texto;
+}
+
+// Devuelve el mensaje de error del número de tarjeta, o "" si está bien
+function errorTarjeta() {
+    const digitos = campoTarjeta.value.replace(/\D/g, "");
+
+    if (digitos.length === 0) return "Escribe los 16 dígitos de la tarjeta.";
+    if (digitos.length < 16) return "Faltan " + (16 - digitos.length) + " dígitos.";
+    return "";
+}
+
+// Fecha de vencimiento escrita como MM/AA
+function errorVencimiento() {
+    const texto = campoVence.value;
+
+    if (texto.length < 5) return "Escribe el vencimiento como MM/AA.";
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(texto)) return "El mes debe estar entre 01 y 12.";
+
+    const partes = texto.split("/");
+    const mes = Number(partes[0]);
+    const anio = 2000 + Number(partes[1]);
+    const hoy = new Date();
+
+    // La tarjeta vale hasta el último día del mes escrito
+    if (anio < hoy.getFullYear() || (anio === hoy.getFullYear() && mes < hoy.getMonth() + 1)) {
+        return "La tarjeta está vencida.";
+    }
+    return "";
+}
+
+function errorCvv() {
+    const texto = campoCvv.value;
+
+    if (texto.length === 0) return "Escribe los 3 números de atrás de la tarjeta.";
+    if (!/^\d{3}$/.test(texto)) return "Deben ser 3 números.";
+    return "";
+}
+
+// Validación en tiempo real (addEventListener 'input', como en el ejercicio de clase)
+campoTarjeta.addEventListener("input", function () {
+    const digitos = this.value.replace(/\D/g, "").slice(0, 16);
+
+    // Se agrupa de 4 en 4: 1234 5678 9012 3456
+    this.value = digitos.replace(/(\d{4})(?=\d)/g, "$1 ");
+    mostrarMensaje("msgTarjeta", digitos.length === 0 ? "" : errorTarjeta());
+});
+
+campoVence.addEventListener("input", function () {
+    let digitos = this.value.replace(/\D/g, "").slice(0, 4);
+
+    // Se agrega la "/" sola después del mes
+    if (digitos.length > 2) {
+        digitos = digitos.slice(0, 2) + "/" + digitos.slice(2);
+    }
+    this.value = digitos;
+    mostrarMensaje("msgVence", digitos.length === 0 ? "" : errorVencimiento());
+});
+
+campoCvv.addEventListener("input", function () {
+    this.value = this.value.replace(/\D/g, "").slice(0, 3);
+    mostrarMensaje("msgCvv", this.value.length === 0 ? "" : errorCvv());
+});
+
+// Al darle a PAGAR: revisa los tres campos. Devuelve true si el pago es válido.
+function validarPago() {
+    const e1 = errorTarjeta();
+    const e2 = errorVencimiento();
+    const e3 = errorCvv();
+
+    mostrarMensaje("msgTarjeta", e1);
+    mostrarMensaje("msgVence", e2);
+    mostrarMensaje("msgCvv", e3);
+
+    return e1 === "" && e2 === "" && e3 === "";
+}
+
+
+/*------------------ ENVÍO FINAL (botón PAGAR del paso 6) -----------------*/
+
 function finalizarReserva(evento) {
     evento.preventDefault();
 
     const sesion = obtenerSesion();
     if (!sesion) {
-        guardarDatos(); // sesión cerrada en otra pestaña: de nuevo al login
+        guardarDatos(); // sesión cerrada en otra pestaña: de nuevo a la ventana de login
         return;
     }
 
-    // Un cliente no puede tener más de una reserva activa
-    if (bloquearSiTieneReserva()) return;
+    // Solo las cuentas de cliente reservan; el administrador únicamente consulta
+    if (sesion.rol !== "usuario") {
+        avisoAdministrador();
+        return;
+    }
+
+    // Máximo 3 reservas vigentes en total
+    if (bloquearSiLlegoAlLimite()) return;
 
     if (!horarioSeleccionado || !mesaSeleccionada) {
-        alert("Selecciona primero un horario disponible.");
+        mostrarAviso("Falta un horario", "Selecciona primero un horario disponible.");
         document.getElementById("paso3").checked = true;
         return;
     }
 
     const filtros = obtenerFiltros();
     const horaFin = calcularHoraFin(horarioSeleccionado);
+
+    // Máximo 2 reservas por día
+    const mensajeDia = validarFechaReserva(sesion.correo, filtros.fecha);
+    if (mensajeDia) {
+        document.getElementById("paso2").checked = true;
+        mostrarAviso("Elige otro día", mensajeDia);
+        return;
+    }
 
     // Última comprobación: que nadie haya tomado la mesa mientras tanto
     if (!mesaEstaLibre(mesaSeleccionada.id, filtros.fecha, horarioSeleccionado, horaFin)) {
@@ -378,6 +611,11 @@ function finalizarReserva(evento) {
         document.getElementById("paso3").checked = true;
         return;
     }
+
+    // Datos de la tarjeta (simulado: no hay pasarela de pago real)
+    if (!validarPago()) return;
+
+    const digitos = campoTarjeta.value.replace(/\D/g, "");
 
     // Mismos nombres de campo que el arreglo "reservas" (mesaId, fecha, horaInicio,
     // horaFin, estado) para que esta mesa quede ocupada en las próximas consultas.
@@ -402,11 +640,15 @@ function finalizarReserva(evento) {
             requerimiento: document.getElementById("requerimiento").value.trim(),
             necesidad: document.getElementById("necesidad").value.trim(),
             alergias: document.getElementById("alergias").value.trim()
+        },
+        pago: {
+            metodo: "Tarjeta",
+            ultimos4: digitos.slice(-4)
         }
     };
 
     // Todavía NO se guarda: primero se muestra el resumen en una ventana modal
-    // para que el cliente confirme (botón "Confirmar reserva" -> confirmarReserva()).
+    // (botón "Reservar" -> confirmarReserva()).
     reservaPendiente = reserva;
     document.getElementById("cajaResumen").innerHTML = reporteReserva(reserva, true);
     const ventanaResumen = document.getElementById("modalResumen");
@@ -414,14 +656,24 @@ function finalizarReserva(evento) {
     ventanaResumen.focus(); // el foco queda en la ventana, no sobre un botón
 }
 
-// Botón "Confirmar reserva" de la ventana modal: recién aquí se guarda
+// Botón "Reservar" de la ventana del resumen: recién aquí se guarda
 function confirmarReserva() {
     document.getElementById("modalResumen").close();
 
     if (!reservaPendiente) return;
 
     // Últimas comprobaciones antes de guardar
-    if (bloquearSiTieneReserva()) return;
+    const sesion = obtenerSesion();
+    if (!sesion || sesion.rol !== "usuario") return;
+
+    if (bloquearSiLlegoAlLimite()) return;
+
+    const mensajeDia = validarFechaReserva(sesion.correo, reservaPendiente.fecha);
+    if (mensajeDia) {
+        document.getElementById("paso2").checked = true;
+        mostrarAviso("Elige otro día", mensajeDia);
+        return;
+    }
 
     if (!mesaEstaLibre(reservaPendiente.mesaId, reservaPendiente.fecha,
                        reservaPendiente.horaInicio, reservaPendiente.horaFin)) {
@@ -440,47 +692,12 @@ function confirmarReserva() {
     localStorage.removeItem(CLAVE_RESERVA); // la reserva ya está completa
     reservaPendiente = null;
 
-    // Pantalla de confirmación que ya tenía el proyecto
+    // Ventana de "reserva exitosa" que ya tenía el proyecto
     window.location.href = "confirmacion.html";
 }
 
 
-/*------------------ VENTANAS MODALES (dialog) -----------------*/
-
-// Reserva armada que espera la confirmación del cliente
-let reservaPendiente = null;
-
-function irAlInicio() {
-    localStorage.removeItem(CLAVE_RESERVA); // se descarta lo que estaba armando
-    window.location.href = "../../index.html";
-}
-
-// 2026-11-20 -> 20/11/2026
-function formatearFecha(fecha) {
-    const partes = fecha.split("-");
-    return partes[2] + "/" + partes[1] + "/" + partes[0];
-}
-
-// Evita que un texto escrito por el cliente se interprete como HTML
-function escaparHTML(texto) {
-    let resultado = "";
-
-    for (let i = 0; i < texto.length; i++) {
-        let letra = texto[i];
-
-        if (letra === "<") {
-            resultado += "&lt;";
-        } else if (letra === ">") {
-            resultado += "&gt;";
-        } else if (letra === "&") {
-            resultado += "&amp;";
-        } else {
-            resultado += letra;
-        }
-    }
-
-    return resultado;
-}
+/*------------------ REPORTE DE UNA RESERVA -----------------*/
 
 // Reporte de una reserva (se arma con comillas invertidas y se muestra con innerHTML,
 // igual que el "cajaReporte" de clase)
@@ -515,54 +732,45 @@ function reporteReserva(reserva, completo) {
             <p><strong>Necesidad</strong><span>${escaparHTML(reserva.adicional.necesidad) || "—"}</span></p>
             <p><strong>Alergias</strong><span>${escaparHTML(reserva.adicional.alergias) || "—"}</span></p>
         `;
+
+        // Solo se muestran los últimos 4 dígitos de la tarjeta
+        if (reserva.pago) {
+            cad += `
+                <h3 class="modal-seccion">Pago</h3>
+                <p><strong>Método</strong><span>${reserva.pago.metodo} •••• ${reserva.pago.ultimos4}</span></p>
+            `;
+        }
     }
 
     return cad;
 }
 
 
-/*------------------ UN CLIENTE = UNA RESERVA ACTIVA -----------------*/
+/*------------------ LÍMITE: MÁXIMO 3 RESERVAS VIGENTES -----------------*/
 
-// Fecha de hoy como YYYY-MM-DD (con la hora local del cliente)
-function fechaDeHoy() {
-    let hoy = new Date();
-    let mes = hoy.getMonth() + 1;
-    let dia = hoy.getDate();
-
-    if (mes < 10) {
-        mes = "0" + mes;
-    }
-    if (dia < 10) {
-        dia = "0" + dia;
-    }
-
-    return hoy.getFullYear() + "-" + mes + "-" + dia;
-}
-
-// Una reserva está "activa" mientras su fecha no haya pasado
-function buscarReservaActiva(correo) {
-    let hoy = fechaDeHoy();
-    let guardadas = leerDato(CLAVES.reservasConfirmadas, []);
-
-    for (let i = 0; i < guardadas.length; i++) {
-        if (guardadas[i].usuario === correo && guardadas[i].fecha >= hoy) {
-            return guardadas[i];
-        }
-    }
-
-    return null;
-}
-
-// Si el cliente ya tiene una reserva activa, lo avisa en una ventana modal
-// y devuelve true para que quien la llamó detenga el proceso.
-function bloquearSiTieneReserva() {
+// Si la cuenta ya tiene 3 reservas vigentes, lo avisa en una ventana modal con la lista
+// (cada una con su botón "Cancelar") y devuelve true para detener el proceso.
+function bloquearSiLlegoAlLimite() {
     const sesion = obtenerSesion();
-    if (!sesion) return false;
+    if (!sesion || sesion.rol !== "usuario") return false;
 
-    const activa = buscarReservaActiva(sesion.correo);
-    if (!activa) return false;
+    const vigentes = reservasVigentesDe(sesion.correo);
+    if (vigentes.length < MAX_RESERVAS_TOTAL) return false;
 
-    document.getElementById("cajaReservaActiva").innerHTML = reporteReserva(activa);
+    let cad = "";
+    for (let i = 0; i < vigentes.length; i++) {
+        let r = vigentes[i];
+        cad += `
+            <div class="fila-reserva">
+                <div>
+                    <strong>${formatearFecha(r.fecha)} · ${r.horaInicio}</strong>
+                    <span>${r.sede} - ${r.salon} · Mesa ${r.mesaId}</span>
+                </div>
+                <button type="button" class="btn-fila" onclick="cancelarReserva('${r.id}')">Cancelar</button>
+            </div>
+        `;
+    }
+    document.getElementById("cajaReservaActiva").innerHTML = cad;
 
     const modal = document.getElementById("modalReservaActiva");
     if (!modal.open) {
@@ -572,21 +780,21 @@ function bloquearSiTieneReserva() {
     return true;
 }
 
-// Botón "Cancelar reserva" de la ventana modal (igual que confirEliminar de clase)
-function cancelarReserva() {
+// Botón "Cancelar" de una reserva de la lista (igual que confirEliminar de clase)
+function cancelarReserva(id) {
     let sesion = obtenerSesion();
     if (sesion === null) return;
 
-    let respuesta = confirm("¿Estás seguro de cancelar tu reserva?");
+    let respuesta = confirm("¿Estás seguro de cancelar esta reserva?");
 
     if (respuesta === true) {
-        let activa = buscarReservaActiva(sesion.correo);
         let guardadas = leerDato(CLAVES.reservasConfirmadas, []);
         let quedan = [];
 
         // Se guardan todas las reservas, menos la que se está cancelando
+        // (y solo se puede cancelar una reserva propia)
         for (let i = 0; i < guardadas.length; i++) {
-            if (activa === null || guardadas[i].id !== activa.id) {
+            if (!(guardadas[i].id === id && guardadas[i].usuario === sesion.correo)) {
                 quedan.push(guardadas[i]);
             }
         }
@@ -608,31 +816,10 @@ function cancelarReserva() {
 // Recupera la reserva temporal, que fue guardada con LocalStorage
 
 function recuperarReservaTemporal() {
-
-    const textoGuardado = localStorage.getItem(CLAVE_RESERVA);
-
-    if (!textoGuardado) return null;
-
-    try {
-
-        return JSON.parse(textoGuardado);
-
-    } catch (error) {
-
-        console.error(
-            "No se pudo leer la reserva temporal:",
-            error
-        );
-
-        localStorage.removeItem(CLAVE_RESERVA);
-
-        return null;
-
-    }
-
+    return leerDato(CLAVE_RESERVA, null);
 }
 
-//Restaura los filtros y continua al paso 4
+// Restaura los filtros y continúa al paso 4 (o al paso 2 si la fecha ya no se permite)
 
 function restaurarFiltros(reserva) {
 
@@ -654,6 +841,17 @@ function restaurarFiltros(reserva) {
 
     mostrarHorarios();
 
+    // La cuenta pudo cambiar al iniciar sesión: se revisa la regla de 2 reservas por día
+    const sesion = obtenerSesion();
+    const mensajeDia = validarFechaReserva(sesion.correo, reserva.fecha);
+
+    if (mensajeDia) {
+        document.getElementById("paso2").checked = true;
+        mostrarAviso("Elige otro día", mensajeDia);
+        localStorage.removeItem(CLAVE_RESERVA);
+        return;
+    }
+
     const filtros = obtenerFiltros();
 
     const mesaActual = buscarMesaDisponible(
@@ -673,9 +871,12 @@ function restaurarFiltros(reserva) {
 
     } else {
 
-        alert(
-            "El horario ya no está disponible. Selecciona otro."
+        mostrarAviso(
+            "Horario no disponible",
+            "El horario que elegiste ya no está disponible. Selecciona otro."
         );
+
+        document.getElementById("paso3").checked = true;
 
         localStorage.removeItem(CLAVE_RESERVA);
 
@@ -690,15 +891,17 @@ const parametrosURL = new URLSearchParams(window.location.search);
 
 const vieneDelLogin = parametrosURL.get("continuar") === "1";
 
-if (bloquearSiTieneReserva()) {
+const sesionInicial = obtenerSesion();
 
-    // El cliente ya tiene una reserva activa. Si venía del login se conserva lo que
-    // estaba armando (por si cancela su reserva y quiere continuar); si no, se descarta.
+if (bloquearSiLlegoAlLimite()) {
+
+    // La cuenta ya tiene 3 reservas vigentes. Si venía del login se conserva lo que
+    // estaba armando (por si cancela una reserva y quiere continuar); si no, se descarta.
     if (!vieneDelLogin) {
         localStorage.removeItem(CLAVE_RESERVA);
     }
 
-} else if (vieneDelLogin && obtenerSesion()) {
+} else if (vieneDelLogin && sesionInicial && sesionInicial.rol === "usuario") {
 
     const reservaRecuperada = recuperarReservaTemporal();
 
@@ -715,15 +918,19 @@ if (bloquearSiTieneReserva()) {
 }
 
 // ==========================================
-// ENVÍO FINAL, LIMPIAR FORMULARIO Y SESIÓN
+// LIMPIAR FORMULARIO
 // ==========================================
 
 // (El envío y el reset se conectan en el HTML con
 //  onsubmit="finalizarReserva(event)" y onreset="limpiarReserva()")
 
-// "Limpiar formulario" también descarta el horario elegido y la reserva temporal
+// "Limpiar formulario" también descarta el horario elegido, la reserva temporal
+// y los mensajes de error del pago
 function limpiarReserva() {
     localStorage.removeItem(CLAVE_RESERVA);
+    mostrarMensaje("msgTarjeta", "");
+    mostrarMensaje("msgVence", "");
+    mostrarMensaje("msgCvv", "");
     setTimeout(mostrarHorarios, 0);
 }
 
