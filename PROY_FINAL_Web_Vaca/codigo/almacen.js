@@ -113,6 +113,18 @@ function verificarAdmin() {
   return true;
 }
 
+// Solo un cliente con sesión puede ver "Mis reservas". Devuelve true si puede entrar.
+function verificarUsuario() {
+  let sesion = obtenerSesion();
+
+  if (sesion === null || sesion.rol !== "usuario") {
+    alert("Inicia sesión con una cuenta de cliente para ver tus reservas.");
+    location.href = RAIZ_SITIO + "paginas/0. login/index.html";
+    return false;
+  }
+  return true;
+}
+
 // Pregunta con confirm() (igual que confirEliminar de clase)
 function cerrarSesion(evento) {
   evento.preventDefault();
@@ -134,7 +146,7 @@ function cerrarSesion(evento) {
 }
 
 // Si hay sesión, el enlace del menú pasa a ser "Cerrar Sesión".
-// Si es el administrador, además aparece el enlace "PANEL".
+// Si es el administrador aparece "PANEL"; si es cliente, "MIS RESERVAS".
 function actualizarMenu() {
   let enlace = document.getElementById("enlaceSesion");
   let sesion = obtenerSesion();
@@ -150,6 +162,10 @@ function actualizarMenu() {
   if (sesion.rol === "admin") {
     let li = document.createElement("li");
     li.innerHTML = `<a href="${RAIZ_SITIO}paginas/6. admin/index.html">PANEL</a>`;
+    enlace.parentNode.parentNode.insertBefore(li, enlace.parentNode);
+  } else {
+    let li = document.createElement("li");
+    li.innerHTML = `<a href="${RAIZ_SITIO}paginas/7. mis reservas/index.html">MIS RESERVAS</a>`;
     enlace.parentNode.parentNode.insertBefore(li, enlace.parentNode);
   }
 }
@@ -200,4 +216,45 @@ function fechaDeHoy() {
   }
 
   return hoy.getFullYear() + "-" + mes + "-" + dia;
+}
+
+// Hora actual como HH:MM
+function horaActual() {
+  let ahora = new Date();
+  let h = ahora.getHours();
+  let m = ahora.getMinutes();
+
+  if (h < 10) {
+    h = "0" + h;
+  }
+  if (m < 10) {
+    m = "0" + m;
+  }
+
+  return h + ":" + m;
+}
+
+// Estado real de una reserva:
+//   "cancelada"  -> la canceló el cliente
+//   "finalizada" -> ya pasó su fecha, o es de hoy y su hora de fin ya terminó
+//   "confirmada" -> todavía no se realiza
+// No se guarda: se calcula cada vez que se muestra, así se actualiza sola con el tiempo.
+function estadoReserva(r) {
+  if (r.estado === "cancelada") {
+    return "cancelada";
+  }
+
+  let hoy = fechaDeHoy();
+
+  if (r.fecha < hoy || (r.fecha === hoy && r.horaFin <= horaActual())) {
+    return "finalizada";
+  }
+
+  return "confirmada";
+}
+
+function textoEstado(estado) {
+  if (estado === "cancelada") return "Cancelada";
+  if (estado === "finalizada") return "Finalizada";
+  return "Confirmada";
 }

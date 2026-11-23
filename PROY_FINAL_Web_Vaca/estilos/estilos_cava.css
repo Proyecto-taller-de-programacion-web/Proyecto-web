@@ -2,7 +2,7 @@
 
 .container {
     display: grid;
-    grid-template-columns: [col-header] 1fr [col-last];
+    grid-template-columns: [col-header] minmax(0, 1fr) [col-last];
     grid-template-rows:
         [row-header]  auto
         [row-hero]    auto
@@ -29,7 +29,9 @@
 
 .encabezado-cava {
     position: relative;
-    height: 100vh;
+    height: calc(100vh - 5rem);
+    height: calc(100svh - 5rem);
+    min-height: 22rem;
     width: 100%;
     overflow: hidden;
 }
@@ -180,8 +182,8 @@
 }
 
 .card-vino img {
-    width: auto;                      
-    max-width: 100%;
+    width: 100%;
+    max-width: 14rem;
     height: 16rem;                    
     object-fit: contain;              
     display: block;
@@ -204,6 +206,7 @@
     max-width: 20rem;
     margin-left: auto;
     margin-right: auto;
+    overflow-wrap: anywhere;
 }
 
 
@@ -269,11 +272,15 @@
 /* CELULARES */
 @media (max-width: 480px) {
     .encabezado-cava {
-        height: 110vh;
+        height: 75vh;
+        height: 75svh;
+        min-height: 20rem;
     }
 
     .encabezado-cava .titulo-hero {
         font-size: 3rem;
+        width: 100%;
+        text-align: center;
     }
 
     /* Modificamos o dejamos solo el padding para que coincida con carnes */
@@ -322,11 +329,14 @@
 /* TABLETS */
 @media (min-width: 481px) and (max-width: 768px) {
     .encabezado-cava {
-        height: 100vh;
+        height: 70vh;
+        height: 70svh;
     }
 
     .encabezado-cava .titulo-hero {
         font-size: 3.5rem;
+        width: 100%;
+        text-align: center;
     }
 
     /* Padding ajustado para la sección intro vertical */
@@ -370,10 +380,6 @@
 
 /* LAPTOPS */
 @media (min-width: 769px) and (max-width: 1279px) {
-    .encabezado-cava {
-        height: 100vh;
-    }
-
     .encabezado-cava .titulo-hero {
         font-size: 4.5rem;
     }
@@ -400,12 +406,7 @@
     }
 }
 
-/* PC */
-@media (min-width: 1280px) {
-    .encabezado-cava {
-        height: 100vh;
-    }
-}
+/* PC: usa el alto base de la portada (pantalla menos header) */
 
 /* ----------------8. ANIMACIONES, TRANSICIONES Y TRANSFORMACIONES---------------- */
 
@@ -434,16 +435,6 @@
     to   { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-/* --- Intro: la imagen de las copas "respira" suavemente --- */
-.figura-intro img {
-    animation: respirar 8s ease-in-out infinite alternate;
-}
-
-@keyframes respirar {
-    from { transform: scale(1); }
-    to   { transform: scale(1.08); }
-}
-
 @keyframes respirar2 {
     from { transform: scale(1); }
     to   { transform: scale(1.02); }
@@ -454,16 +445,12 @@
     transition: transform 0.6s ease;
 }
 
-.card-vino:hover {
-    transform: translateY(-8px);
-}
-
 .card-vino img {
     transition: transform 0.8s ease, box-shadow 0.8s ease;
 }
 
 .card-vino:hover img {
-    transform: scale(1.03);
+    transform: translateY(-8px) scale(1.03);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
@@ -510,7 +497,7 @@
     }
 
     .card-vino {
-        animation: pasarVinos 10s ease-in-out infinite;
+        animation: pasarVinos 18s ease-in-out infinite;
     }
 
     .card-vino.clon {
@@ -530,4 +517,18 @@
     50%, 71%     { transform: translateX(calc(-200% - 2 * var(--gap-vinos))); }
     75%, 96%     { transform: translateX(calc(-300% - 3 * var(--gap-vinos))); }
     100%         { transform: translateX(calc(-400% - 4 * var(--gap-vinos))); }
+}
+
+/* Personas que piden menos movimiento: sin zoom, pulso ni "respiración" */
+@media (prefers-reduced-motion: reduce) {
+    .encabezado-cava img,
+    .encabezado-cava .titulo-hero,
+    .intro-cava img,
+    .boton-carta a {
+        animation: none;
+    }
+
+    .encabezado-cava .titulo-hero {
+        transform: translate(-50%, -50%);
+    }
 }

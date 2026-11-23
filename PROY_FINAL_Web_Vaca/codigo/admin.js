@@ -33,7 +33,7 @@ function llenarTabla() {
                 <td>${formatearFecha(r.fecha)}</td>
                 <td>${r.horaInicio} - ${r.horaFin}</td>
                 <td>${r.personas}</td>
-                <td><span class="estado estado-confirmada">Confirmada</span></td>
+                <td><span class="estado estado-${estadoReserva(r)}">${textoEstado(estadoReserva(r))}</span></td>
             </tr>
         `;
     }

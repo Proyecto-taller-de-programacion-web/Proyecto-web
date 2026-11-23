@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mis reservas en La Vaca Roja: historial y cancelación de reservas.">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <title>Mis reservas</title>
+    <link rel="stylesheet" href="../../estilos/estilos_admin.css">
+    <link rel="stylesheet" href="../../estilos/estilos_global.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!---------BARRA DE NAVEGACIÓN (menú hamburguesa responsive)---------->
+        <header class="header">
+
+            <!-- Checkbox oculto: debe ir primero para que el selector ~ alcance al nav -->
+            <input type="checkbox" id="checkmenu">
+
+            <!-- Logo: siempre visible a la izquierda -->
+            <figure class="logo-container">
+                <a href="../../index.html">
+                    <img class="logo-principal" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+                </a>
+            </figure>
+
+            <!-- Ícono hamburguesa: visible solo en móvil y tablet -->
+            <label for="checkmenu" class="lblmenu">&#9776;</label>
+
+            <nav class="nav">
+                <ul>
+                    <li><a href="../../index.html">INICIO</a></li>
+                    <li><a href="../../paginas/1. carnes/index.html">CARNES</a></li>
+                    <li><a href="../../paginas/2. cava-bar/index.html">CAVA/BAR</a></li>
+                    <li><a href="../../paginas/3. nosotros/index.html">NOSOTROS</a></li>
+                    <li><a href="../../paginas/4. sedes/index.html">SEDES</a></li>
+                    <li><a href="../../paginas/5. reservar/index.html">RESERVAR</a></li>
+                    <li class="boton-login"><a id="enlaceSesion" href="../../paginas/0. login/index.html">Iniciar Sesión</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <!-- Se muestra solo si mis_reservas.js comprueba que hay una sesión de cliente -->
+        <main class="admin-seccion" id="contenidoUsuario" hidden>
+
+            <div class="admin-encabezado">
+                <p class="referencia">MI CUENTA</p>
+                <h1 class="titulo-hero">MIS RESERVAS</h1>
+                <p class="parrafo">Historial de todas tus reservas. Puedes cancelar las que aún no se han realizado.</p>
+            </div>
+
+            <!-- Buscador: escribe y la tabla se filtra (onkeyup) -->
+            <div class="admin-busqueda">
+                <input type="text" id="filtro" placeholder="Buscar por código, fecha, sede, zona, estado..."
+                    aria-label="Buscar reservas" onkeyup="filtrarTabla()">
+            </div>
+
+            <!-- Tabla (JavaScript escribe las filas en el tbody) -->
+            <div class="admin-tabla-caja">
+                <table class="admin-tabla" id="tabla">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Sede y zona</th>
+                            <th>Mesa</th>
+                            <th>Personas</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla"></tbody>
+                </table>
+            </div>
+
+            <!-- Paginación básica -->
+            <div class="admin-paginacion">
+                <p id="infoPagina" aria-live="polite"></p>
+                <div id="botonesPagina">
+                    <button type="button" class="btn-pagina" id="btnAnterior" onclick="paginaAnterior()">Anterior</button>
+                    <button type="button" class="btn-pagina" id="btnSiguiente" onclick="paginaSiguiente()">Siguiente</button>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="footer">
+
+            <!-- Columna 1: marca -->
+            <figure class="marca-footer">
+                <img class="logo-footer" src="../../img/logo_empresa.png" alt="Logo La Vaca Roja">
+                <h2 class="titulo-logo">LA VACA ROJA</h2>
+            </figure>
+
+            <!-- Columna 2: sedes y contacto -->
+            <div class="caja-footer">
+                <h4 class="informacion-footer">SEDES</h4>
+                <p>Av. Santa Cruz N° 940 - Miraflores, Lima.</p>
+                <p>Calle Pancho Fierro 15073 - San Isidro, Lima.</p>
+                <br>
+
+                <h4 class="informacion-footer">TELÉFONO</h4>
+                <p>(01) 352 1472</p>
+                <p>982 140 582</p>
+                <br>
+
+                <h4 class="informacion-footer">EMAIL</h4>
+                <p>info@lavacaroja.pe</p>
+                <p>Consultas y reservas</p>
+            </div>
+
+            <!-- Columna 3: horario y servicios -->
+            <div class="caja-footer">
+                <h4 class="informacion-footer">HORARIO DE ATENCIÓN</h4>
+                <p>Martes a Sábado: 12:00 pm - 10:00 pm</p>
+                <p>Domingos: 12:00 pm - 7:00 pm</p>
+                <p>Lunes: Cerrado</p>
+                <br>
+
+                <h4 class="informacion-footer">SERVICIOS</h4>
+                <p>Atención en salón</p>
+                <p>Reservas de mesa</p>
+                <p>Atención para familias</p>
+            </div>
+
+            <!-- Columna 4: redes y libro de reclamaciones -->
+            <div class="caja-footer">
+                <h4 class="informacion-footer">REDES SOCIALES</h4>
+                <div class="redes-footer">
+                    <img src="../../img/logoFacebook.png" alt="Logo de Facebook">
+                    <img src="../../img/logoWhatsApp.png" alt="Logo de WhatsApp">
+                    <img src="../../img/logoTiktok.png" alt="Logo de TikTok">
+                </div>
+                <br>
+
+                <h4 class="informacion-footer">LIBRO DE RECLAMACIONES</h4>
+                <a class="libro-reclamaciones" href="../../pdf_cartas/terminosycondiciones.pdf" target="_blank">
+                    <img src="../../img/libro_de_reclamaciones.jpg" alt="Libro de Reclamaciones">
+                </a>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="../../codigo/almacen.js"></script>
+    <script src="../../codigo/mis_reservas.js"></script>
+
+</body>
+
+</html>
