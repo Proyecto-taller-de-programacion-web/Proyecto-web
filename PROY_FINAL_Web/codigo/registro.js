@@ -1,11 +1,11 @@
 /* =====================================================
-   registro.js — crea la cuenta, la guarda en localStorage y abre sesión
+   registro.js — crea la cuenta y abre sesión
    Depende de almacen.js
    ===================================================== */
 
 // Se llama desde el HTML:  <form onsubmit="registrarUsuario(event)">
 function registrarUsuario(event) {
-  event.preventDefault(); // para que no se recargue la página al enviar
+  event.preventDefault();
 
   let nombre = document.getElementById("nombre").value.trim();
   let apellido = document.getElementById("apellido").value.trim();
@@ -14,14 +14,12 @@ function registrarUsuario(event) {
   let pass = document.getElementById("pass").value;
   let pass2 = document.getElementById("pass2").value;
 
-  // Validaciones: el mensaje sale en el div "mgError"
   if (pass !== pass2) {
     document.getElementById("mgError").innerHTML = "Las contraseñas no coinciden.";
     return;
   }
 
-  // Se revisa, recorriendo la lista, si el correo ya estaba registrado
-  let usuarios = leerDato(CLAVES.usuarios, []);
+  // ¿El correo ya estaba registrado?
   let existe = false;
 
   for (let i = 0; i < usuarios.length; i++) {
@@ -31,26 +29,21 @@ function registrarUsuario(event) {
   }
 
   if (existe === true) {
-    document.getElementById("mgError").innerHTML =
-      "Este correo ya está registrado. Inicia sesión.";
+    document.getElementById("mgError").innerHTML = "Este correo ya está registrado. Inicia sesión.";
     return;
   }
 
-  document.getElementById("mgError").innerHTML = "";
-
-  // El rol siempre es "usuario": nadie puede hacerse administrador desde el formulario
+  // El rol siempre es "usuario": nadie se hace administrador desde el formulario
   let nuevo = {
     nombre: nombre,
     apellido: apellido,
     correo: correo,
     telefono: telefono,
-    pass: pass, // OJO: solo válido para un proyecto de curso sin servidor
+    pass: pass,
     rol: "usuario"
   };
-  usuarios.push(nuevo);
-  guardarDato(CLAVES.usuarios, usuarios);
 
-  // Cuenta creada -> entra directo con su sesión. Si venía de una reserva a medias,
-  // abrirSesion lo devuelve a ella (paso 4); si no, va al inicio.
+  usuarios.push(nuevo);
+  guardarUsuarios();
   abrirSesion(nuevo);
 }

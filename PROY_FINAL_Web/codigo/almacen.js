@@ -1,118 +1,86 @@
 /* =====================================================
-   almacen.js — utilidades compartidas de localStorage,
-   roles (usuario / admin) y control de sesión del menú.
+   almacen.js — LocalStorage, sesión y menú.
    Se carga en TODAS las páginas del sitio.
-   (Sigue el modelo del PDF de la semana 16: usuarios iniciales,
-    inicializar localStorage, obtenerSesion, verificarAutenticacion,
-    redirigirPorRol y cerrarSesion.)
+   Aquí está TODO el uso de LocalStorage del proyecto.
    ===================================================== */
 
-const CLAVES = {
-  usuarios: 'vr_usuarios',                    // cuentas registradas
-  sesion: 'vr_sesion',                        // usuario con sesión iniciada
-  reservaTemporal: 'reservaTemporal',         // reserva a medias (la guarda reserva.js)
-  reservasConfirmadas: 'vr_reservas_confirmadas' // reservas terminadas
-};
-
 // Ruta a la carpeta raíz del sitio (sirve desde cualquier página, para armar enlaces)
-const RAIZ_SITIO = document.currentScript
-  ? document.currentScript.src.replace('codigo/almacen.js', '')
-  : '';
+const RAIZ_SITIO = document.currentScript.src.replace("codigo/almacen.js", "");
 
+// Listas que se guardan en el navegador:
+//   usuarios  -> cuentas registradas (el admin es un usuario con rol "admin")
+//   registros -> reservas confirmadas
+// (Las claves empiezan con "vr_" para no mezclarse con otros proyectos
+//  que hayan guardado datos en el mismo navegador)
+// AQUI DENTRO vamos a usar LocalStorage
+let usuarios = JSON.parse(localStorage.getItem("vr_usuarios")) || [];
+let registros = JSON.parse(localStorage.getItem("vr_registros")) || [];
 
-/* ---------- LEER / GUARDAR (con try/catch como en el PDF) ---------- */
+// El administrador siempre debe estar en la lista, aunque ya hubiera otras cuentas guardadas
+let existeAdmin = false;
 
-function leerDato(clave, porDefecto) {
-  try {
-    let texto = localStorage.getItem(clave);
-
-    if (texto === null) {
-      return porDefecto;
-    }
-    return JSON.parse(texto);
-  } catch (error) {
-    // El dato estaba dañado: se descarta y se usa el valor por defecto
-    localStorage.removeItem(clave);
-    return porDefecto;
+for (let i = 0; i < usuarios.length; i++) {
+  if (usuarios[i].correo === "admin@lavacaroja.pe") {
+    existeAdmin = true;
   }
 }
 
-function guardarDato(clave, valor) {
-  localStorage.setItem(clave, JSON.stringify(valor));
+if (existeAdmin === false) {
+  usuarios.push({
+    nombre: "Administrador",
+    apellido: "La Vaca Roja",
+    correo: "admin@lavacaroja.pe",
+    telefono: "000000000",
+    pass: "admin123",
+    rol: "admin"
+  });
+  guardarUsuarios();
 }
 
-function borrarDato(clave) {
-  localStorage.removeItem(clave);
+
+/* ---------- GUARDAR ---------- */
+
+function guardarUsuarios() {
+  // AQUI DENTRO vamos a usar LocalStorage
+  localStorage.setItem("vr_usuarios", JSON.stringify(usuarios));
+}
+
+function guardarEnStorage() {
+  // AQUI DENTRO vamos a usar LocalStorage
+  localStorage.setItem("vr_registros", JSON.stringify(registros));
 }
 
 
-/* ---------- USUARIOS INICIALES Y ROLES ---------- */
+/* ---------- RESERVA A MEDIAS ---------- */
+// Lo que el visitante eligió antes de ir al login (sede, salón, personas, fecha y horario),
+// para devolverlo al paso donde se quedó cuando vuelva con su sesión iniciada.
 
-// Única cuenta administradora. El rol NUNCA viene de un formulario:
-// el registro siempre crea rol "usuario" (ver registro.js).
-const usuariosIniciales = [
-  {
-    nombre: 'Administrador',
-    apellido: 'La Vaca Roja',
-    correo: 'admin@lavacaroja.pe',
-    telefono: '000000000',
-    pass: 'admin123', // OJO: solo válido para un proyecto de curso sin servidor
-    rol: 'admin'
-  }
-];
-
-// Revisa que la lista guardada tenga la estructura correcta y que exista el admin.
-// Las cuentas antiguas (sin rol) pasan a ser "usuario".
-function inicializarUsuarios() {
-  let usuarios = leerDato(CLAVES.usuarios, []);
-
-  if (!Array.isArray(usuarios)) {
-    usuarios = [];
-  }
-
-  // Cuentas con estructura dañada se descartan
-  let validos = [];
-  for (let i = 0; i < usuarios.length; i++) {
-    let u = usuarios[i];
-    if (u && typeof u.correo === 'string' && typeof u.pass === 'string') {
-      if (u.rol !== 'admin' && u.rol !== 'usuario') {
-        u.rol = 'usuario';
-      }
-      validos.push(u);
-    }
-  }
-
-  // Si falta algún usuario inicial (el admin), se agrega
-  for (let i = 0; i < usuariosIniciales.length; i++) {
-    let existe = validos.some(u => u.correo === usuariosIniciales[i].correo);
-    if (!existe) {
-      validos.push(usuariosIniciales[i]);
-    }
-  }
-
-  guardarDato(CLAVES.usuarios, validos);
+function guardarReservaTemporal(datos) {
+  // AQUI DENTRO vamos a usar LocalStorage
+  localStorage.setItem("vr_reservaTemporal", JSON.stringify(datos));
 }
 
-inicializarUsuarios();
+function obtenerReservaTemporal() {
+  // AQUI DENTRO vamos a usar LocalStorage
+  return JSON.parse(localStorage.getItem("vr_reservaTemporal"));
+}
+
+function borrarReservaTemporal() {
+  // AQUI DENTRO vamos a usar LocalStorage
+  localStorage.removeItem("vr_reservaTemporal");
+}
 
 
 /* ---------- SESIÓN ---------- */
 
 // Devuelve la sesión (con su rol) o null si es visitante
 function obtenerSesion() {
-  let sesion = leerDato(CLAVES.sesion, null);
-
-  if (sesion === null || typeof sesion.correo !== 'string') {
-    return null;
-  }
-  if (sesion.rol !== 'admin' && sesion.rol !== 'usuario') {
-    sesion.rol = 'usuario'; // sesiones antiguas, creadas antes de los roles
-  }
-  return sesion;
+  // AQUI DENTRO vamos a usar LocalStorage
+  return JSON.parse(localStorage.getItem("vr_sesion"));
 }
 
-// Guarda la sesión (sin la contraseña) y envía a cada rol a su lugar.
-// Se usa desde login.js y registro.js (ambos están en paginas/0. xxx/).
+// Guarda la sesión (sin la contraseña) y envía a cada rol a su página.
+// Se usa desde login.js y registro.js (están en paginas/0. xxx/)
 function abrirSesion(usuario) {
   let sesion = {
     nombre: usuario.nombre,
@@ -121,39 +89,72 @@ function abrirSesion(usuario) {
     telefono: usuario.telefono,
     rol: usuario.rol
   };
-  guardarDato(CLAVES.sesion, sesion);
-  redirigirPorRol(sesion);
-}
 
-function redirigirPorRol(sesion) {
-  if (sesion.rol === 'admin') {
-    location.href = '../6. admin/index.html';
-  } else if (localStorage.getItem(CLAVES.reservaTemporal)) {
-    // Venía de una reserva a medias: vuelve a ella y continúa en el paso 4
-    location.href = '../5. reservar/index.html?continuar=1';
+  // AQUI DENTRO vamos a usar LocalStorage
+  localStorage.setItem("vr_sesion", JSON.stringify(sesion));
+
+  if (usuario.rol === "admin") {
+    location.href = "../6. admin/index.html";
   } else {
-    location.href = '../../index.html';
+    // ?continuar=1 -> reservar.js devuelve al cliente al paso donde se quedó
+    location.href = "../5. reservar/index.html?continuar=1";
   }
 }
 
-// Protege una página por rol (modelo del PDF). Devuelve true si puede entrar.
-function verificarAutenticacion(rolRequerido) {
+// Solo el administrador puede ver el panel. Devuelve true si puede entrar.
+function verificarAdmin() {
   let sesion = obtenerSesion();
 
-  if (sesion === null) {
-    alert('Acceso denegado. Debes iniciar sesión.');
-    location.replace(RAIZ_SITIO + 'paginas/0. login/index.html');
+  if (sesion === null || sesion.rol !== "admin") {
+    alert("No tienes permisos para entrar a esta página.");
+    location.href = RAIZ_SITIO + "index.html";
     return false;
   }
-
-  if (rolRequerido && sesion.rol !== rolRequerido) {
-    alert('No tienes permisos para acceder a esta página.');
-    location.replace(RAIZ_SITIO + 'index.html');
-    return false;
-  }
-
   return true;
 }
+
+// Pregunta con confirm() (igual que confirEliminar de clase)
+function cerrarSesion(evento) {
+  evento.preventDefault();
+
+  let respuesta = confirm("¿Estás seguro de cerrar sesión?");
+
+  if (respuesta === true) {
+    // AQUI DENTRO vamos a usar LocalStorage
+    localStorage.removeItem("vr_sesion");
+    borrarReservaTemporal(); // una reserva a medias no pasa a otra persona
+
+    // Si estaba en el panel del admin, ya no puede quedarse ahí
+    if (location.pathname.indexOf("admin") !== -1) {
+      location.href = RAIZ_SITIO + "index.html";
+    } else {
+      location.reload();
+    }
+  }
+}
+
+// Si hay sesión, el enlace del menú pasa a ser "Cerrar Sesión".
+// Si es el administrador, además aparece el enlace "PANEL".
+function actualizarMenu() {
+  let enlace = document.getElementById("enlaceSesion");
+  let sesion = obtenerSesion();
+
+  if (enlace === null || sesion === null) {
+    return;
+  }
+
+  enlace.innerHTML = "Cerrar Sesión";
+  enlace.href = "#";
+  enlace.onclick = cerrarSesion;
+
+  if (sesion.rol === "admin") {
+    let li = document.createElement("li");
+    li.innerHTML = `<a href="${RAIZ_SITIO}paginas/6. admin/index.html">PANEL</a>`;
+    enlace.parentNode.parentNode.insertBefore(li, enlace.parentNode);
+  }
+}
+
+actualizarMenu();
 
 
 /* ---------- FUNCIONES COMUNES ---------- */
@@ -185,7 +186,7 @@ function formatearFecha(fecha) {
   return partes[2] + "/" + partes[1] + "/" + partes[0];
 }
 
-// Fecha de hoy como YYYY-MM-DD (con la hora local del cliente)
+// Fecha de hoy como YYYY-MM-DD
 function fechaDeHoy() {
   let hoy = new Date();
   let mes = hoy.getMonth() + 1;
@@ -200,57 +201,3 @@ function fechaDeHoy() {
 
   return hoy.getFullYear() + "-" + mes + "-" + dia;
 }
-
-
-/* ---------- MENÚ: "Iniciar Sesión" / "Cerrar Sesión" / "Panel" ---------- */
-
-// Primero pregunta con confirm() (igual que confirEliminar de clase)
-function cerrarSesion(evento) {
-  evento.preventDefault();
-
-  let respuesta = confirm("¿Estás seguro de cerrar sesión?");
-
-  if (respuesta === true) {
-    borrarDato(CLAVES.sesion);
-    borrarDato(CLAVES.reservaTemporal); // una reserva a medias no pasa a otra persona
-
-    // Si estaba en el panel del admin, ya no puede quedarse ahí
-    if (location.pathname.indexOf('6. admin') !== -1 || location.pathname.indexOf('6.%20admin') !== -1) {
-      location.href = RAIZ_SITIO + 'index.html';
-    } else {
-      location.reload();
-    }
-  }
-}
-
-// Si hay sesión abierta, el enlace del menú pasa a ser "Cerrar Sesión".
-// Si la sesión es del administrador, además aparece el enlace "PANEL".
-function actualizarEnlaceSesion() {
-  let enlace = document.getElementById("enlaceSesion");
-  let sesion = obtenerSesion();
-
-  if (enlace === null || sesion === null) {
-    return;
-  }
-
-  enlace.innerHTML = "Cerrar Sesión";
-  enlace.href = "#";
-  enlace.removeAttribute("aria-current");
-  enlace.onclick = cerrarSesion;
-
-  if (sesion.rol === 'admin') {
-    let li = document.createElement("li");
-    let a = document.createElement("a");
-    a.href = RAIZ_SITIO + "paginas/6. admin/index.html";
-    a.textContent = "PANEL";
-    if (location.pathname.indexOf('6. admin') !== -1 || location.pathname.indexOf('6.%20admin') !== -1) {
-      a.setAttribute("aria-current", "page");
-    }
-    li.appendChild(a);
-    enlace.parentNode.parentNode.insertBefore(li, enlace.parentNode);
-  }
-}
-
-// Este archivo se carga al final de cada página (o con defer),
-// así que el menú ya existe y se puede llamar directamente.
-actualizarEnlaceSesion();
