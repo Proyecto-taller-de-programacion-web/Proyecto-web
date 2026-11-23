@@ -188,6 +188,38 @@ body {
   color: #35b489;
 }
 
+.estado-cancelada {
+  border-color: #c41f24;
+  color: #f0565b;
+}
+
+.estado-finalizada {
+  border-color: var(--gris);
+  color: var(--gris);
+}
+
+/* Botón "Cancelar" de Mis reservas */
+.btn-cancelar {
+  padding: 7px 14px;
+  background: transparent;
+  border: 1px solid var(--rojo);
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blanco);
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.btn-cancelar:hover {
+  background: var(--rojo);
+}
+
+.sin-accion {
+  color: var(--gris);
+}
+
 /* ============ PAGINACIÓN ============ */
 
 .admin-paginacion {

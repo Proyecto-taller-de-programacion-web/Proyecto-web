@@ -364,7 +364,7 @@ function llegoAlLimite() {
     for (let i = 0; i < registros.length; i++) {
         let r = registros[i];
 
-        if (r.usuario === sesion.correo && r.fecha >= hoy) {
+        if (r.usuario === sesion.correo && estadoReserva(r) === "confirmada") {
             vigentes.push(r);
 
             if (r.fecha === fecha) {
@@ -414,16 +414,13 @@ function cancelarReserva(id) {
     let respuesta = confirm("¿Estás seguro de cancelar esta reserva?");
 
     if (respuesta === true) {
-        // Se guardan todas las reservas, menos la que se cancela
-        let quedan = [];
-
+        // La reserva no se borra: pasa a "cancelada" para conservar el historial
         for (let i = 0; i < registros.length; i++) {
-            if (registros[i].id !== id) {
-                quedan.push(registros[i]);
+            if (registros[i].id === id) {
+                registros[i].estado = "cancelada";
             }
         }
 
-        registros = quedan;
         guardarEnStorage();
 
         alert("Reserva cancelada");
