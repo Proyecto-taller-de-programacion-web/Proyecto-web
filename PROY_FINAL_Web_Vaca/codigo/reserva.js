@@ -89,7 +89,6 @@ function obtenerFiltros() {
     };
 }
 
-//--------------------------------  HORAS --------------------------------
 
 function horaAMinutos(hora) {
     const partes = hora.split(":");
@@ -119,7 +118,7 @@ function obtenerHorarios(fecha) {
     return horarios;
 }
 
-//--------------------------------  MESAS DISPONIBLES --------------------------------
+//--------------------------------  PARTE 2 --------------------------------
 
 function hayCruce(inicioNuevo, finNuevo, inicioExistente, finExistente) {
     return horaAMinutos(inicioNuevo) < horaAMinutos(finExistente) &&
@@ -237,9 +236,7 @@ document.querySelectorAll('input[name="sede"], input[name="zona"]').forEach(func
 selectorPersonas.addEventListener("change", mostrarHorarios);
 selectorFecha.addEventListener("change", mostrarHorarios);
 
-//--------------------------------  PASO 2 y PASO 3 --------------------------------
 
-// SIGUIENTE del paso 2
 function validarPaso2() {
     if (!selectorFecha.value || !selectorPersonas.value) {
         alert("Elige el número de personas y la fecha.");
@@ -253,6 +250,8 @@ function validarPaso2() {
 
     document.getElementById("paso3").checked = true;
 }
+
+//--------------------------------  PARTE 3 --------------------------------
 
 // SIGUIENTE del paso 3: valida el horario y la sesión. Si todo está bien, pasa al paso 4.
 function guardarDatos() {
@@ -495,7 +494,7 @@ function validarPago() {
     return true;
 }
 
-//--------------------------------  ENVÍO FINAL (botón PAGAR) --------------------------------
+//--------------------------------  PARTE 4  --------------------------------
 
 function finalizarReserva(evento) {
     evento.preventDefault();
