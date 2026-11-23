@@ -239,8 +239,7 @@
                     <div class="form-action">
                         <label for="paso2" class="btn-paso btn-atras">ATRÁS</label>
 
-                        <!-- Guarda los datos de la reserva (para que no se borren si el usuario va al login).
-                             Si no hay sesión, abre la ventana "Por favor, inicia sesión". -->
+                        <!-- Revisa horario y sesión (si no hay sesión, pregunta si quiere ir al login) -->
                         <button type="button" id="btn-ir-login" class="btn-paso btn-siguiente" onclick="guardarDatos()">
                             SIGUIENTE
                         </button>
@@ -342,16 +341,15 @@
                     <div class="form-group">
                         <label for="numero-tarjeta">NÚMERO DE TARJETA (16 DÍGITOS)</label>
                         <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="0000 0000 0000 0000"
-                            inputmode="numeric" autocomplete="cc-number" maxlength="19" required
+                            inputmode="numeric" autocomplete="cc-number" maxlength="19" required oninput="formatearTarjeta(event)"
                             pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}" title="Escribe los 16 dígitos de la tarjeta">
-                        <span class="mensaje-error" id="msgTarjeta" aria-live="polite"></span>
                     </div>
 
                     <div class="fila-pago">
                         <div class="form-group">
                             <label for="vence-tarjeta">FECHA DE VENCIMIENTO</label>
                             <input type="text" id="vence-tarjeta" name="vence-tarjeta" placeholder="MM/AA"
-                                inputmode="numeric" autocomplete="cc-exp" maxlength="5" required
+                                inputmode="numeric" autocomplete="cc-exp" maxlength="5" required oninput="formatearVence(event)"
                                 pattern="(0[1-9]|1[0-2])\/[0-9]{2}" title="Escribe el vencimiento como MM/AA">
                             <span class="mensaje-error" id="msgVence" aria-live="polite"></span>
                         </div>
@@ -361,12 +359,9 @@
                             <input type="password" id="cvv-tarjeta" name="cvv-tarjeta" placeholder="•••"
                                 inputmode="numeric" autocomplete="cc-csc" maxlength="3" required
                                 pattern="[0-9]{3}" title="Escribe los 3 números de atrás de la tarjeta">
-                            <span class="mensaje-error" id="msgCvv" aria-live="polite"></span>
                         </div>
                     </div>
 
-                    <p class="nota-pago">Pago simulado para el proyecto: los datos de la tarjeta no se guardan.
-                        Al pagar verás el resumen de tu reserva y podrás reservar.</p>
 
                     <div class="form-action">
                         <label for="paso5" class="btn-paso btn-atras">ATRÁS</label>
@@ -447,19 +442,20 @@
         <h2 class="modal-titulo">Resumen de tu reserva</h2>
         <p class="modal-texto">Revisa que todos los datos sean correctos y pulsa Reservar.</p>
         <div id="cajaResumen" class="modal-reporte"></div>
+        <p class="modal-nota"><strong>Nota:</strong> Cada reserva tiene un valor de S/ 20 que no se reembolsará, en caso se cancele la reserva.</p>
         <div class="modal-acciones">
             <button type="button" class="btn-modal btn-modal-secundario" onclick="modalResumen.close()">Volver</button>
             <button type="button" class="btn-modal btn-modal-principal" onclick="confirmarReserva()">Reservar</button>
         </div>
     </dialog>
 
-    <!-- 2. Límite: máximo 3 reservas vigentes por cuenta.
-         oncancel: evita cerrarla con la tecla Esc; onclose: si igual se cierra, vuelve a abrirse. -->
-    <dialog id="modalReservaActiva" class="modal-vr" tabindex="-1" autofocus oncancel="event.preventDefault()" onclose="bloquearSiLlegoAlLimite()">
+    <!-- 2. Límite: máximo 3 reservas vigentes por cuenta (con botón Cancelar en cada una) -->
+    <dialog id="modalReservaActiva" class="modal-vr" tabindex="-1" autofocus>
         <p class="modal-eyebrow">Aviso</p>
         <h2 class="modal-titulo">Llegaste al límite de reservas</h2>
         <p class="modal-texto">Cada cuenta puede tener como máximo 3 reservas vigentes. Cancela una para poder reservar de nuevo.</p>
         <div id="cajaReservaActiva" class="modal-reporte"></div>
+        <p class="modal-nota"><strong>Nota:</strong> Cada reserva tiene un valor de S/ 20 que no se reembolsará, en caso se cancele la reserva.</p>
         <div class="modal-acciones">
             <button type="button" class="btn-modal btn-modal-principal" onclick="irAlInicio()">Volver al inicio</button>
         </div>
@@ -486,16 +482,6 @@
         <div class="modal-acciones">
             <button type="button" class="btn-modal btn-modal-secundario" onclick="cerrarModalLogin()">Cancelar</button>
             <button type="button" class="btn-modal btn-modal-principal" onclick="irAlLogin()">Iniciar Sesión</button>
-        </div>
-    </dialog>
-
-    <!-- 4. Aviso general (el título y el texto los pone reserva.js según el caso) -->
-    <dialog id="modalAviso" class="modal-vr modal-centrado" tabindex="-1" autofocus>
-        <p class="modal-eyebrow">Aviso</p>
-        <h2 class="modal-titulo" id="avisoTitulo"></h2>
-        <p class="modal-texto" id="avisoTexto"></p>
-        <div class="modal-acciones">
-            <button type="button" class="btn-modal btn-modal-principal" onclick="modalAviso.close()">Entendido</button>
         </div>
     </dialog>
 

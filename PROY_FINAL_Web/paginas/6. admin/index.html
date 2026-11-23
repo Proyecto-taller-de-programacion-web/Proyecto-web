@@ -60,26 +60,15 @@
                 <p class="parrafo">Consulta de solo lectura de todas las reservas confirmadas.</p>
             </div>
 
-            <!-- Buscador: texto + combobox con el campo donde buscar -->
+            <!-- Buscador: escribe y la tabla se filtra (onkeyup) -->
             <div class="admin-busqueda">
-                <input type="search" id="textoBusqueda" placeholder="Escribe lo que quieres buscar..."
-                    aria-label="Texto a buscar">
-
-                <select id="criterioBusqueda" aria-label="Buscar por">
-                    <option value="todos">Todos los campos</option>
-                    <option value="nombre">Nombre</option>
-                    <option value="correo">Correo</option>
-                    <option value="codigo">Código</option>
-                    <option value="fecha">Fecha</option>
-                    <option value="sede">Sede / Zona</option>
-                    <option value="mesa">Mesa</option>
-                    <option value="estado">Estado</option>
-                </select>
+                <input type="text" id="filtro" placeholder="Ingrese nombre, correo, código, fecha, sede..."
+                    aria-label="Buscar reservas" onkeyup="filtrarTabla()">
             </div>
 
             <!-- Tabla (JavaScript escribe las filas en el tbody) -->
             <div class="admin-tabla-caja">
-                <table class="admin-tabla">
+                <table class="admin-tabla" id="tabla">
                     <thead>
                         <tr>
                             <th>Código</th>
@@ -97,10 +86,13 @@
                 </table>
             </div>
 
-            <!-- Paginación -->
+            <!-- Paginación básica -->
             <div class="admin-paginacion">
                 <p id="infoPagina" aria-live="polite"></p>
-                <div id="botonesPagina"></div>
+                <div id="botonesPagina">
+                    <button type="button" class="btn-pagina" id="btnAnterior" onclick="paginaAnterior()">Anterior</button>
+                    <button type="button" class="btn-pagina" id="btnSiguiente" onclick="paginaSiguiente()">Siguiente</button>
+                </div>
             </div>
 
         </main>
